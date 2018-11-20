@@ -24,6 +24,7 @@ export class TopicsComponent implements OnInit {
       }
     );
   }
+
   ngOnInit() {
     this.getTopicsFormService();
   }
@@ -31,9 +32,8 @@ export class TopicsComponent implements OnInit {
   //Action when select a Topic in List item
   selectedTopic: Topic;
   onSelect(topic: Topic): void {
-      this.selectedTopic = topic;
-      this.topicService.message = "";
-      console.log(`selectedTopic = ${JSON.stringify(this.selectedTopic)}`);
+    this.selectedTopic = topic;
+    this.topicService.message = "";
   }
 
 }

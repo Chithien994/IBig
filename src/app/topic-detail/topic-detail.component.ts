@@ -37,15 +37,15 @@ export class TopicDetailComponent implements OnInit {
   }
 
   param: Object = {};
-  update(): void {
+  onUpdate(name: string, user: number): void {
+    this.topic.name = name;
+    this.topic.user = user;
     this.topicService.update(new Topic().getParams(this.topic)).subscribe(() => {
       if(this.route.snapshot.paramMap.get('id')){
         this.goBack();
       }
     });
   }
-
-  onSubmit() { this.update(); }
 
   goBack(): void {
     this.location.back();
