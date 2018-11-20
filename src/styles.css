@@ -1,0 +1,84 @@
+body {
+    margin: auto;
+    padding: 0;
+    font-size: 0.875em; /* 14px/16=0.875em */
+    font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+    color: #333;
+    background: #fff;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+h1 {
+    margin: 0 0 20px;
+    font-weight: 300;
+    font-size: 20px;
+    color: #666;
+}
+
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #417690;
+}
+
+.ng-invalid:not(form)  {
+    border-left: 5px solid #a94442; /* red */
+}
+
+.button-default {
+    background: #79aec8;
+    border: 1px solid #ccc;
+}
+
+.button-gray {
+    border: 1px solid #ccc;
+    padding: 4px 10px;
+    margin: 0;
+    vertical-align: middle;
+    background: #fff;
+    box-shadow: 0 -15px 20px -10px rgba(0, 0, 0, 0.15) inset;
+    cursor: pointer;
+    color: #333;
+    border-radius: 4px;
+    font-size: 14px;
+}
+.card-header, .card-footer {
+    background: #417690;
+    color: white;
+}
+.card-body {
+    background: #79aec8;
+    color: white;
+}
+
+.max-height{
+    height: -webkit-fill-available;
+}
+
+.row-fix {
+    margin: 0%;
+    padding: 0%;
+}
+
+.container-list {
+    margin: 0%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.col-padding-0 {
+    padding: 0%;
+}
+
+.nav-side-menu {
+    overflow: auto;
+    font-family: verdana;
+    font-weight: 200;
+    background-color: #2e353d;
+    position: fixed;
+    top: 0px;
+    width: 300px;
+    height: 100%;
+    color: #e1ffff;
+}

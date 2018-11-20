@@ -1,0 +1,18 @@
+/*
+ChiThienTCN
+Footer css
+*/
+.footer {
+    width: auto;
+    height: 40px;
+    padding: 10px 40px;
+    background: #417690;
+    line-height: 40px;
+    color: #ffc;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+.text-footer{
+    padding: 0;
+}

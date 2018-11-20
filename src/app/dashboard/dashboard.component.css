@@ -1,0 +1,32 @@
+/*
+ChiThienTCN
+Dashboard css
+*/
+.col-1-4 {
+    float: left;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    width: 25%;
+  }
+[class*='col-']:last-of-type {
+    padding-right: 0;
+}
+.topic-box {
+    padding: 20px;
+    text-align: center;
+    color: #eee;
+    max-height: 120px;
+    min-width: 120px;
+    background: #79aec8;
+    border-radius: 20px;
+}
+.topic-box:hover {
+    background: #417690;
+    cursor: pointer;
+    color: #eee;
+}
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+} 

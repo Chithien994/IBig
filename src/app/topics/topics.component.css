@@ -1,0 +1,26 @@
+/*
+ChiThienTCN
+Topics css
+*/
+.parent {
+  display: flex;
+}
+.selected {
+  background: #417690 !important;
+  color: white;
+}
+
+.topics {
+    color: #333;
+    padding-left: 0;
+    width: 100%;
+  }
+.topicItem {
+  background: #cce5ff;
+  padding: 0.3em;
+  margin: 0.2em;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 0.25em;
+  font-weight: 500;
+}

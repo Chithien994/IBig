@@ -1,0 +1,32 @@
+<!--
+ChiThienTCN
+Topic html
+-->
+<div class="container-list">
+    <div class="row">
+        <div class="col-sm-3 col-padding-0">
+            <div class="card max-height">
+                <div class="card-header"><strong>My favorite topics</strong> <small> </small></div>
+                <div class="card-body">
+                    <ol class="topics float-left">
+                        <li class= "topicItem" 
+                        *ngFor="let topic of topics"
+                        [class.selected]="topic === selectedTopic"
+                        (click)="onSelect(topic)"
+                        >
+                            {{topic.name}}
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9 col-padding-0">
+            <app-topic-detail [topic]="selectedTopic"></app-topic-detail>
+        </div>
+    </div>
+</div>
+<!-- <div style="margin: 10px; text-align: left;">  
+    <label>Topic name (data-binding two-way):        
+        <input [(ngModel)]="topic.name" placeholder="Enter topic's name">     
+    </label>
+</div> -->
