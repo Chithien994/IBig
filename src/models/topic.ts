@@ -9,11 +9,11 @@ export class Topic {
     picture: string;
     
 
-    public getParams(input: Topic){
-        var param = new Topic();
-        param.id = +input.id;
-        param.user = +input.user;
-        param.name = input.name;
+    public getParams(id: number, user: number, name: string){
+        const param = new Topic();
+        param.id = id;
+        param.user = user;
+        param.name = name;
         return param;
     }
 }

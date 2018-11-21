@@ -8,7 +8,8 @@ import { Location } from '@angular/common';
 import { Topic } from '../../models/topic';
 //Router
 import { ActivatedRoute } from '@angular/router';
-import { TopicService } from '../topic.service';
+import { TopicService } from '../../services/topic.service';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-topic-detail',
@@ -20,9 +21,10 @@ export class TopicDetailComponent implements OnInit {
   @Input() topic: Topic; 
 
   constructor(
-    public route: ActivatedRoute,
-    public topicService: TopicService,
-    public location: Location,
+    private route: ActivatedRoute,
+    private topicService: TopicService,
+    private location: Location,
+    private msgService: MessageService
     ) { }
 
   ngOnInit() {
@@ -30,19 +32,26 @@ export class TopicDetailComponent implements OnInit {
   }
 
   getTopicFromRoute(): void {
+    this.msgService.clear();
     const id = +this.route.snapshot.paramMap.get('id');
-    console.log(`this.route.snapshot.paramMap = ${JSON.stringify(this.route.snapshot.paramMap)}`);
-    //Call service to "get movie from id" ?
     this.topicService.getTopicFromId(id).subscribe(topic => this.topic = topic);        
   }
 
-  param: Object = {};
   onUpdate(name: string, user: number): void {
-    this.topic.name = name;
-    this.topic.user = user;
-    this.topicService.update(new Topic().getParams(this.topic)).subscribe(() => {
-      if(this.route.snapshot.paramMap.get('id')){
-        this.goBack();
+    this.msgService.clear();
+    this.topicService.update(new Topic().getParams(this.topic.id, user, name)).subscribe(result => {
+      
+      console.log(`code: ${JSON.stringify(result)}`);
+      if(typeof result['code'] === 'undefined' || result['code'] == 200){
+
+        this.msgService.add('Successed!',false);
+        this.topic.name = name;
+        this.topic.user = user;
+        if(this.route.snapshot.paramMap.get('id')){
+          this.goBack();
+        }
+      }else{
+        this.msgService.add(result['message'],true);
       }
     });
   }

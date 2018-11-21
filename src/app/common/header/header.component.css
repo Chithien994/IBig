@@ -17,6 +17,10 @@ Header css
     color: #fff;
 }
 
+.selected{
+    color: #f5dd5d!important;
+}
+
 .breadcrumbs {
     background: #79aec8;
     padding: 10px 40px;

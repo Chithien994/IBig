@@ -23,8 +23,8 @@ Topic - detail html
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" title="Update" class="button-gray">Update</button>
-                        <span class="ml-sm-3">{{topicService.message}}</span>
+                        <button type="submit" [disabled]="!f.form.valid" title="Update" class="btn button-gray">Update</button>
+                        <span class="mt-sm-3" style="display: block;"><app-message></app-message></span>
                     </div>
                 </div>
             </form>

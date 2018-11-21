@@ -3,7 +3,7 @@ ChiThienTCN
 Dashboard Component
 */
 import { Component, OnInit } from '@angular/core';
-import { TopicService } from '../topic.service';
+import { TopicService } from '../../services/topic.service';
 import { Topic } from '../../models/topic';
 
 @Component({

@@ -4,7 +4,8 @@ Topics Component
 */
 import { Component, OnInit } from '@angular/core';
 import { Topic } from '../../models/topic';
-import { TopicService } from '../topic.service';
+import { TopicService } from '../../services/topic.service';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-topics',
@@ -14,9 +15,10 @@ import { TopicService } from '../topic.service';
 export class TopicsComponent implements OnInit {
 
   topics: Topic[];
-  constructor(private topicService: TopicService) { }
+  constructor(private topicService: TopicService, private msgService: MessageService) { }
 
   getTopicsFormService(): void {
+    this.msgService.clear();
     this.topicService.getTopics().subscribe(
       (updateTopic) => {
         this.topics = updateTopic['results'];
@@ -32,6 +34,7 @@ export class TopicsComponent implements OnInit {
   //Action when select a Topic in List item
   selectedTopic: Topic;
   onSelect(topic: Topic): void {
+    this.msgService.clear();
     this.selectedTopic = topic;
     this.topicService.message = "";
   }

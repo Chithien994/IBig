@@ -8,9 +8,9 @@ Header html
     </div>
 	<div class="user-tools">
          <ul class="nav">
-            <li
-            *ngFor="let route of appRouting.routes">
+            <li *ngFor="let route of appRouting.routes">
                 <a 
+                    [class.selected]="route.path==getCurrentRouter().path"
                     *ngIf="route.data.isShow" 
                     style="color:#fff; padding-left: 16px;" 
                     routerLink="/{{ route.path }}">
@@ -23,7 +23,7 @@ Header html
     <a style="color:#fff;" href="/{{ getHomeRouter().path }}">{{getHomeRouter().data.title | titlecase }} </a>
     <a 
     style="color:#fff;" 
-    *ngIf="setCurrentRouter()">
+    *ngIf="setCurrentRouter() && getHomeRouter().path !==''">
     <span class="fa fa-angle-right"></span>
     {{getCurrentRouter().data.title | titlecase}}</a>
 </div>
