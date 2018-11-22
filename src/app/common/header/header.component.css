@@ -17,7 +17,7 @@ Header css
     color: #fff;
 }
 
-.selected{
+.selected, .nav a:hover, .home:hover{
     color: #f5dd5d!important;
 }
 
@@ -26,10 +26,11 @@ Header css
     padding: 10px 40px;
     border: none;
     font-size: 14px;
-    color: #c4dce8;
+    color: #fff;
     text-align: left;
     margin-bottom: 0px;
 }
+
 .branding h1, .branding h1 a:link, .branding h1 a:visited {
     color: #f5dd5d;
 }

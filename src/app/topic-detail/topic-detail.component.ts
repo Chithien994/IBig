@@ -2,12 +2,16 @@
 ChiThienTCN
 Topic - detail Component
 */
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
 import { Location } from '@angular/common';
 
 import { Topic } from '../../models/topic';
-//Router
+import { User } from '../../models/user';
+
+/** Router */
 import { ActivatedRoute } from '@angular/router';
+
+/** Service */
 import { TopicService } from '../../services/topic.service';
 import { MessageService } from '../../services/message.service';
 
@@ -18,7 +22,14 @@ import { MessageService } from '../../services/message.service';
 })
 export class TopicDetailComponent implements OnInit {
 
-  @Input() topic: Topic; 
+  /** Get data from parents */
+  @Input() topic: Topic
+
+  /** Initialize an event notifying parents */
+  @Output() messageEvent = new EventEmitter<boolean>()
+
+  users: User[]
+  user = new User
 
   constructor(
     private route: ActivatedRoute,
@@ -28,35 +39,123 @@ export class TopicDetailComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.getTopicFromRoute();
+
+    //Automatically get data when component is initialized
+    this.getUsers();
+    this.getTopicFromID()
   }
 
-  getTopicFromRoute(): void {
-    this.msgService.clear();
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.topicService.getTopicFromId(id).subscribe(topic => this.topic = topic);        
+  /**
+   * Get users
+   */
+  getUsers(){
+    this.topicService.auth.getUsers().subscribe(results => {
+      this.users = results['results']
+    })
   }
 
+  /**
+   * Get data by id
+   */
+  getTopicFromID(): void {
+
+    //Clear message
+    this.msgService.clear()
+
+    //get id from param map
+    const id = +this.route.snapshot.paramMap.get('id')
+    if(id > 0){
+      this.topicService.getTopicFromId(id).subscribe(topic => this.topic = topic)
+    }
+  }
+
+  /**
+   * Update data
+   * called from template
+   * 
+   * @param name string
+   * @param user number
+   */
   onUpdate(name: string, user: number): void {
-    this.msgService.clear();
+    this.msgService.clear()
     this.topicService.update(new Topic().getParams(this.topic.id, user, name)).subscribe(result => {
       
       console.log(`code: ${JSON.stringify(result)}`);
-      if(typeof result['code'] === 'undefined' || result['code'] == 200){
+      if(result != null && result['status'] == 200 || result['code'] == 200 || result['id']){
 
-        this.msgService.add('Successed!',false);
-        this.topic.name = name;
-        this.topic.user = user;
+        ////Topic successfully updated.
+
+        //Go back if you are on the details page.
         if(this.route.snapshot.paramMap.get('id')){
-          this.goBack();
+          this.goBack()
+        }else{
+
+          //Reset data
+          this.topic.name = name
+          this.topic.user = user
+
+          //Successful notification.
+          this.msgService.onSuccess()
         }
       }else{
-        this.msgService.add(result['message'],true);
+
+        //Notification failed
+        this.msgService.setFailure(result['message'])
       }
     });
   }
 
+  /**
+   * Add a topic
+   * called from template
+   * 
+   * @param name string
+   * @param user number
+   */
+  add(name: string, user: number): void {
+    this.happy()//Hỏi người dùng khi thêm quá nhiều
+
+    this.msgService.clear();
+    this.topicService.addTopic(new Topic().getParams(this.topic.id, user, name)).subscribe(result => {
+      if(result != null && result['status'] == 200 || result['code'] == 200 || result['id']){
+    
+        //Topic successfully added
+        
+        // Lưu lại số lần thêm thành công
+        sessionStorage.setItem("add",(+sessionStorage.getItem("add")+1)+"")
+
+        ////Go back if you are on the details page.
+        if(this.route.snapshot.paramMap.get('id')){
+          this.goBack()
+        }else{
+
+          //Send request to parents to reload the data.
+          this.messageEvent.emit(true)
+
+          //Successful notification.
+          this.msgService.onSuccess()
+        }
+      }else{
+
+        //Notification failed
+        this.msgService.setFailure(result['message'])
+      }
+      
+    });
+
+  }
+
+  /** 
+   * Go back
+   */
   goBack(): void {
-    this.location.back();
+    this.location.back()
+  }
+
+  happy(){
+    if(+sessionStorage.getItem("add")>2){
+      alert('Có rãnh lắm không???')
+      sessionStorage.setItem("add","0");
+    }
   }
 }

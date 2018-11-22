@@ -16,6 +16,7 @@ export const MessageType = {success: 'success', info: 'info', warning: 'warning'
 export const HOME = '';
 export const LOGIN_PATH = 'login/';
 export const TOPICS_PATH = `topics/`;
+export const USERS_PATH = `users/`;
 
 export const APP_NAME = 'IBig';
 export const CURRENT_USER = 'currentUser';

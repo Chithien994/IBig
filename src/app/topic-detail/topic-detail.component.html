@@ -5,9 +5,9 @@ Topic - detail html
 <div class="container-list" *ngIf="topic && topic.id">
     <div class="row d-flex justify-content-center">
         <div class="col-md-12 col-padding-0">
-            <form name="form" (ngSubmit)="f.form.valid && onUpdate(name.value,user.value)" #f="ngForm" novalidate>
+            <form name="form" #f="ngForm" novalidate>
                 <div class="card">
-                    <div class="card-header"><strong>You selected: {{topic.name}}. Details:</strong> <small> </small></div>
+                    <div class="card-header"><strong>Details: <span style="color: #ffc;" >{{topic.name}}</span></strong></div>
                     <div class="card-body">  
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -16,14 +16,18 @@ Topic - detail html
                             <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Name is required</div>
                         </div>
                         <div class="form-group">
-                            <label for="alterEgo">User id</label>
-                            <input type="text" class="form-control" [ngModel]="topic.user" type="number" placeholder="Enter User Id" title="Enter User Id" name="user"
-                            #user="ngModel" required>    
-                            <div [hidden]="user.valid || user.pristine" class="alert alert-danger">User id is required</div>
+                            <label for="alterEgo">User</label>
+                            <select class="form-control" id="user"  name="user" #user required>
+                                <option *ngFor="let user of users"
+                                    [selected]="topic.user == user.id"
+                                    [value]="user.id">{{user.email}}
+                                </option>
+                            </select>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" [disabled]="!f.form.valid" title="Update" class="btn button-gray">Update</button>
+                        <button (click)="onUpdate(name.value,user.value)" [disabled]="!f.form.valid" title="Update" class="btn button-gray">Update</button>
+                        <button (click)="add(name.value,user.value); user.reset()" [disabled]="!f.form.valid" title="Add" class="ml-sm-3 btn button-gray">New</button>
                         <span class="mt-sm-3" style="display: block;"><app-message></app-message></span>
                     </div>
                 </div>

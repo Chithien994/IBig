@@ -5,7 +5,7 @@ Header Component
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { AppRoutingModule } from '../../app-routing.module';
-import { Router } from '@angular/router';
+import { Router, Route } from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
@@ -24,8 +24,14 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {}
 
-  currentRouter: Object = {path:'',data:{title:"",isShow:false}};
-  setCurrentRouter(){
+  currentRouter: Route;
+
+  /**
+   * Set current router
+   * 
+   * @returns only true
+   */
+  setCurrentRouter(): boolean{
 
     for(let route of this.appRouting.routes){
       if(route.path===this.router.url.split("/")[1] ||
@@ -39,15 +45,21 @@ export class HeaderComponent implements OnInit {
     return true;
   }
 
-  getCurrentRouter(){
+  /**
+   * Get current router
+   * 
+   * @returns Route
+   */
+  getCurrentRouter(): Route{
     return this.currentRouter;
   }
 
-  getHomeRouter(){
+  /**
+   * Get home router
+   * 
+   * @returns Route
+   */
+  getHomeRouter(): Route{
     return this.appRouting.routes[0];
-  }
-
-  goBack(): void {
-    this.location.back();
   }
 }

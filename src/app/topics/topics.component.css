@@ -5,7 +5,7 @@ Topics css
 .parent {
   display: flex;
 }
-.selected {
+.selected, .topicItem:hover  {
   background: #417690 !important;
   color: white;
 }

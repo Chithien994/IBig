@@ -17,6 +17,7 @@ import { TopicService } from '../services/topic.service';
 import { MessageService } from '../services/message.service';
 import { AuthenticationService } from '../services/auth/authentication.service';
 
+import { NgxPopper } from 'angular-popper';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { AuthenticationService } from '../services/auth/authentication.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPopper
   ],
   providers: [
     TopicService,

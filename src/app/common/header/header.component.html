@@ -20,10 +20,9 @@ Header html
     </div>        
 </div>
 <div class="breadcrumbs">
-    <a style="color:#fff;" href="/{{ getHomeRouter().path }}">{{getHomeRouter().data.title | titlecase }} </a>
-    <a 
-    style="color:#fff;" 
-    *ngIf="setCurrentRouter() && getHomeRouter().path !==''">
+    <a class="home" href="/{{ getHomeRouter().path }}">{{getHomeRouter().data.title | titlecase }} </a>
+    <a
+    *ngIf="setCurrentRouter() && getCurrentRouter()['path']">
     <span class="fa fa-angle-right"></span>
     {{getCurrentRouter().data.title | titlecase}}</a>
 </div>

@@ -6,6 +6,7 @@ export class Topic {
     id: number;
     user: number;
     name: string;
+    privileged: number;
     picture: string;
     
 
@@ -14,6 +15,7 @@ export class Topic {
         param.id = id;
         param.user = user;
         param.name = name;
+        param.privileged = 1;
         return param;
     }
 }

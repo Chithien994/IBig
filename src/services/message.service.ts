@@ -13,6 +13,23 @@ export class MessageService {
     this.messages.push(this.messege);
   }
 
+  onSuccess(){
+    this.add('Successed!',false);
+  }
+
+  setSuccess(message: string){
+    this.add(message,false);
+  }
+
+  onFailure(){
+    this.add('Failure!',true);
+  }
+
+  setFailure(message: string){
+    this.add(message,true);
+  }
+
+
   clear() {
     this.messages = [];
   }

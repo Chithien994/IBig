@@ -9,25 +9,45 @@ import { CURRENT_USER, LOGIN_HTTP_OPTIONS } from '../../app/app-constants';
 export class AuthenticationService extends BaseService {
   readonly LOGIN_PATH = 'login';
   readonly LOGOUT_PATH = 'logout';
+  readonly USERS_PATH = `users/`;
 
   constructor(protected http: HttpClient) { 
     super(http);
   }
 
-  public fakeHttpHeaders = {
+  /** 
+   * Option: HttpHeaders ---
+   * Content-Type,
+   * Authorization
+   */
+  public httpHeaders = {
+    // headers: new HttpHeaders({
+    //   'Content-Type':  'application/json',
+    //   'Authorization': `token ${this.currentToken()}`
+    // })
+
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
       'Authorization': 'token d95ca4f94ea324af1622757882c583f85e5b9a27'
     })
   };
 
-  public httpHeaders = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': `token ${this.currentToken()}`
-    })
-  };
+  /**
+   * This method is used to get the users a list
+   * 
+   * @returns any | User[]
+   */
+  getUsers(){
+    return this.get(this.USERS_PATH, this.httpHeaders);
+  }
 
+  /**
+   * This method is used to login.
+   * 
+   * @param username string
+   * @param password string
+   * @returns any | User object
+   */
   login(username:string, password:string){
     const body = new URLSearchParams();
     body.set("username",username);
@@ -35,10 +55,13 @@ export class AuthenticationService extends BaseService {
     return this.post(this.LOGIN_PATH, body, LOGIN_HTTP_OPTIONS);
   }
 
-    /**
+  /**
    * This method is used to logout.
+   * 
+   * @returns any | User object
    */
   logout() {
+
     // remove user from local storage to log user out
     return this.post(this.LOGOUT_PATH).pipe(result => result);
   }
@@ -51,7 +74,8 @@ export class AuthenticationService extends BaseService {
   }
 
   /**
-   * Get current login user.
+   * set current login user.
+   * 
    * @param user object
    */
   setCurrentUser(user) {
@@ -65,6 +89,9 @@ export class AuthenticationService extends BaseService {
     return JSON.parse(sessionStorage.getItem(CURRENT_USER));
   }
 
+  /**
+   * This method is used to clear session.
+   */
   clearSession() {
     sessionStorage.removeItem(CURRENT_USER);
   }
@@ -72,7 +99,7 @@ export class AuthenticationService extends BaseService {
   /**
    * Get current name of current user.
    */
-  currentName() {
+  currentName(): string {
     const user = this.currentUser();
     if (user!=null && user.name != null) {
       return user.name;
@@ -80,7 +107,10 @@ export class AuthenticationService extends BaseService {
     return "";
   }
 
-  currentToken(){
+  /**
+   * Get current token of current user.
+   */
+  currentToken(): string{
     const user = this.currentUser();
     if (user!=null && user.token != null) {
       return user.token;

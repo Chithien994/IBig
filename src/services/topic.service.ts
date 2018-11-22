@@ -1,16 +1,15 @@
-/*
-ChiThienTCN
-Topic Service
-*/
+/**
+ * ChiThienTCN
+ * Topic Service
+ */
 import { Injectable } from '@angular/core';
 
 import { Topic } from '../models/topic';
 
-//Get data asynchronously with Observable
+/** Get data asynchronously with Observable */
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseService } from './base/base.service';
 import { AuthenticationService } from '../services/auth/authentication.service';
 import { TOPICS_PATH } from '../app/app-constants';
@@ -18,35 +17,79 @@ import { TOPICS_PATH } from '../app/app-constants';
 
 @Injectable()
 export class TopicService extends BaseService {
-  public message = "";
 
-  constructor(protected http: HttpClient, private auth: AuthenticationService) {
+  constructor(protected http: HttpClient, public auth: AuthenticationService) {
     super(http);
   }
 
+  /**
+   * Get the Topics list 
+   * 
+   * @returns Topic[] | any
+   */
   getTopics() {
-    // this.messageService.add(`${ new Date().toLocaleString()}. Get movie list`);
-    // return of(fakeTopics);
-    return this.get(TOPICS_PATH, this.auth.fakeHttpHeaders);
+    return this.get(TOPICS_PATH, this.auth.httpHeaders);
   }
+
+  /**
+   * Get topic by id
+   * 
+   * @param id number
+   * @returns Topic | any
+   */
   getTopicFromId(id: number) {
-    this.message = "";
-    return this.get(this.getPathAddId(id), this.auth.fakeHttpHeaders);
+    return this.get(this.getPathAddId(id), this.auth.httpHeaders);
   }
 
+  /**
+   * Add a topic
+   * 
+   * @param topic Topic
+   * @returns Topic | any
+   */
+  addTopic(topic: Topic){
+    return this.post(TOPICS_PATH, topic, this.auth.httpHeaders);
+  }
+
+  /**
+   * Update a topic
+   * 
+   * @param topic Topic
+   * @returns any
+   */
   update(topic: Topic) {
-    this.message = "";
-    return this.patch(this.getPathAddId(topic.id), topic, this.auth.fakeHttpHeaders);
+    return this.patch(this.getPathAddId(topic.id), topic, this.auth.httpHeaders);
   }
 
-  /* GET topics whose name contains searched string */
+  /**
+   * Delete a topic
+   * 
+   * @param id number
+   * @returns any
+   */
+  onDelete(id: number) {
+    return this.delete(this.getPathAddId(id),this.auth.httpHeaders)
+  }
+
+  /**
+   * GET topics whose name contains searched string
+   * 
+   * @param typedString string
+   * @returns Topic[] | any
+   */
   searchTopics(typedString: string) {
     if (!typedString.trim()) {     
       return of([]);
     }
-    return this.get(`${TOPICS_PATH}?name_like=${typedString}`, this.auth.fakeHttpHeaders);
+    return this.get(`${TOPICS_PATH}?name_like=${typedString}`, this.auth.httpHeaders);
   }
 
+  /**
+   * Append the path by Id
+   * 
+   * @param id number
+   * @returns url string
+   */
   getPathAddId(id: number){
     return `${TOPICS_PATH}${id}/`;
   }
