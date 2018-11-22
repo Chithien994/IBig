@@ -12,6 +12,7 @@ import { TopicDetailComponent } from './topic-detail/topic-detail.component';
 import { MessageComponent } from './message/message.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SearchComponent } from './search/search.component';
+import {TimeoutWarningComponent} from './common/modal/timeoutWarning.component';
 
 import { TopicService } from '../services/topic.service';
 import { MessageService } from '../services/message.service';
@@ -28,7 +29,8 @@ import { NgxPopper } from 'angular-popper';
     TopicDetailComponent,
     MessageComponent,
     DashboardComponent,
-    SearchComponent
+    SearchComponent,
+    TimeoutWarningComponent
   ],
   imports: [
     BrowserModule,
