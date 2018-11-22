@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { AppRoutingModule } from '../../app-routing.module';
 import { Router, Route } from '@angular/router';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -16,15 +15,23 @@ import { Location } from '@angular/common';
 export class HeaderComponent implements OnInit {
   
   constructor(
-    public appComponent: AppComponent,
+    private appComponent: AppComponent,
     public appRouting: AppRoutingModule,
-    public router: Router,
-    public location: Location
+    private router: Router
     ) {}
 
   ngOnInit() {}
 
   currentRouter: Route;
+
+  /**
+   * Get app title
+   * 
+   * @returns title
+   */
+  getAppTitle(): string{
+    return this.appComponent.title
+  }
 
   /**
    * Set current router

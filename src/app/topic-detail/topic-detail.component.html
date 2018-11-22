@@ -7,7 +7,10 @@ Topic - detail html
         <div class="col-md-12 col-padding-0">
             <form name="form" #f="ngForm" novalidate>
                 <div class="card">
-                    <div class="card-header"><strong>Details: <span style="color: #ffc;" >{{topic.name}}</span></strong></div>
+                    <div class="card-header">
+                        <strong style="float: left;">Details: <span style="color: #ffc;" >{{topic.name}}</span></strong>
+                        <span [hidden]="hiddenCloseButton()" (click)="onHidden()" class="close" style="float: right;">&times;</span>
+                    </div>
                     <div class="card-body">  
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -27,7 +30,7 @@ Topic - detail html
                     </div>
                     <div class="card-footer">
                         <button (click)="onUpdate(name.value,user.value)" [disabled]="!f.form.valid" title="Update" class="btn button-gray">Update</button>
-                        <button (click)="add(name.value,user.value); user.reset()" [disabled]="!f.form.valid" title="Add" class="ml-sm-3 btn button-gray">New</button>
+                        <button (click)="add(name.value,user.value)" [disabled]="!f.form.valid" title="Add" class="ml-sm-3 btn button-gray">New</button>
                         <span class="mt-sm-3" style="display: block;"><app-message></app-message></span>
                     </div>
                 </div>

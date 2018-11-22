@@ -9,11 +9,12 @@ import { Topic } from '../../models/topic';
 import { User } from '../../models/user';
 
 /** Router */
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 /** Service */
 import { TopicService } from '../../services/topic.service';
 import { MessageService } from '../../services/message.service';
+import { R_TOPICS_PATH, R_DETAIL_PATH } from '../app-constants';
 
 @Component({
   selector: 'app-topic-detail',
@@ -35,14 +36,34 @@ export class TopicDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private topicService: TopicService,
     private location: Location,
-    private msgService: MessageService
+    private msgService: MessageService,
+    private router: Router
     ) { }
 
   ngOnInit() {
 
     //Automatically get data when component is initialized
-    this.getUsers();
+    this.getUsers()
     this.getTopicFromID()
+  }
+
+  /**
+   * Hide this Component
+   */
+  onHidden(){
+    this.topic = null;
+  }
+
+  /**
+   * Hide close button when in topic detail page (domain/detail/:id => return true)
+   * 
+   * @returns true or false
+   */
+  hiddenCloseButton(){
+    if(this.router.url.search(R_DETAIL_PATH)==1){
+      return true
+    }
+    return false
   }
 
   /**
@@ -113,7 +134,9 @@ export class TopicDetailComponent implements OnInit {
    * @param user number
    */
   add(name: string, user: number): void {
-    this.happy()//Hỏi người dùng khi thêm quá nhiều
+
+    //Notify when user has too many topics.
+    this.happy()
 
     this.msgService.clear();
     this.topicService.addTopic(new Topic().getParams(this.topic.id, user, name)).subscribe(result => {
@@ -121,12 +144,13 @@ export class TopicDetailComponent implements OnInit {
     
         //Topic successfully added
         
-        // Lưu lại số lần thêm thành công
-        sessionStorage.setItem("add",(+sessionStorage.getItem("add")+1)+"")
+        // Record the number of times the topic was successfully added
+        sessionStorage.setItem("add",(`${+sessionStorage.getItem("add")+1}`))
 
         ////Go back if you are on the details page.
         if(this.route.snapshot.paramMap.get('id')){
-          this.goBack()
+          //this.goBack()
+          window.location.href = R_TOPICS_PATH
         }else{
 
           //Send request to parents to reload the data.
@@ -152,6 +176,9 @@ export class TopicDetailComponent implements OnInit {
     this.location.back()
   }
 
+  /**
+   * Notify when user has too many topics.
+   */
   happy(){
     if(+sessionStorage.getItem("add")>2){
       alert('Có rãnh lắm không???')

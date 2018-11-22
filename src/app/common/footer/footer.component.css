@@ -11,6 +11,7 @@ Footer css
     color: #ffc;
     overflow: hidden;
     box-sizing: content-box;
+    z-index: 3;
 }
 
 .text-footer{

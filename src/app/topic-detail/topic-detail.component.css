@@ -13,3 +13,13 @@ Topic - detail css
     font-size: 0.875em; /* 14px/16=0.875em */
     border-radius: 0.25em;
 }
+
+.close{
+    color: #9e9c9c;
+    opacity: .8;
+}
+
+.close:hover{
+    color: white;
+}
+

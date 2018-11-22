@@ -24,9 +24,12 @@
     "angular-popper": "^2.0.0",
     "angular-user-idle": "^2.0.0",
     "core-js": "^2.5.4",
+    "ng-simple-slideshow": "^1.2.6",
     "ngx-delete-confirm": "0.0.4",
+    "ngx-slick": "^0.2.1",
     "popper.js": "^1.14.5",
     "rxjs": "~6.3.3",
+    "slick-carousel": "^1.8.1",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

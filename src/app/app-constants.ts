@@ -12,8 +12,16 @@ export const LOGIN_HTTP_OPTIONS = {
  */
 export const TIMEOUT_CONFIG = {idle: 1800, timeout: 31, ping: 5};
 export const MessageType = {success: 'success', info: 'info', warning: 'warning', danger: 'danger'};
+
 // Routing path
-export const HOME = '';
+export const R_HOME = '';
+export const R_LOGIN_PATH = 'login';
+export const R_TOPICS_PATH = `topics`;
+export const R_BASHBOARD_PATH = `dashboard`;
+export const R_DETAIL_PATH = `detail/`;
+export const R_USERS_PATH = `users`;
+
+//Api path
 export const LOGIN_PATH = 'login/';
 export const TOPICS_PATH = `topics/`;
 export const USERS_PATH = `users/`;
@@ -26,4 +34,4 @@ export const LOGOUT = 'Log Out';
 export const HELP = 'Help';
 export const ROLE_EDIT_SUFFIX = '-EDIT';
 export const ROLE_VIEW_SUFFIX = '-VIEW';
-export const WITHOUT_CHECK_ROLE_MODULES = [HOME, 'master'];
+export const WITHOUT_CHECK_ROLE_MODULES = [R_HOME, 'master'];

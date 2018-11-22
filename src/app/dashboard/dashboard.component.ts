@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getTopics(): void {
-    this.topicService.getTopics().subscribe(topics => this.topics = topics['results'].slice(1, 5));
+    this.topicService.getTopics().subscribe(topics => this.topics = topics['results'].slice(1, 11));
   }
 
 }

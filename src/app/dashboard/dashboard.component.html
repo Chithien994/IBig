@@ -2,13 +2,13 @@
 ChiThienTCN
 Dashboard html
 -->
-<h3>Top 4 topics</h3>
- <div>
-  <a *ngFor="let topic of topics" class="col-1-4"
+<h3>Top 10 topics</h3>
+<div>
+    <a *ngFor="let topic of topics" class="col-1-4"
     style="text-decoration: none;" 
     routerLink="/detail/{{topic.id}}">
-    <div class="topic-box">
-      <h4>{{topic.name}}</h4>
-    </div>
-  </a>
+      <div class="topic-box">
+        <h4>{{topic.name}}</h4>
+      </div>
+    </a>
 </div>
