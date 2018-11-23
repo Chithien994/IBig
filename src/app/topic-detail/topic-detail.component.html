@@ -8,7 +8,7 @@ Topic - detail html
             <form name="form" #f="ngForm" novalidate>
                 <div class="card">
                     <div class="card-header">
-                        <strong style="float: left;">Details: <span style="color: #ffc;" >{{topic.name}}</span></strong>
+                        <span style="float: left;">Details: <span style="color: #ffc;" >{{topic.name}}</span></span>
                         <span [hidden]="hiddenCloseButton()" (click)="onHidden()" class="close" style="float: right;">&times;</span>
                     </div>
                     <div class="card-body">  

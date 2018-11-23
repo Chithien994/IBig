@@ -14,12 +14,3 @@ Topic - detail css
     border-radius: 0.25em;
 }
 
-.close{
-    color: #9e9c9c;
-    opacity: .8;
-}
-
-.close:hover{
-    color: white;
-}
-

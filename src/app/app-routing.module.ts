@@ -19,16 +19,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule {
   public routes = routes;
-
-  getHomeRouter(){
-    return routes.filter(router=>router.path="")[0]
-  }
-
-  getTopicsRouter(){
-    return this.routes.filter(router=>router.path="topics")[0]
-  }
-
-  getDashboardRouter(){
-    return routes.filter(router=>router.path="dashboard")[0]
-  }
 }

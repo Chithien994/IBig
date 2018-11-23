@@ -6,19 +6,40 @@ Topic html
     <div class="row">
         <div class="col-sm-3 col-padding-0">
             <div class="card max-height">
-                <div class="card-header"><strong>My favorite topics</strong> <small> </small></div>
+                <div class="card-header">My favorite topics</div>
                 <div class="card-body">
-                    <ol class="topics float-left">
-                        <li class= "topicItem" 
-                        *ngFor="let topic of topics"
-                        [class.selected]="topic === selectedTopic"
-                        (click)="onSelect(topic)"
-                        >
-                            {{topic.name}}
-                            <span (click)="onDelete(topic.id)" class="fa fa-trash-o float-right" style="color:black;"></span>
+
+                    <!-- Scroll -->
+                    <virtual-scroller class="topics" #scroll [items]="topics">
+                        <ol class="topics float-left example-item">
+                            <li class= "topicItem" 
+                            *ngFor="let topic of scroll.viewPortItems;"
+                            [class.selected]="topic === selectedTopic"
+                            (click)="onSelect(topic)"
+                            >
+                                {{topic.name}}
+
+                                <!-- Delete Modal Component -->
+                                <span 
+                                    class="fa fa-trash-o float-right" 
+                                    style="color:black;" 
+                                    data-toggle="modal" 
+                                    [attr.data-target]="'#modal-'+topic.id">
+                                </span>
+                                
+                                <delete-modal 
+                                    (event)="onDelete($event)" 
+                                    [title]="'Confirm delete?'" 
+                                    [message]="'Do you want to delete: '+topic.name + '?'" 
+                                    [id]="topic.id">
+                                </delete-modal>
+                                <!-- End Delete Modal Component -->
                             
-                        </li>
-                    </ol>
+                            </li>
+                        </ol>
+                    </virtual-scroller>
+                    <!-- End Scroll -->
+
                 </div>
             </div>
         </div>

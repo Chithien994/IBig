@@ -5,6 +5,7 @@ body {
     font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
     color: #333;
     background: #fff;
+    font-weight: 400;
 }
 
 a, a:hover {
@@ -14,7 +15,7 @@ a, a:hover {
 
 h1 {
     margin: 0 0 20px;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 20px;
     color: #666;
 }
@@ -32,7 +33,7 @@ h1 {
     border: 1px solid #ccc;
 }
 
-.button-gray {
+.button-gray, .button-delete {
     border: 1px solid #ccc;
     padding: 4px 10px;
     margin: 0;
@@ -43,6 +44,10 @@ h1 {
     color: #333;
     border-radius: 4px;
     font-size: 14px;
+}
+.button-delete{
+    background: #e74c3c;
+    color: #ececec;
 }
 .card-header, .card-footer {
     background: #417690;
@@ -82,4 +87,28 @@ h1 {
     width: 300px;
     height: 100%;
     color: #e1ffff;
+}
+
+/** Modal */
+.modal-content, .modal-body {
+    background: #79aec8;
+    cursor: context-menu;
+}
+
+.modal-header, .modal-footer {
+    background: #417690;
+}
+
+.modal-body {
+    padding: 30px 20px;
+}
+
+
+.close{
+    color: #9e9c9c;
+    opacity: .8;
+}
+
+.close:hover{
+    color: white;
 }

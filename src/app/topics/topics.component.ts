@@ -2,21 +2,30 @@
 ChiThienTCN
 Topics Component
 */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeEvent, VirtualScrollerComponent } from 'ngx-virtual-scroller';
+
 import { Topic } from '../../models/topic';
 import { TopicService } from '../../services/topic.service';
-import { MessageService } from '../../services/message.service';
+import { MessageService } from '../../services/message.service'
 
 @Component({
   selector: 'app-topics',
   templateUrl: './topics.component.html',
-  styleUrls: ['./topics.component.css']
+  styleUrls: ['./topics.component.css'],
 })
+
 export class TopicsComponent implements OnInit {
 
   topics: Topic[]
 
-  constructor(private topicService: TopicService, private msgService: MessageService) { }
+  @ViewChild(VirtualScrollerComponent)
+  public virtualScroller: VirtualScrollerComponent;
+
+  constructor(
+    private topicService: TopicService,
+    private msgService: MessageService) {
+  }
 
   ngOnInit() {
 
@@ -48,6 +57,10 @@ export class TopicsComponent implements OnInit {
 
         //results returned
         this.topics = updateTopic['results']
+        
+        //
+        this.virtualScroller.childHeight = 1;
+    
       }
     );
   }
@@ -83,5 +96,4 @@ export class TopicsComponent implements OnInit {
     this.msgService.clear()
     this.selectedTopic = topic
   }
-
 }

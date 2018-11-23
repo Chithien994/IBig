@@ -1,0 +1,23 @@
+/** Modal */
+.modal-content, .modal-body {
+    background: #79aec8;
+    cursor: context-menu;
+}
+
+.modal-header, .modal-footer {
+    background: #417690;
+}
+
+.modal-body {
+    padding: 30px 20px;
+}
+
+
+.close{
+    color: #9e9c9c;
+    opacity: .8;
+}
+
+.close:hover{
+    color: white;
+}

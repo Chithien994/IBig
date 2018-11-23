@@ -22,7 +22,7 @@ Topics css
   text-align: left;
   cursor: pointer;
   border-radius: 0.25em;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .topic-detail{
@@ -35,3 +35,45 @@ Topics css
     margin-left: 0%;
   }
 }
+
+.scrollable-content{
+  display: block;
+}
+
+virtual-scroller {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  height: 600px;
+}
+
+my-custom-component {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  height: 600px;
+}
+
+/** Style Scrollbar **/
+
+/* width */
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #fff; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #417690; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #417690; 
+}
+
+/**End  Style Scrollbar **/
