@@ -6,28 +6,31 @@ Topic html
     <div class="row">
         <div class="col-sm-3 col-padding-0">
             <div class="card max-height">
-                <div class="card-header">My favorite topics</div>
+                <div class="card-header">My favorite topics: {{ getLengthTopics() }}</div>
                 <div class="card-body">
 
                     <!-- Scroll -->
-                    <virtual-scroller class="topics" #scroll [items]="topics">
-                        <ol class="topics float-left example-item">
+                    <virtual-scroller 
+                    class="topics"  
+                    [items]="topics" 
+                    (vsUpdate)="scrollItems = $event"
+                    (vsEnd)="onChangeEvent($event)">
+                        <ol class="topics float-left">
                             <li class= "topicItem" 
-                            *ngFor="let topic of scroll.viewPortItems;"
-                            [class.selected]="topic === selectedTopic"
-                            (click)="onSelect(topic)"
-                            >
-                                {{topic.name}}
+                            *ngFor="let topic of scrollItems"
+                            [class.selected]="topic === selectedTopic">
+
+                                <span class="item-content" 
+                                (click)="onSelect(topic)">{{topic.name}}</span>
 
                                 <!-- Delete Modal Component -->
-                                <span 
-                                    class="fa fa-trash-o float-right" 
-                                    style="color:black;" 
+                                <button 
+                                    class="fa fa-trash-o icon-delete"
                                     data-toggle="modal" 
                                     [attr.data-target]="'#modal-'+topic.id">
-                                </span>
+                                </button>
                                 
-                                <delete-modal 
+                                <delete-modal
                                     (event)="onDelete($event)" 
                                     [title]="'Confirm delete?'" 
                                     [message]="'Do you want to delete: '+topic.name + '?'" 
@@ -36,6 +39,7 @@ Topic html
                                 <!-- End Delete Modal Component -->
                             
                             </li>
+                            <div *ngIf="loading" class="loader">Loading...</div>
                         </ol>
                     </virtual-scroller>
                     <!-- End Scroll -->

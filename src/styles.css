@@ -45,9 +45,19 @@ h1 {
     border-radius: 4px;
     font-size: 14px;
 }
+
 .button-delete{
     background: #e74c3c;
     color: #ececec;
+}
+
+.icon-delete {
+    padding: 3px;
+    float: right;
+    color: black;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 .card-header, .card-footer {
     background: #417690;
@@ -90,19 +100,10 @@ h1 {
 }
 
 /** Modal */
-.modal-content, .modal-body {
-    background: #79aec8;
-    cursor: context-menu;
-}
 
-.modal-header, .modal-footer {
-    background: #417690;
+.modal-open {
+    padding: 0% !important;
 }
-
-.modal-body {
-    padding: 30px 20px;
-}
-
 
 .close{
     color: #9e9c9c;
@@ -111,4 +112,15 @@ h1 {
 
 .close:hover{
     color: white;
+}
+
+/* Fixed scrollable */
+
+.total-padding{
+    visibility: hidden;
+    display: none;
+}
+.scrollable-content{
+    transform: none !important;
+    position: relative !important;
 }

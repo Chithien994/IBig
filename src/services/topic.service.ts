@@ -25,10 +25,12 @@ export class TopicService extends BaseService {
   /**
    * Get the Topics list 
    * 
+   * @param limit number
+   * @param offset number
    * @returns Topic[] | any
    */
-  getTopics() {
-    return this.get(TOPICS_PATH, this.auth.httpHeaders);
+  getTopics(limit: number, offset: number) {
+    return this.get(this.getPathLimitOffset(limit, offset), this.auth.httpHeaders);
   }
 
   /**
@@ -92,5 +94,16 @@ export class TopicService extends BaseService {
    */
   getPathAddId(id: number){
     return `${TOPICS_PATH}${id}/`;
+  }
+
+  /**
+   * Get path with limit and offset
+   * 
+   * @param limit number
+   * @param offset number
+   * @returns string (`${API_PATH}?limit=${limit}&offset=${offset}`)
+   */
+  getPathLimitOffset(limit: number, offset: number): string{
+    return `${TOPICS_PATH}?limit=${limit}&offset=${offset}`
   }
 }

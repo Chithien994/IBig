@@ -3,12 +3,16 @@ ChiThienTCN
 Dashboard html
 -->
 <h3>Top 10 topics</h3>
-<div>
-    <a *ngFor="let topic of topics" class="col-1-4"
+<div class="topics">
+  <!-- Scroll -->
+  <virtual-scroller #scroll [items]="topics">
+    <a *ngFor="let item of scroll.viewPortItems" class="col-1-4"
     style="text-decoration: none;" 
-    routerLink="/detail/{{topic.id}}">
+    routerLink="/detail/{{item.id}}">
       <div class="topic-box">
-        <h4>{{topic.name}}</h4>
+        <h4>{{item.name}}</h4>
       </div>
     </a>
+  </virtual-scroller>
+  <!-- End Scroll -->
 </div>

@@ -2,7 +2,7 @@
 ChiThienTCN
 Topics Component
 */
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ChangeEvent, VirtualScrollerComponent } from 'ngx-virtual-scroller';
 
 import { Topic } from '../../models/topic';
@@ -17,7 +17,7 @@ import { MessageService } from '../../services/message.service'
 
 export class TopicsComponent implements OnInit {
 
-  topics: Topic[]
+  @Input() topics: Topic[]
 
   @ViewChild(VirtualScrollerComponent)
   public virtualScroller: VirtualScrollerComponent;
@@ -44,6 +44,25 @@ export class TopicsComponent implements OnInit {
     }
   }
 
+  protected loading: boolean;
+
+
+  /**
+   * Called when changes count in a list
+   * 
+   * @param event ChangeEvent
+   */
+  protected onChangeEvent(event: ChangeEvent) {
+    console.log("ChangeEvent")
+  }
+
+  /**
+   * Call this function after resize + animation end
+   */
+  afterResize() {
+    this.virtualScroller.refresh();
+  }
+
   /**
    * Get the Topics list.
    */
@@ -52,17 +71,33 @@ export class TopicsComponent implements OnInit {
     //Clear messages
     this.msgService.clear()
 
+    //Show loading
+    this.loading = true;
+
     //Send a request to retrieve the data, and listen for the results returned.
-    this.topicService.getTopics().subscribe((updateTopic) => {
+    this.topicService.getTopics(25,0).subscribe((updateTopic) => {
 
         //results returned
         this.topics = updateTopic['results']
         
-        //
-        this.virtualScroller.childHeight = 1;
+        //Hide loading
+        this.loading = false;
+        this.virtualScroller.childHeight = 10;
     
       }
     );
+  }
+
+  /**
+   * Used to get length of topics
+   * 
+   * @returns length: number
+   */
+  getLengthTopics(): number{
+    if(this.topics){
+      return this.topics.length
+    }
+    return 0;
   }
 
   /**

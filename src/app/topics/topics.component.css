@@ -12,17 +12,27 @@ Topics css
 
 .topics {
     color: #333;
-    padding-left: 0;
+    padding: 0%;
+    margin: 0%;
     width: 100%;
   }
 .topicItem {
   background: #cce5ff;
   padding: 0.3em;
   margin: 0.2em;
-  text-align: left;
-  cursor: pointer;
   border-radius: 0.25em;
   font-weight: 400;
+  display: flex;
+}
+
+.item-content {
+  padding: 0%;
+  margin: 0%;
+  cursor: pointer;
+  text-align: left;
+  width: 90%;
+  display: block;
+
 }
 
 .topic-detail{
@@ -36,22 +46,14 @@ Topics css
   }
 }
 
-.scrollable-content{
-  display: block;
-}
-
 virtual-scroller {
-  display: block;
   width: 100%;
   overflow: auto;
   height: 600px;
 }
 
-my-custom-component {
-  display: block;
-  width: 100%;
-  overflow: auto;
-  height: 600px;
+.loader {
+  color: #fff;
 }
 
 /** Style Scrollbar **/

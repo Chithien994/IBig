@@ -30,3 +30,47 @@ Dashboard css
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 } 
+
+.router {
+    display: block;
+}
+.topics {
+    width: 90%;
+    display: block;
+}
+
+.scrollable-content {
+    position: relative;
+}
+
+virtual-scroller {
+width: 90%;
+}
+
+my-custom-component {
+    position: relative;
+}
+
+/** Style Scrollbar **/
+
+/* width */
+::-webkit-scrollbar {
+    width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #fff; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #417690; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #417690; 
+}
+
+/**End  Style Scrollbar **/

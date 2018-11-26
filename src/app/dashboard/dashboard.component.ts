@@ -2,9 +2,10 @@
 ChiThienTCN
 Dashboard Component
 */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TopicService } from '../../services/topic.service';
 import { Topic } from '../../models/topic';
+import { ChangeEvent, VirtualScrollerComponent } from 'ngx-virtual-scroller';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +15,10 @@ import { Topic } from '../../models/topic';
 export class DashboardComponent implements OnInit {
 
   topics: Topic[] = [];
+
+  @ViewChild(VirtualScrollerComponent)
+  public virtualScroller: VirtualScrollerComponent;
+  
   constructor(private topicService: TopicService) { }
 
   ngOnInit() {
@@ -22,6 +27,8 @@ export class DashboardComponent implements OnInit {
 
   getTopics(): void {
     this.topicService.getTopics().subscribe(topics => this.topics = topics['results'].slice(1, 11));
+    this.virtualScroller.horizontal = true
+    this.virtualScroller.childHeight = 200
   }
 
 }
