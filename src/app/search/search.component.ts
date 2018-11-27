@@ -16,8 +16,6 @@ import { KEY_SEARCH, VAL_LIMIT_SEARCH, KEY_LIMIT } from '../app-constants';
 })
 export class SearchComponent implements OnInit {
 
-  list$: Observable<any[]>;
-
   @Input() path: string
   @Input() title: string
 
@@ -28,11 +26,16 @@ export class SearchComponent implements OnInit {
   constructor(private baseService: BaseService, private auth: AuthenticationService) { }
 
   search(searchedString: string): void {
-    this.searchedSubject(searchedString).subscribe(result =>{
-      if(result != null && typeof result['results'] != null){
-        this.event.emit(result['results'])
-      }
-    })
+    if(searchedString){
+      this.searchedSubject(searchedString).subscribe(result =>{
+        if(result != null && typeof result['results'] != null){
+          this.event.emit(result['results'])
+        }
+      })
+    }else{
+      
+      this.event.emit(false)
+    }
   }
 
   ngOnInit() {
