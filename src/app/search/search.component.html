@@ -1,3 +1,9 @@
-<p>
-  search works!
-</p>
+<!-- 
+Chi Thien TCN
+Email: chithien994@gmail.com
+Search movie by typing in <input> tag
+-->
+<div id="search">
+  <h4>{{ title }} search</h4> 
+  <input #searchBox (keyup)="search(searchBox.value)" /> 
+</div>

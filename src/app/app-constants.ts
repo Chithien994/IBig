@@ -26,6 +26,14 @@ export const LOGIN_PATH = 'login/';
 export const TOPICS_PATH = `topics/`;
 export const USERS_PATH = `users/`;
 
+//Api key
+export const KEY_SEARCH = `search`;
+export const KEY_LIMIT = `limit`;
+export const KEY_OFFSET = `offset`;
+
+//Api value
+export const VAL_LIMIT_SEARCH = 10;
+
 export const APP_NAME = 'IBig';
 export const CURRENT_USER = 'currentUser';
 export const LOGGED_IN_AS = 'You are logged in as ';

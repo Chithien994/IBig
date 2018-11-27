@@ -25,7 +25,7 @@ export class AuthenticationService extends BaseService {
     //   'Content-Type':  'application/json',
     //   'Authorization': `token ${this.currentToken()}`
     // })
-
+//d95ca4f94ea324af1622757882c583f85e5b9a27
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
       'Authorization': 'token d95ca4f94ea324af1622757882c583f85e5b9a27'

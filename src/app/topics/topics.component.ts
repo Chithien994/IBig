@@ -8,6 +8,7 @@ import { ChangeEvent, VirtualScrollerComponent, IViewport } from 'ngx-virtual-sc
 import { Topic } from '../../models/topic';
 import { TopicService } from '../../services/topic/topic.service';
 import { MessageService } from '../../services/message/message.service'
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-topics',
@@ -39,14 +40,23 @@ export class TopicsComponent implements OnInit {
   }
 
   /**
+   * Topic successfully added
    * 
    * @param $event
    */
   receiveMessage($event) {
-    console.log($event)
     if($event){
       this.refreshList()
     }
+  }
+
+  /**
+   * Event Search result
+   * 
+   * @param $event
+   */
+  onSearch($event){
+    this.topics = $event
   }
 
   /**

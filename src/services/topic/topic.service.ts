@@ -74,19 +74,6 @@ export class TopicService extends BaseService {
   }
 
   /**
-   * GET topics whose name contains searched string
-   * 
-   * @param typedString string
-   * @returns Topic[] | any
-   */
-  searchTopics(typedString: string) {
-    if (!typedString.trim()) {     
-      return of([]);
-    }
-    return this.get(`${TOPICS_PATH}?name_like=${typedString}`, this.auth.httpHeaders);
-  }
-
-  /**
    * Append the path by Id
    * 
    * @param id number
