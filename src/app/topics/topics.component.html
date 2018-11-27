@@ -8,12 +8,16 @@ Topic html
             <div class="card max-height">
                 <div class="card-header">My favorite topics: {{ getLengthTopics() }}/{{ count }}</div>
                 <div class="card-body">
-                    <app-search
-                    (event)="onSearch($event)"
-                    [title]="'Topic'"
-                    [path]="'topics/'">
 
-                    </app-search>
+                    <!-- Search component -->
+                    <div style="padding: 0 8px 16px 2px;">
+                        <app-search
+                            (event)="onSearch($event)"
+                            [title]="'Topic'"
+                            [path]="'topics/'">
+                        </app-search>
+                    </div>
+                    
 
                     <!-- Scroll -->
                     <virtual-scroller 

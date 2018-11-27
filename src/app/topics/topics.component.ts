@@ -56,6 +56,7 @@ export class TopicsComponent implements OnInit {
    * @param $event
    */
   onSearch($event){
+    console.log($event)
     this.topics = $event
   }
 

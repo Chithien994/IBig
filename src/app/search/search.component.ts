@@ -24,23 +24,19 @@ export class SearchComponent implements OnInit {
   /** Initialize an event notifying parents */
   @Output() event = new EventEmitter<any>()
   
-  private searchedSubject = new Subject<string>();
 
   constructor(private baseService: BaseService, private auth: AuthenticationService) { }
 
   search(searchedString: string): void {
-    this.searchedSubject.next(searchedString);
+    this.searchedSubject(searchedString).subscribe(result =>{
+      if(result != null && typeof result['results'] != null){
+        this.event.emit(result['results'])
+      }
+    })
   }
 
   ngOnInit() {
-    this.list$ = this.searchedSubject.pipe(
-      debounceTime(300), // wait 300ms after each keystroke before considering the searched string
-      distinctUntilChanged(),// ignore new string if same as previous string
-      switchMap((searchedString: string) => this.searchBase(searchedString))
-    );
-
-    //Send request to parents to reload the data.
-    this.event.emit(this.list$)
+    
   }
 
   /**
@@ -49,11 +45,15 @@ export class SearchComponent implements OnInit {
    * @param typedString string
    * @returns Array[] | any
    */
-  searchBase(typedString: string) {
+  searchedSubject(typedString: string): Observable<any>{
     if (!typedString.trim()) {     
       return of([]);
     }
-    console.log(this.list$)
-    return this.baseService.get(`${this.path}?${KEY_LIMIT}=${VAL_LIMIT_SEARCH}&${KEY_SEARCH}=${typedString}`, this.auth.httpHeaders);
+    return this.baseService.get(
+      `${this.path}?${KEY_LIMIT}=${VAL_LIMIT_SEARCH}&${KEY_SEARCH}=${typedString}`,
+       this.auth.httpHeaders).pipe(
+          debounceTime(300), // wait 300ms after each keystroke before considering the searched string
+          distinctUntilChanged(),// ignore new string if same as previous string
+        );
   }
 }
