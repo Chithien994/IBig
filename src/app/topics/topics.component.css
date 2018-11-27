@@ -56,21 +56,27 @@ virtual-scroller {
   color: #fff;
 }
 
+.loadMore {
+  margin-top: 5px;
+}
+
 /** Style Scrollbar **/
 
 /* width */
 ::-webkit-scrollbar {
-  width: 2px;
+  width: 6px;
 }
 
 /* Track */
-::-webkit-scrollbar-track {
-  background: #fff; 
+::-webkit-scrollbar-track { 
+  border-radius: 3px;
+  border: 1px solid #417690;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #417690; 
+  border-radius: 3px;
 }
 
 /* Handle on hover */

@@ -3,11 +3,11 @@ ChiThienTCN
 Topics Component
 */
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { ChangeEvent, VirtualScrollerComponent } from 'ngx-virtual-scroller';
+import { ChangeEvent, VirtualScrollerComponent, IViewport } from 'ngx-virtual-scroller';
 
 import { Topic } from '../../models/topic';
-import { TopicService } from '../../services/topic.service';
-import { MessageService } from '../../services/message.service'
+import { TopicService } from '../../services/topic/topic.service';
+import { MessageService } from '../../services/message/message.service'
 
 @Component({
   selector: 'app-topics',
@@ -18,6 +18,11 @@ import { MessageService } from '../../services/message.service'
 export class TopicsComponent implements OnInit {
 
   @Input() topics: Topic[]
+  count: number = 0
+  loading: boolean;
+  private limit: number = 25
+  private offset: number = 0
+  private bLoadMore: boolean
 
   @ViewChild(VirtualScrollerComponent)
   public virtualScroller: VirtualScrollerComponent;
@@ -30,7 +35,7 @@ export class TopicsComponent implements OnInit {
   ngOnInit() {
 
     ////Automatically get data when component is initialized
-    this.getTopicsFormService()
+    this.getTopicsFormService(this.limit, this.offset)
   }
 
   /**
@@ -40,20 +45,25 @@ export class TopicsComponent implements OnInit {
   receiveMessage($event) {
     console.log($event)
     if($event){
-      this.getTopicsFormService()
+      this.refreshList()
     }
   }
 
-  protected loading: boolean;
-
-
   /**
-   * Called when changes count in a list
-   * 
-   * @param event ChangeEvent
+   * Load more
    */
-  protected onChangeEvent(event: ChangeEvent) {
-    console.log("ChangeEvent")
+  loadMore(){
+    this.bLoadMore = true
+    this.offset = this.getLengthTopics()
+    if(this.offset > this.count){
+      this.offset = this.count
+    }
+    console.log(this.offset)
+    this.getTopicsFormService(this.limit, this.offset)
+  }
+
+  refreshList(){
+    this.getTopicsFormService(this.getLengthTopics(), 0)
   }
 
   /**
@@ -66,7 +76,7 @@ export class TopicsComponent implements OnInit {
   /**
    * Get the Topics list.
    */
-  getTopicsFormService(): void {
+  getTopicsFormService(limit: number, offset: number): void {
 
     //Clear messages
     this.msgService.clear()
@@ -75,15 +85,25 @@ export class TopicsComponent implements OnInit {
     this.loading = true;
 
     //Send a request to retrieve the data, and listen for the results returned.
-    this.topicService.getTopics(25,0).subscribe((updateTopic) => {
+    this.topicService.getTopics(limit,offset).subscribe((updateTopic) => {
 
         //results returned
-        this.topics = updateTopic['results']
+        if(this.bLoadMore){
+
+          //When click load more
+          this.bLoadMore = false
+          this.topics = this.topics.concat(updateTopic['results'])
+        }else{
+
+          //When load first or refresh 
+          this.topics = updateTopic['results']
+        }
+        
+        this.count = updateTopic['count']
         
         //Hide loading
         this.loading = false;
-        this.virtualScroller.childHeight = 10;
-    
+        this.virtualScroller.childHeight = 1;
       }
     );
   }
@@ -111,7 +131,7 @@ export class TopicsComponent implements OnInit {
       if(result == null || result['code'] == 204){
 
         //reload data
-        this.getTopicsFormService()
+        this.refreshList()
         alert("Delete successfully!")
       }else{
         alert("Delete failed!")

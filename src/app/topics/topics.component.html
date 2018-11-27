@@ -6,18 +6,17 @@ Topic html
     <div class="row">
         <div class="col-sm-3 col-padding-0">
             <div class="card max-height">
-                <div class="card-header">My favorite topics: {{ getLengthTopics() }}</div>
+                <div class="card-header">My favorite topics: {{ getLengthTopics() }}/{{ count }}</div>
                 <div class="card-body">
 
                     <!-- Scroll -->
                     <virtual-scroller 
                     class="topics"  
-                    [items]="topics" 
-                    (vsUpdate)="scrollItems = $event"
-                    (vsEnd)="onChangeEvent($event)">
+                    #scroll
+                    [items]="topics">
                         <ol class="topics float-left">
                             <li class= "topicItem" 
-                            *ngFor="let topic of scrollItems"
+                            *ngFor="let topic of scroll.viewPortItems"
                             [class.selected]="topic === selectedTopic">
 
                                 <span class="item-content" 
@@ -43,6 +42,12 @@ Topic html
                         </ol>
                     </virtual-scroller>
                     <!-- End Scroll -->
+                    <button 
+                        [hidden]="getLengthTopics()==count || loading" 
+                        (click)="loadMore()" 
+                        class="btn button-gray loadMore">
+                        Load More
+                    </button>
 
                 </div>
             </div>

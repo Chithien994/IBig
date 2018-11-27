@@ -10,12 +10,12 @@ import { TopicsComponent } from './topics/topics.component';
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
 import { TopicDetailComponent } from './topic-detail/topic-detail.component';
-import { MessageComponent } from './message/message.component';
+import { MessageComponent } from './common/message/message.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SearchComponent } from './search/search.component';
 
-import { TopicService } from '../services/topic.service';
-import { MessageService } from '../services/message.service';
+import { TopicService } from '../services/topic/topic.service';
+import { MessageService } from '../services/message/message.service';
 import { AuthenticationService } from '../services/auth/authentication.service';
 import { DeleteModalComponent } from './common/modal/delete/delete-modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

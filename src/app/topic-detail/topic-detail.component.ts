@@ -12,8 +12,8 @@ import { User } from '../../models/user';
 import { Router, ActivatedRoute } from '@angular/router';
 
 /** Service */
-import { TopicService } from '../../services/topic.service';
-import { MessageService } from '../../services/message.service';
+import { TopicService } from '../../services/topic/topic.service';
+import { MessageService } from '../../services/message/message.service';
 import { R_TOPICS_PATH, R_DETAIL_PATH } from '../app-constants';
 
 @Component({

@@ -6,7 +6,7 @@ import {
 } from 'rxjs/operators';
 
 import { Topic } from '../../models/topic';
-import { TopicService } from '../../services/topic.service';
+import { TopicService } from '../../services/topic/topic.service';
 
 @Component({
   selector: 'app-search',

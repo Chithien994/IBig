@@ -4,15 +4,15 @@
  */
 import { Injectable } from '@angular/core';
 
-import { Topic } from '../models/topic';
+import { Topic } from '../../models/topic';
 
 /** Get data asynchronously with Observable */
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { BaseService } from './base/base.service';
-import { AuthenticationService } from '../services/auth/authentication.service';
-import { TOPICS_PATH } from '../app/app-constants';
+import { BaseService } from '../base/base.service';
+import { AuthenticationService } from '../auth/authentication.service';
+import { TOPICS_PATH } from '../../app/app-constants';
 
 
 @Injectable()

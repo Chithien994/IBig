@@ -34,38 +34,34 @@ Dashboard css
 .router {
     display: block;
 }
-.topics {
-    width: 90%;
-    display: block;
-}
 
 .scrollable-content {
     position: relative;
 }
 
 virtual-scroller {
-width: 90%;
-}
-
-my-custom-component {
-    position: relative;
+    margin: 0 1%;
+    width: 98%;
 }
 
 /** Style Scrollbar **/
 
 /* width */
 ::-webkit-scrollbar {
-    width: 2px;
+    height: 10px;
+    overflow: hidden;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #fff; 
+    background: #79aec8; 
+    border-radius: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: #417690; 
+    border-radius: 5px;
 }
 
 /* Handle on hover */
