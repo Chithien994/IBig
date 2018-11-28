@@ -9,7 +9,7 @@ export class Topic {
     privileged: number;
     picture: string;
 
-    public getParams(id: number, user: number, name: string){
+    public getParams(id: number, user: number, name: string) {
         const param = new Topic();
         param.id = id;
         param.user = user;
