@@ -1,14 +1,11 @@
 /**
- * ChiThienTCN
- * Topic Service
+ * ChiThienTCN.
+ * Topic Service.
  */
 import { Injectable } from '@angular/core';
 
 import { Topic } from '../../models/topic';
 
-/** Get data asynchronously with Observable */
-import { Observable } from 'rxjs';
-import { of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { BaseService } from '../base/base.service';
 import { AuthenticationService } from '../auth/authentication.service';
@@ -23,8 +20,8 @@ export class TopicService extends BaseService {
   }
 
   /**
-   * Get the Topics list 
-   * 
+   * Get the Topics list
+   *
    * @param limit number
    * @param offset number
    * @returns Topic[] | any
@@ -35,7 +32,7 @@ export class TopicService extends BaseService {
 
   /**
    * Get topic by id
-   * 
+   *
    * @param id number
    * @returns Topic | any
    */
@@ -45,17 +42,17 @@ export class TopicService extends BaseService {
 
   /**
    * Add a topic
-   * 
+   *
    * @param topic Topic
    * @returns Topic | any
    */
-  addTopic(topic: Topic){
+  addTopic(topic: Topic) {
     return this.post(TOPICS_PATH, topic, this.auth.httpHeaders);
   }
 
   /**
    * Update a topic
-   * 
+   *
    * @param topic Topic
    * @returns any
    */
@@ -65,32 +62,32 @@ export class TopicService extends BaseService {
 
   /**
    * Delete a topic
-   * 
+   *
    * @param id number
    * @returns any
    */
   onDelete(id: number) {
-    return this.delete(this.getPathAddId(id),this.auth.httpHeaders)
+    return this.delete(this.getPathAddId(id), this.auth.httpHeaders);
   }
 
   /**
    * Append the path by Id
-   * 
+   *
    * @param id number
    * @returns url string
    */
-  getPathAddId(id: number){
+  getPathAddId(id: number) {
     return `${TOPICS_PATH}${id}/`;
   }
 
   /**
    * Get path with limit and offset
-   * 
+   *
    * @param limit number
    * @param offset number
    * @returns string (`${API_PATH}?limit=${limit}&offset=${offset}`)
    */
-  getPathLimitOffset(limit: number, offset: number): string{
-    return `${TOPICS_PATH}?limit=${limit}&offset=${offset}`
+  getPathLimitOffset(limit: number, offset: number): string {
+    return `${TOPICS_PATH}?limit=${limit}&offset=${offset}`;
   }
 }

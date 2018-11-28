@@ -16,47 +16,47 @@ import { KEY_SEARCH, VAL_LIMIT_SEARCH, KEY_LIMIT } from '../app-constants';
 })
 export class SearchComponent implements OnInit {
 
-  @Input() path: string
-  @Input() title: string
+  @Input() path: string;
+  @Input() title: string;
 
   /** Initialize an event notifying parents */
-  @Output() event = new EventEmitter<any>()
-  
+  @Output() event = new EventEmitter<any>();
+
 
   constructor(private baseService: BaseService, private auth: AuthenticationService) { }
 
   search(searchedString: string): void {
-    if(searchedString){
-      this.searchedSubject(searchedString).subscribe(result =>{
-        if(result != null && typeof result['results'] != null){
-          this.event.emit(result['results'])
+    if (searchedString) {
+      this.searchedSubject(searchedString).subscribe(result => {
+        if (result != null && typeof result['results'] != null) {
+          this.event.emit(result['results']);
         }
-      })
-    }else{
-      
-      this.event.emit(false)
+      });
+    } else {
+
+      this.event.emit(false);
     }
   }
 
   ngOnInit() {
-    
+
   }
 
   /**
    * GET topics whose name contains searched string
-   * 
+   *
    * @param typedString string
    * @returns Array[] | any
    */
-  searchedSubject(typedString: string): Observable<any>{
-    if (!typedString.trim()) {     
+  searchedSubject(typedString: string): Observable<any> {
+    if (!typedString.trim()) {
       return of([]);
     }
     return this.baseService.get(
       `${this.path}?${KEY_LIMIT}=${VAL_LIMIT_SEARCH}&${KEY_SEARCH}=${typedString}`,
        this.auth.httpHeaders).pipe(
           debounceTime(300), // wait 300ms after each keystroke before considering the searched string
-          distinctUntilChanged(),// ignore new string if same as previous string
+          distinctUntilChanged(), // ignore new string if same as previous string
         );
   }
 }

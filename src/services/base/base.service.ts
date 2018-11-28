@@ -17,7 +17,7 @@ export class BaseService {
 
   /**
    * Post
-   * 
+   *
    * @param path string
    * @param body ?: any | null
    * @param options ?: any | null
@@ -32,7 +32,7 @@ export class BaseService {
 
   /**
    * Get
-   * 
+   *
    * @param path string
    * @param options ?: any | null
    * @returns any
@@ -46,7 +46,7 @@ export class BaseService {
 
   /**
    * Put
-   * 
+   *
    * @param path string
    * @param body ?: any | null
    * @param options ?: any | null
@@ -61,7 +61,7 @@ export class BaseService {
 
   /**
    * Patch
-   * 
+   *
    * @param path string
    * @param body ?: any | null
    * @param options ?: any | null
@@ -76,16 +76,16 @@ export class BaseService {
 
   /**
    * Delete
-   * 
+   *
    * @param path string
    * @param options ?: any | null
    * @returns any
    */
   delete(path: string, options?: any | null): Observable<any> {
-    console.log(this.getFullUrl(path))
+    console.log(this.getFullUrl(path));
     return this.http.delete<any>(this.getFullUrl(path), options).pipe(
-      tap(response =>{
-        console.log(JSON.stringify(response))
+      tap(response => {
+        console.log(JSON.stringify(response));
       }),
       catchError(error => of(error))
     );
@@ -93,8 +93,9 @@ export class BaseService {
 
   /**
    * Get the full url.
+   *
    * @param path string
-   * @return {string} url
+   * @return string url
    */
   getFullUrl(path: string) {
     return API_URL + path;
@@ -102,8 +103,9 @@ export class BaseService {
 
    /**
    * Get the message from HttpErrorResponse object.
-   * @param {HttpErrorResponse} error the HttpErrorResponse object.
-   * @return {string} the message.
+   *
+   * @param HttpErrorResponse error the HttpErrorResponse object.
+   * @return string the message.
    */
   getErrorMessage(error: HttpErrorResponse) {
     if (error.error != null) {

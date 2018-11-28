@@ -39,12 +39,12 @@ Topic html
                                     [attr.data-target]="'#modal-'+topic.id">
                                 </button>
                                 
-                                <delete-modal
+                                <app-delete-modal
                                     (event)="onDelete($event)" 
                                     [title]="'Confirm delete?'" 
                                     [message]="'Do you want to delete: '+topic.name + '?'" 
                                     [id]="topic.id">
-                                </delete-modal>
+                                </app-delete-modal>
                                 <!-- End Delete Modal Component -->
                             
                             </li>

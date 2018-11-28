@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild(VirtualScrollerComponent)
   public virtualScroller: VirtualScrollerComponent;
-  
+
   constructor(private topicService: TopicService) { }
 
   ngOnInit() {
@@ -26,9 +26,9 @@ export class DashboardComponent implements OnInit {
   }
 
   getTopics(): void {
-    this.topicService.getTopics(25,0).subscribe(topics => this.topics = topics['results'].slice(1, 11));
-    this.virtualScroller.horizontal = true
-    this.virtualScroller.childHeight = 200
+    this.topicService.getTopics(25, 0).subscribe(topics => this.topics = topics['results'].slice(1, 11));
+    this.virtualScroller.horizontal = true;
+    this.virtualScroller.childHeight = 200;
   }
 
 }

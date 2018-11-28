@@ -7,7 +7,7 @@ import { ChangeEvent, VirtualScrollerComponent, IViewport } from 'ngx-virtual-sc
 
 import { Topic } from '../../models/topic';
 import { TopicService } from '../../services/topic/topic.service';
-import { MessageService } from '../../services/message/message.service'
+import { MessageService } from '../../services/message/message.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -18,67 +18,70 @@ import { Observable } from 'rxjs';
 
 export class TopicsComponent implements OnInit {
 
-  @Input() topics: Topic[]
-  count: number = 0
-  loading: boolean;
-  private limit: number = 25
-  private offset: number = 0
-  private bLoadMore: boolean
-
-  @ViewChild(VirtualScrollerComponent)
-  public virtualScroller: VirtualScrollerComponent;
-
   constructor(
     private topicService: TopicService,
     private msgService: MessageService) {
   }
 
+  @Input() topics: Topic[];
+  count = 0;
+  loading: boolean;
+  private limit = 25;
+  private offset = 0;
+  private bLoadMore: boolean;
+
+  @ViewChild(VirtualScrollerComponent)
+  public virtualScroller: VirtualScrollerComponent;
+
+  /** Selected topic */
+  selectedTopic: Topic;
+
   ngOnInit() {
 
-    ////Automatically get data when component is initialized
-    this.getTopicsFormService(this.limit, this.offset)
+    // Automatically get data when component is initialized
+    this.getTopicsFormService(this.limit, this.offset);
   }
 
   /**
    * Topic successfully added
-   * 
-   * @param $event
+   *
+   * @param $event EventEmitter<boolean>
    */
   receiveMessage($event) {
-    if($event){
-      this.refreshList()
+    if ($event) {
+      this.refreshList();
     }
   }
 
   /**
    * Event Search result
-   * 
-   * @param $event
+   *
+   * @param $event EventEmitter<any>
    */
-  onSearch($event){
-    if($event){
-      this.topics = $event
-    }else {
-      this.refreshList()
+  onSearch($event) {
+    if ($event) {
+      this.topics = $event;
+    } else {
+      this.refreshList();
     }
-    
+
   }
 
   /**
    * Load more
    */
-  loadMore(){
-    this.bLoadMore = true
-    this.offset = this.getLengthTopics()
-    if(this.offset > this.count){
-      this.offset = this.count
+  loadMore() {
+    this.bLoadMore = true;
+    this.offset = this.getLengthTopics();
+    if (this.offset > this.count) {
+      this.offset = this.count;
     }
-    console.log(this.offset)
-    this.getTopicsFormService(this.limit, this.offset)
+    console.log(this.offset);
+    this.getTopicsFormService(this.limit, this.offset);
   }
 
-  refreshList(){
-    this.getTopicsFormService(this.getLengthTopics(), 0)
+  refreshList() {
+    this.getTopicsFormService(this.getLengthTopics(), 0);
   }
 
   /**
@@ -90,33 +93,36 @@ export class TopicsComponent implements OnInit {
 
   /**
    * Get the Topics list.
+   *
+   * @param limit number
+   * @param offset number
    */
   getTopicsFormService(limit: number, offset: number): void {
 
-    //Clear messages
-    this.msgService.clear()
+    // Clear messages
+    this.msgService.clear();
 
-    //Show loading
+    // Show loading
     this.loading = true;
 
-    //Send a request to retrieve the data, and listen for the results returned.
-    this.topicService.getTopics(limit,offset).subscribe((updateTopic) => {
+    // Send a request to retrieve the data, and listen for the results returned.
+    this.topicService.getTopics(limit, offset).subscribe((updateTopic) => {
 
-        //results returned
-        if(this.bLoadMore){
+        // results returned
+        if (this.bLoadMore) {
 
-          //When click load more
-          this.bLoadMore = false
-          this.topics = this.topics.concat(updateTopic['results'])
-        }else{
+          // When click load more
+          this.bLoadMore = false;
+          this.topics = this.topics.concat(updateTopic['results']);
+        } else {
 
-          //When load first or refresh 
-          this.topics = updateTopic['results']
+          // When load first or refresh
+          this.topics = updateTopic['results'];
         }
-        
-        this.count = updateTopic['count']
-        
-        //Hide loading
+
+        this.count = updateTopic['count'];
+
+        // Hide loading
         this.loading = false;
         this.virtualScroller.childHeight = 1;
       }
@@ -125,45 +131,42 @@ export class TopicsComponent implements OnInit {
 
   /**
    * Used to get length of topics
-   * 
+   *
    * @returns length: number
    */
-  getLengthTopics(): number{
-    if(this.topics){
-      return this.topics.length
+  getLengthTopics(): number {
+    if (this.topics) {
+      return this.topics.length;
     }
     return 0;
   }
 
   /**
    * Delete topic
-   * 
+   *
    * @param id number
    */
-  onDelete(id: number): void{
-    this.topicService.onDelete(id).subscribe(result =>{
+  onDelete(id: number): void {
+    this.topicService.onDelete(id).subscribe(result => {
 
-      if(result == null || result['code'] == 204){
+      if (result == null || result['code'] === 204) {
 
-        //reload data
-        this.refreshList()
-        alert("Delete successfully!")
-      }else{
-        alert("Delete failed!")
+        // reload data
+        this.refreshList();
+        alert('Delete successfully!');
+      } else {
+        alert('Delete failed!');
       }
-    })
+    });
   }
-
-  /** Selected topic */
-  selectedTopic: Topic
 
   /**
    * Action when select a Topic in List item and clear messages
-   * 
+   *
    * @param topic Topic
    */
   onSelect(topic: Topic): void {
-    this.msgService.clear()
-    this.selectedTopic = topic
+    this.msgService.clear();
+    this.selectedTopic = topic;
   }
 }
