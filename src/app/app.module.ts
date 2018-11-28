@@ -12,7 +12,7 @@ import { FooterComponent } from './common/footer/footer.component';
 import { TopicDetailComponent } from './topic-detail/topic-detail.component';
 import { MessageComponent } from './common/message/message.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { SearchComponent } from './search/search.component';
+import { SearchComponent } from './common/search/search.component';
 
 import { TopicService } from '../services/topic/topic.service';
 import { MessageService } from '../services/message/message.service';

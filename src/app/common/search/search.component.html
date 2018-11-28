@@ -1,0 +1,9 @@
+<!-- 
+Chi Thien TCN
+Email: chithien994@gmail.com
+Search movie by typing in <input> tag
+-->
+<div class="search">
+  <h6 class="title-search">{{ title }} search</h6> 
+  <input class="input-search" id="input-search" #searchBox (keyup)="search(searchBox.value)" placeholder="Search" title="Search" /> 
+</div>

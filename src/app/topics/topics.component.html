@@ -12,7 +12,7 @@ Topic html
                     <!-- Search component -->
                     <div style="padding: 0 8px 16px 2px;">
                         <app-search
-                            (event)="onSearch($event)"
+                            (event)="searchCallBack($event)"
                             [title]="'Topic'"
                             [path]="'topics/'">
                         </app-search>
@@ -63,7 +63,10 @@ Topic html
             </div>
         </div>
         <div class="col-sm-9 col-padding-0 topic-detail">
-            <app-topic-detail (messageEvent)="receiveMessage($event)" [topic]="selectedTopic"></app-topic-detail>
+            <app-topic-detail
+                (messageEvent)="addCallBack($event)"
+                [topic]="selectedTopic">
+            </app-topic-detail>
         </div>
     </div>
 </div>

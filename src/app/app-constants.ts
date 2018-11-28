@@ -8,7 +8,8 @@ export const LOGIN_HTTP_OPTIONS = {
 };
 /**
  * Config the time to show warning timeout popup.
- * @type {{idle: number; timeout: number; ping: number}}
+ *
+ * type {idle: number; timeout: number; ping: number}
  */
 export const TIMEOUT_CONFIG = {idle: 1800, timeout: 31, ping: 5};
 export const MessageType = {success: 'success', info: 'info', warning: 'warning', danger: 'danger'};
@@ -21,18 +22,18 @@ export const R_BASHBOARD_PATH = `dashboard`;
 export const R_DETAIL_PATH = `detail/`;
 export const R_USERS_PATH = `users`;
 
-//Api path
+// Api path
 export const LOGIN_PATH = 'login/';
 export const TOPICS_PATH = `topics/`;
 export const USERS_PATH = `users/`;
 
-//Api key
+// Api key
 export const KEY_SEARCH = `search`;
 export const KEY_LIMIT = `limit`;
 export const KEY_OFFSET = `offset`;
 
-//Api value
-export const VAL_LIMIT_SEARCH = 10;
+// Api value
+export const VAL_LIMIT_SEARCH = 25;
 
 export const APP_NAME = 'IBig';
 export const CURRENT_USER = 'currentUser';

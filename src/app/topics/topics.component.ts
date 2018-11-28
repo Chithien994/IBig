@@ -9,6 +9,7 @@ import { Topic } from '../../models/topic';
 import { TopicService } from '../../services/topic/topic.service';
 import { MessageService } from '../../services/message/message.service';
 import { Observable } from 'rxjs';
+import { BaseComponent } from '../base/base.component';
 
 @Component({
   selector: 'app-topics',
@@ -16,11 +17,12 @@ import { Observable } from 'rxjs';
   styleUrls: ['./topics.component.css'],
 })
 
-export class TopicsComponent implements OnInit {
+export class TopicsComponent extends BaseComponent {
 
   constructor(
     private topicService: TopicService,
     private msgService: MessageService) {
+    super();
   }
 
   @Input() topics: Topic[];
@@ -36,7 +38,7 @@ export class TopicsComponent implements OnInit {
   /** Selected topic */
   selectedTopic: Topic;
 
-  ngOnInit() {
+  appOnInit() {
 
     // Automatically get data when component is initialized
     this.getTopicsFormService(this.limit, this.offset);
@@ -47,7 +49,7 @@ export class TopicsComponent implements OnInit {
    *
    * @param $event EventEmitter<boolean>
    */
-  receiveMessage($event) {
+  addCallBack($event) {
     if ($event) {
       this.refreshList();
     }
@@ -58,13 +60,17 @@ export class TopicsComponent implements OnInit {
    *
    * @param $event EventEmitter<any>
    */
-  onSearch($event) {
-    if ($event) {
+  searchCallBack($event) {
+    const value = this.getElementById('input-search').value;
+
+    // Check input Search length
+    if ($event && value.length > 0) {
       this.topics = $event;
     } else {
-      this.refreshList();
-    }
 
+      // Reload previous data. (Before searching)
+      this.getTopicsFormService(this.offset + this.limit, 0);
+    }
   }
 
   /**
@@ -82,13 +88,6 @@ export class TopicsComponent implements OnInit {
 
   refreshList() {
     this.getTopicsFormService(this.getLengthTopics(), 0);
-  }
-
-  /**
-   * Call this function after resize + animation end
-   */
-  afterResize() {
-    this.virtualScroller.refresh();
   }
 
   /**
