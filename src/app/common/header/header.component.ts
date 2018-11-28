@@ -2,10 +2,10 @@
 ChiThienTCN
 Header Component
 */
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { AppRoutingModule } from '../../app-routing.module';
-import { Router, Route } from '@angular/router';
+import { Route, ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '../base/base.component';
 
 @Component({
@@ -18,6 +18,7 @@ export class HeaderComponent extends BaseComponent {
   constructor(
     private appComponent: AppComponent,
     public appRouting: AppRoutingModule,
+    private activatedRoute: ActivatedRoute,
     private router: Router
     ) {
     super();
@@ -42,10 +43,9 @@ export class HeaderComponent extends BaseComponent {
    * @returns only true
    */
   setCurrentRouter(): boolean {
-
     for (const route of this.appRouting.routes) {
-      if (route.path === this.router.url.split('/')[1] ||
-      this.router.url.search(route.path.substring(0, 7)) === 1) {// ==> 'detail/'
+      if (route.path === this.getPath().split('/')[1] ||
+      this.getPath().search(route.path.substring(0, 7)) === 1) {// ==> 'detail/'
         this.currentRouter = route;
         break;
       } else {
@@ -71,5 +71,18 @@ export class HeaderComponent extends BaseComponent {
    */
   getHomeRouter(): Route {
     return this.appRouting.routes[0];
+  }
+
+  /**
+   * Get current path
+   *
+   * @returns path
+   *
+   * @example
+   * http://localhost:4200/detail/15
+   * return '/detail/15'
+   */
+  getPath(): string {
+    return this.router.url;
   }
 }

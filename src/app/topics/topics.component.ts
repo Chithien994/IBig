@@ -8,8 +8,8 @@ import { ChangeEvent, VirtualScrollerComponent, IViewport } from 'ngx-virtual-sc
 import { Topic } from '../../models/topic';
 import { TopicService } from '../../services/topic/topic.service';
 import { MessageService } from '../../services/message/message.service';
-import { Observable } from 'rxjs';
 import { BaseComponent } from '../common/base/base.component';
+import { RP_RESULTS, RP_COUNT, RP_CODE } from '../app-constants';
 
 @Component({
   selector: 'app-topics',
@@ -112,14 +112,14 @@ export class TopicsComponent extends BaseComponent {
 
           // When click load more
           this.bLoadMore = false;
-          this.topics = this.topics.concat(updateTopic['results']);
+          this.topics = this.topics.concat(updateTopic[RP_RESULTS]);
         } else {
 
           // When load first or refresh
-          this.topics = updateTopic['results'];
+          this.topics = updateTopic[RP_RESULTS];
         }
 
-        this.count = updateTopic['count'];
+        this.count = updateTopic[RP_COUNT];
 
         // Hide loading
         this.loading = false;
@@ -148,7 +148,7 @@ export class TopicsComponent extends BaseComponent {
   onDelete(id: number): void {
     this.topicService.onDelete(id).subscribe(result => {
 
-      if (result == null || result['code'] === 204) {
+      if (result == null || result[RP_CODE] === 204) {
 
         // reload data
         this.refreshList();

@@ -35,6 +35,14 @@ export const KEY_OFFSET = `offset`;
 // Api value
 export const VAL_LIMIT_SEARCH = 25;
 
+// Response
+export const RP_ID = 'id';
+export const RP_RESULTS = 'results';
+export const RP_COUNT = 'count';
+export const RP_CODE = 'code';
+export const RP_STATUS = 'status';
+export const RP_MESSAGE = 'message';
+
 export const APP_NAME = 'IBig';
 export const CURRENT_USER = 'currentUser';
 export const LOGGED_IN_AS = 'You are logged in as ';

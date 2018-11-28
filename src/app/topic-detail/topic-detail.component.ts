@@ -3,18 +3,17 @@ ChiThienTCN
 Topic - detail Component
 */
 import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
-
+import { BaseComponent } from '../common/base/base.component';
 import { Topic } from '../../models/topic';
 import { User } from '../../models/user';
-
-/** Router */
-import { Router, ActivatedRoute } from '@angular/router';
 
 /** Service */
 import { TopicService } from '../../services/topic/topic.service';
 import { MessageService } from '../../services/message/message.service';
-import { R_TOPICS_PATH, R_DETAIL_PATH } from '../app-constants';
-import { BaseComponent } from '../common/base/base.component';
+
+/** Constants */
+import { R_TOPICS_PATH, R_DETAIL_PATH, RP_RESULTS, RP_CODE, RP_STATUS, RP_ID, RP_MESSAGE } from '../app-constants';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 @Component({
   selector: 'app-topic-detail',
@@ -33,7 +32,7 @@ export class TopicDetailComponent extends BaseComponent {
   user = new User;
 
   constructor(
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private topicService: TopicService,
     private msgService: MessageService,
     private router: Router
@@ -61,7 +60,7 @@ export class TopicDetailComponent extends BaseComponent {
    * @returns true or false
    */
   hiddenCloseButton() {
-    if (this.router.url.search(R_DETAIL_PATH) === 1) {
+    if (this.getPath().search(R_DETAIL_PATH) === 1) {
       return true;
     }
     return false;
@@ -72,7 +71,7 @@ export class TopicDetailComponent extends BaseComponent {
    */
   getUsers() {
     this.topicService.auth.getUsers().subscribe(results => {
-      this.users = results['results'];
+      this.users = results[RP_RESULTS];
     });
   }
 
@@ -85,7 +84,7 @@ export class TopicDetailComponent extends BaseComponent {
     this.msgService.clear();
 
     // get id from param map
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = +this.paramMap().get('id');
     if (id > 0) {
       this.topicService.getTopicFromId(id).subscribe(topic => this.topic = topic);
     }
@@ -102,13 +101,12 @@ export class TopicDetailComponent extends BaseComponent {
     this.msgService.clear();
     this.topicService.update(new Topic().getParams(this.topic.id, user, name)).subscribe(result => {
 
-      console.log(`code: ${JSON.stringify(result)}`);
-      if (result != null && result['status'] === 200 || result['code'] === 200 || result['id']) {
+      if (result != null && result[RP_STATUS] === 200 || result[RP_CODE] === 200 || result[RP_ID]) {
 
-        //// Topic successfully updated.
+        // Topic successfully updated.
 
         // Go back if you are on the details page.
-        if (this.route.snapshot.paramMap.get('id')) {
+        if (this.paramMap().get('id')) {
           this.goBack();
         } else {
 
@@ -122,7 +120,7 @@ export class TopicDetailComponent extends BaseComponent {
       } else {
 
         // Notification failed
-        this.msgService.setFailure(result['message']);
+        this.msgService.setFailure(result[RP_MESSAGE]);
       }
     });
   }
@@ -141,7 +139,8 @@ export class TopicDetailComponent extends BaseComponent {
 
     this.msgService.clear();
     this.topicService.addTopic(new Topic().getParams(this.topic.id, user, name)).subscribe(result => {
-      if (result != null && result['status'] === 200 || result['code'] === 200 || result['id']) {
+
+      if (result != null && result[RP_STATUS] === 200 || result[RP_CODE] === 200 || result[RP_ID]) {
 
         // Topic successfully added
 
@@ -149,7 +148,7 @@ export class TopicDetailComponent extends BaseComponent {
         sessionStorage.setItem('add', (`${+sessionStorage.getItem('add') + 1}`));
 
         //// Go back if you are on the details page.
-        if (this.route.snapshot.paramMap.get('id')) {
+        if (this.paramMap().get('id')) {
           // this.goBack()
           this.goToPage(R_TOPICS_PATH);
         } else {
@@ -163,11 +162,38 @@ export class TopicDetailComponent extends BaseComponent {
       } else {
 
         // Notification failed
-        this.msgService.setFailure(result['message']);
+        this.msgService.setFailure(result[RP_MESSAGE]);
       }
 
     });
 
+  }
+
+  /**
+   * @description
+   * Param map
+   *
+   * ActivatedRoute Contains the information about a route associated with a component loaded in an outlet.
+   *
+   * snapshot The current snapshot of this route
+   *
+   * @returns this.activatedRoute.snapshot.paramMap: ParamMap
+   */
+  paramMap(): ParamMap {
+    return this.activatedRoute.snapshot.paramMap;
+  }
+
+  /**
+   * Get current path
+   *
+   * @returns path
+   *
+   * @example
+   * http://localhost:4200/detail/15
+   * return '/detail/15'
+   */
+  getPath(): string {
+    return this.router.url;
   }
 
   /**

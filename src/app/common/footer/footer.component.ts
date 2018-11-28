@@ -2,7 +2,7 @@
 ChiThienTCN
 Footer Component
 */
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { BaseComponent } from '../base/base.component';
 
 @Component({

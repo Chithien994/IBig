@@ -18,6 +18,7 @@ export abstract class BaseComponent implements OnInit {
 
   ngOnInit() {
     this.onInit();
+   // console.log(JSON.stringify(this.paramMap));
   }
 
   /**
