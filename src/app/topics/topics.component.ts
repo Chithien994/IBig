@@ -9,7 +9,7 @@ import { Topic } from '../../models/topic';
 import { TopicService } from '../../services/topic/topic.service';
 import { MessageService } from '../../services/message/message.service';
 import { Observable } from 'rxjs';
-import { BaseComponent } from '../base/base.component';
+import { BaseComponent } from '../common/base/base.component';
 
 @Component({
   selector: 'app-topics',
@@ -38,7 +38,7 @@ export class TopicsComponent extends BaseComponent {
   /** Selected topic */
   selectedTopic: Topic;
 
-  appOnInit() {
+  onInit() {
 
     // Automatically get data when component is initialized
     this.getTopicsFormService(this.limit, this.offset);

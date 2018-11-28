@@ -3,7 +3,6 @@ ChiThienTCN
 Topic - detail Component
 */
 import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
-import { Location } from '@angular/common';
 
 import { Topic } from '../../models/topic';
 import { User } from '../../models/user';
@@ -15,13 +14,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { TopicService } from '../../services/topic/topic.service';
 import { MessageService } from '../../services/message/message.service';
 import { R_TOPICS_PATH, R_DETAIL_PATH } from '../app-constants';
+import { BaseComponent } from '../common/base/base.component';
 
 @Component({
   selector: 'app-topic-detail',
   templateUrl: './topic-detail.component.html',
   styleUrls: ['./topic-detail.component.css']
 })
-export class TopicDetailComponent implements OnInit {
+export class TopicDetailComponent extends BaseComponent {
 
   /** Get data from parents */
   @Input() topic: Topic;
@@ -35,12 +35,13 @@ export class TopicDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private topicService: TopicService,
-    private location: Location,
     private msgService: MessageService,
     private router: Router
-    ) { }
+    ) {
+    super();
+  }
 
-  ngOnInit() {
+  onInit() {
 
     // Automatically get data when component is initialized
     this.getUsers();
@@ -150,7 +151,7 @@ export class TopicDetailComponent implements OnInit {
         //// Go back if you are on the details page.
         if (this.route.snapshot.paramMap.get('id')) {
           // this.goBack()
-          window.location.href = R_TOPICS_PATH;
+          this.goToPage(R_TOPICS_PATH);
         } else {
 
           // Send request to parents to reload the data.
@@ -167,13 +168,6 @@ export class TopicDetailComponent implements OnInit {
 
     });
 
-  }
-
-  /**
-   * Go back
-   */
-  goBack(): void {
-    this.location.back();
   }
 
   /**

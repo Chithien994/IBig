@@ -6,23 +6,26 @@ import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { AppRoutingModule } from '../../app-routing.module';
 import { Router, Route } from '@angular/router';
+import { BaseComponent } from '../base/base.component';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent extends BaseComponent {
 
   constructor(
     private appComponent: AppComponent,
     public appRouting: AppRoutingModule,
     private router: Router
-    ) {}
+    ) {
+    super();
+  }
 
   currentRouter: Route;
 
-  ngOnInit() {}
+  onInit() {}
 
   /**
    * Get app title
