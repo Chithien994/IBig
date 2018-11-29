@@ -12,9 +12,10 @@ import { Message, MessageService } from 'src/services/message/message.service';
 export class LoginComponent extends BaseComponent {
 
   login: object = {'username': '', 'password': ''};
-  message: Message = new Message;
+
   constructor(private auth: AuthenticationService, public msgServer: MessageService) {
     super();
+    msgServer.clear();
   }
 
   onInit() {

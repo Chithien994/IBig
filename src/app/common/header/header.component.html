@@ -8,12 +8,13 @@ Header html
     </div>
 	<div class="user-tools">
          <ul class="nav">
-            <li data-toggle="modal" [attr.data-target]="'#modal-login'"><a>Login</a></li>
-            <li data-toggle="modal" [attr.data-target]="'#modal-login'"><a>Register</a></li>
+            <li (click)="clearMsg()" data-toggle="modal" [attr.data-target]="'#modal-login'"><a>Login</a></li>
+            <li class="ml-md-2" (click)="clearMsg()" data-toggle="modal" [attr.data-target]="'#modal-login'"><a>Register</a></li>
              <app-login></app-login>
             <li *ngFor="let route of appRouting.routes">
                 <a 
                     [class.selected]="route.path==getCurrentRouter().path"
+                    [class.ml-md-2]="route.data.isShow"
                     *ngIf="route.data.isShow"
                     routerLink="/{{ route.path }}">
                     {{ route.data.title | titlecase }}

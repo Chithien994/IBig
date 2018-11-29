@@ -7,6 +7,7 @@ import { AppComponent } from '../../app.component';
 import { AppRoutingModule } from '../../app-routing.module';
 import { Route, Router } from '@angular/router';
 import { BaseComponent } from '../base/base.component';
+import { MessageService } from 'src/services/message/message.service';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,8 @@ export class HeaderComponent extends BaseComponent {
   constructor(
     private appComponent: AppComponent,
     public appRouting: AppRoutingModule,
-    private router: Router
+    private router: Router,
+    private msgServer: MessageService
     ) {
     super();
   }
@@ -83,5 +85,12 @@ export class HeaderComponent extends BaseComponent {
    */
   getPath(): string {
     return this.router.url;
+  }
+
+  /**
+   * Clear all message
+   */
+  clearMsg(): void {
+    this.msgServer.clear();
   }
 }
