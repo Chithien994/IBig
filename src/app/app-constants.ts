@@ -3,7 +3,7 @@ export const URL = 'https://itbigger.pythonanywhere.com/';
 export const API_URL = `${URL}api/v1/`;
 export const LOGIN_HTTP_OPTIONS = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/x-www-form-urlencoded'
+    'Content-Type':  'application/json'
   })
 };
 /**
@@ -17,6 +17,7 @@ export const MessageType = {success: 'success', info: 'info', warning: 'warning'
 // Routing path
 export const R_HOME = '';
 export const R_LOGIN_PATH = 'login';
+export const R_REGISTER_PATH = 'register';
 export const R_TOPICS_PATH = `topics`;
 export const R_BASHBOARD_PATH = `dashboard`;
 export const R_DETAIL_PATH = `detail/`;

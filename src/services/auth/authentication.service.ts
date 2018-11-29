@@ -48,9 +48,9 @@ export class AuthenticationService extends BaseService {
    * @returns any | User object
    */
   login(username: string, password: string) {
-    const body = new URLSearchParams();
-    body.set('username', username);
-    body.set('password', password);
+    const body = new Object();
+    body['username'] = username;
+    body['password'] = password;
     return this.post(this.LOGIN_PATH, body, LOGIN_HTTP_OPTIONS);
   }
 

@@ -5,7 +5,7 @@ Header Component
 import { Component } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { AppRoutingModule } from '../../app-routing.module';
-import { Route, ActivatedRoute, Router } from '@angular/router';
+import { Route, Router } from '@angular/router';
 import { BaseComponent } from '../base/base.component';
 
 @Component({
@@ -18,7 +18,6 @@ export class HeaderComponent extends BaseComponent {
   constructor(
     private appComponent: AppComponent,
     public appRouting: AppRoutingModule,
-    private activatedRoute: ActivatedRoute,
     private router: Router
     ) {
     super();

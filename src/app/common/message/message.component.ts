@@ -2,9 +2,9 @@
 ChiThienTCN
 Message Service
 */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
-import { MessageService } from '../../../services/message/message.service';
+import { MessageService, Message } from '../../../services/message/message.service';
 import { BaseComponent } from '../base/base.component';
 
 @Component({

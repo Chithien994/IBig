@@ -1,0 +1,49 @@
+<!-- The Modal -->
+<div class="modal" id="modal-login">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <form name="form" #login="ngForm" novalidate>
+          <!-- Modal Header -->
+          <div class="modal-header">
+              <h4 class="modal-title">Login</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body text-left">
+            <div class="form-group">
+              <label for="username">Phone or email</label>
+              <input type="text" class="form-control" placeholder="Phone or email" title="Phone or email"
+              [(ngModel)]="login.username" name="username" #username="ngModel" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" placeholder="Password" title="Password"
+              [(ngModel)]="login.password" name="password" #password="ngModel" required>
+            </div>
+            <app-message></app-message>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <div class="row">
+              <div class="col-md-12">
+                <button 
+                  type="button"
+                  (click)="onLogin(username.value, password.value)"
+                  [disabled]="!login.form.valid"
+                  class="btn button-gray">
+                  Sign in
+                </button>
+                <button type="button" class="btn button-gray ml-sm-2" data-dismiss="modal">Close</button>
+              </div>
+              <div class="col-md-12">
+                <a class="link" href="#">Create account</a> or <a class="link" href="#">reset password</a>
+              </div>
+            </div>
+          </div>
+        </form>  
+      </div>
+  </div>
+</div>
+<!-- End Modal -->

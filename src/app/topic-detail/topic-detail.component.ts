@@ -147,9 +147,8 @@ export class TopicDetailComponent extends BaseComponent {
         // Record the number of times the topic was successfully added
         sessionStorage.setItem('add', (`${+sessionStorage.getItem('add') + 1}`));
 
-        //// Go back if you are on the details page.
+        // Go to topic page if you are on the details page.
         if (this.paramMap().get('id')) {
-          // this.goBack()
           this.goToPage(R_TOPICS_PATH);
         } else {
 
@@ -189,8 +188,8 @@ export class TopicDetailComponent extends BaseComponent {
    * @returns path
    *
    * @example
-   * http://localhost:4200/detail/15
-   * return '/detail/15'
+   * http://localhost:4200/example/15
+   * return '/example/15'
    */
   getPath(): string {
     return this.router.url;

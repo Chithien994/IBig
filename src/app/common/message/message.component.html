@@ -1,6 +1,5 @@
-<div class="msg" *ngIf="messageService.messages.length" style="text-align:left;">  
-    <h4>Messages</h4>
+<div *ngIf="messageService.messages.length > 0">  
     <div *ngFor='let message of messageService.messages'> 
-        <span class="succ" [class.err]="message.err">{{message.message}}</span>
+        <span class="alert alert-success" [class.alert-danger]="message.err">{{message.message}}</span>
     </div>
 </div>

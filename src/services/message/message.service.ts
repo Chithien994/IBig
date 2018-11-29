@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class MessageService {
 
   messages: Message[] = [];
-  messege: Message = new Message;
+  message: Message = new Message;
 
   /**
    * Add message content, and message type.
@@ -16,8 +16,8 @@ export class MessageService {
    * @param err boolean
    */
   add(message: string, err: boolean) {
-    this.messege.setNotfy(message, err);
-    this.messages.push(this.messege);
+    this.message.setNotfy(message, err);
+    this.messages.push(this.message);
   }
 
   /**
@@ -55,9 +55,11 @@ export class MessageService {
 
   /**
    * Delete all notifications.
+   * Only return true
    */
-  clear() {
+  clear(): boolean {
     this.messages = [];
+    return true;
   }
 
   constructor() { }

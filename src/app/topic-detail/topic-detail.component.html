@@ -27,11 +27,15 @@ Topic - detail html
                                 </option>
                             </select>
                         </div>
+
+                        <!-- Message -->
+                        <div class="form-group">
+                            <app-message style="display:bock"></app-message>
+                        </div>
                     </div>
                     <div class="card-footer">
                         <button (click)="onUpdate(name.value,user.value)" [disabled]="!f.form.valid" title="Update" class="btn button-gray">Update</button>
                         <button (click)="add(name.value,user.value)" [disabled]="!f.form.valid" title="Add" class="ml-sm-3 btn button-gray">New</button>
-                        <span class="mt-sm-3" style="display: block;"><app-message></app-message></span>
                     </div>
                 </div>
             </form>

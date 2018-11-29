@@ -13,6 +13,11 @@ Header css
     box-sizing: content-box;
 }
 
+.nav li {
+    color:#fff;
+    padding-left: 16px;
+}
+
 .header a:link, .header a:visited {
     color: #fff;
 }

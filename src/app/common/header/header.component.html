@@ -8,13 +8,16 @@ Header html
     </div>
 	<div class="user-tools">
          <ul class="nav">
+            <li data-toggle="modal" [attr.data-target]="'#modal-login'"><a>Login</a></li>
+            <li data-toggle="modal" [attr.data-target]="'#modal-login'"><a>Register</a></li>
+             <app-login></app-login>
             <li *ngFor="let route of appRouting.routes">
                 <a 
                     [class.selected]="route.path==getCurrentRouter().path"
-                    *ngIf="route.data.isShow" 
-                    style="color:#fff; padding-left: 16px;" 
+                    *ngIf="route.data.isShow"
                     routerLink="/{{ route.path }}">
-                    {{ route.data.title | titlecase }}</a>
+                    {{ route.data.title | titlecase }}
+                </a>
             </li>
         </ul>
     </div>        

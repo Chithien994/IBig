@@ -19,6 +19,8 @@ import { MessageService } from '../services/message/message.service';
 import { AuthenticationService } from '../services/auth/authentication.service';
 import { DeleteModalComponent } from './common/modal/delete/delete-modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MessageComponent,
     DashboardComponent,
     SearchComponent,
-    DeleteModalComponent
+    DeleteModalComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
