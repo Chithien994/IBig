@@ -2,7 +2,7 @@
 ChiThienTCN
 Message Service
 */
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { MessageService, Message } from '../../../services/message/message.service';
 import { BaseComponent } from '../base/base.component';
@@ -14,6 +14,7 @@ import { BaseComponent } from '../base/base.component';
 })
 export class MessageComponent  extends BaseComponent {
 
+  @Input() message: Message;
   constructor(public messageService: MessageService) {
     super();
   }

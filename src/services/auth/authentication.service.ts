@@ -21,14 +21,14 @@ export class AuthenticationService extends BaseService {
    * Authorization
    */
   public httpHeaders = {
-    // headers: new HttpHeaders({
-    //   'Content-Type':  'application/json',
-    //   'Authorization': `token ${this.currentToken()}`
-    // })
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
-      'Authorization': 'token d95ca4f94ea324af1622757882c583f85e5b9a27'
+      'Authorization': `token ${this.currentToken()}`
     })
+    // headers: new HttpHeaders({
+    //   'Content-Type':  'application/json',
+    //   'Authorization': 'token d95ca4f94ea324af1622757882c583f85e5b9a27'
+    // })
   };
 
   /**
@@ -79,6 +79,9 @@ export class AuthenticationService extends BaseService {
    */
   setCurrentUser(user) {
     sessionStorage.setItem(CURRENT_USER, JSON.stringify(user));
+
+    // Reload page
+    window.location.reload();
   }
 
   /**
@@ -93,6 +96,7 @@ export class AuthenticationService extends BaseService {
    */
   clearSession() {
     sessionStorage.removeItem(CURRENT_USER);
+    window.location.href = '';
   }
 
   /**

@@ -9,11 +9,11 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: R_HOME, pathMatch: 'full', data: { title: 'Home', isShow: true }},
-  { path: R_REGISTER_PATH, component: RegisterComponent, data: { title: 'Register', isShow: false }},
-  { path: R_TOPICS_PATH, component: TopicsComponent, data: { title: 'Topics', isShow: true }},
-  { path: R_BASHBOARD_PATH, component: DashboardComponent, data: { title: 'Dashboard', isShow: true }},
-  { path: `${R_DETAIL_PATH}:id`, component: TopicDetailComponent, data: { title: 'Topic Detail', isShow: false }}
+  { path: '', redirectTo: R_HOME, pathMatch: 'full', data: { title: 'Home', isShow: true, auth: false }},
+  { path: R_REGISTER_PATH, component: RegisterComponent, data: { title: 'Register', isShow: false, auth: true }},
+  { path: R_TOPICS_PATH, component: TopicsComponent, data: { title: 'Topics', isShow: true, auth: true }},
+  { path: R_BASHBOARD_PATH, component: DashboardComponent, data: { title: 'Dashboard', isShow: true, auth: true }},
+  { path: `${R_DETAIL_PATH}:id`, component: TopicDetailComponent, data: { title: 'Topic Detail', isShow: false, auth: true }}
 ];
 
 @NgModule({

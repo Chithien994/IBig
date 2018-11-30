@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '../common/base/base.component';
 import { AuthenticationService } from 'src/services/auth/authentication.service';
-import { RP_CODE, RP_MESSAGE, RP_ID } from '../app-constants';
-import { Message, MessageService } from 'src/services/message/message.service';
+import { RP_MESSAGE, RP_ID } from '../app-constants';
+import { Message } from 'src/services/message/message.service';
 
 @Component({
   selector: 'app-login',
@@ -11,24 +11,44 @@ import { Message, MessageService } from 'src/services/message/message.service';
 })
 export class LoginComponent extends BaseComponent {
 
+  // Login model (Used for template-driven forms)
   login: object = {'username': '', 'password': ''};
 
-  constructor(private auth: AuthenticationService, public msgServer: MessageService) {
+  // Message variable.
+  message: Message;
+
+  constructor(private auth: AuthenticationService) {
     super();
-    msgServer.clear();
   }
 
   onInit() {
   }
 
+  /**
+   * Used to login
+   *
+   * @param username string
+   * @param password string
+   */
   onLogin(username: string, password: string): void {
-    this.msgServer.clear();
+
+    // Initialization of message model.
+    this.message  = new Message;
+
+    // Sign in and wait for the result to return.
     this.auth.login(username, password).subscribe(result => {
-      console.log(JSON.stringify(result));
+
       if (result && result[RP_ID] > 0) {
-        this.msgServer.onSuccess();
+
+        // Set the message content (Success).
+        this.message.setNotfy('Successed!', false);
+
+        // Saves login session with all content returned.
+        this.auth.setCurrentUser(result);
       } else {
-        this.msgServer.setFailure(result[RP_MESSAGE]);
+
+        // Set message content (Failed).
+        this.message.setNotfy(result[RP_MESSAGE], true);
       }
     });
   }

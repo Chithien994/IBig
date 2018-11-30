@@ -21,7 +21,7 @@
               <input type="password" class="form-control" placeholder="Password" title="Password"
               [(ngModel)]="login.password" name="password" #password="ngModel" required>
             </div>
-            <app-message></app-message>
+            <app-message [message]="message"></app-message>
           </div>
 
           <!-- Modal footer -->

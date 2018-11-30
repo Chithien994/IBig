@@ -8,6 +8,7 @@ import { AppRoutingModule } from '../../app-routing.module';
 import { Route, Router } from '@angular/router';
 import { BaseComponent } from '../base/base.component';
 import { MessageService } from 'src/services/message/message.service';
+import { AuthenticationService } from 'src/services/auth/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +21,8 @@ export class HeaderComponent extends BaseComponent {
     private appComponent: AppComponent,
     public appRouting: AppRoutingModule,
     private router: Router,
-    private msgServer: MessageService
+    private msgServer: MessageService,
+    public auth: AuthenticationService
     ) {
     super();
   }
