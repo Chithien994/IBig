@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
-@Component({
-  selector: 'app-base'
-})
 export abstract class BaseComponent implements OnInit {
 
   constructor() {}

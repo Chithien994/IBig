@@ -69,7 +69,7 @@ export class AuthenticationService extends BaseService {
    * Returns true if the app is logging.
    */
   isLogined() {
-    return sessionStorage.getItem(CURRENT_USER) != null;
+    return localStorage.getItem(CURRENT_USER) != null;
   }
 
   /**
@@ -78,7 +78,7 @@ export class AuthenticationService extends BaseService {
    * @param user object
    */
   setCurrentUser(user) {
-    sessionStorage.setItem(CURRENT_USER, JSON.stringify(user));
+    localStorage.setItem(CURRENT_USER, JSON.stringify(user));
 
     // Reload page
     window.location.reload();
@@ -88,14 +88,14 @@ export class AuthenticationService extends BaseService {
    * Get current user info.
    */
   currentUser() {
-    return JSON.parse(sessionStorage.getItem(CURRENT_USER));
+    return JSON.parse(localStorage.getItem(CURRENT_USER));
   }
 
   /**
    * This method is used to clear session.
    */
   clearSession() {
-    sessionStorage.removeItem(CURRENT_USER);
+    localStorage.removeItem(CURRENT_USER);
     window.location.href = '';
   }
 

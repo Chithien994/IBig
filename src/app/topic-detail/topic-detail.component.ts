@@ -145,7 +145,7 @@ export class TopicDetailComponent extends BaseComponent {
         // Topic successfully added
 
         // Record the number of times the topic was successfully added
-        sessionStorage.setItem('add', (`${+sessionStorage.getItem('add') + 1}`));
+        localStorage.setItem('add', (`${+localStorage.getItem('add') + 1}`));
 
         // Go to topic page if you are on the details page.
         if (this.paramMap().get('id')) {
@@ -199,9 +199,9 @@ export class TopicDetailComponent extends BaseComponent {
    * Notify when user has too many topics.
    */
   happy() {
-    if (+sessionStorage.getItem('add') > 2) {
+    if (+localStorage.getItem('add') > 2) {
       alert('Có rãnh lắm không???');
-      sessionStorage.setItem('add', '0');
+      localStorage.setItem('add', '0');
     }
   }
 }
