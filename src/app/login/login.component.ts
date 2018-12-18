@@ -11,13 +11,13 @@ import { Message } from 'src/services/message/message.service';
 })
 export class LoginComponent extends BaseComponent {
 
-  // Login model (Used for template-driven forms)
+  /** Login model (Used for template-driven forms) */
   login: object = {'username': '', 'password': ''};
 
-  // Message variable.
+  /** Message variable. */
   message: Message;
 
-  // Loading
+  /** Show icon is in progress, and disable "Sign in" button, if "loading" is true. False in reverse. */
   loading: boolean;
 
   constructor(private auth: AuthenticationService) {

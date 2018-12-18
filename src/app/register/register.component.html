@@ -1,9 +1,74 @@
 <div class="contaiter">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="fName">First Name</label>
-      </div>
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-10 content">
+      <form name="formRegister" #register="ngForm" novalidate>
+          <div class="card">
+            <div class="card-header">
+                <label style="float: left;">Register</label>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="firstName">First name</label>
+                      <input type="text" class="form-control" placeholder="First name" title="First name"
+                      [(ngModel)]="register.firstName" name="firstName" #firstName="ngModel" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="lastName">Last name</label>
+                      <input type="text" class="form-control" placeholder="Last name" title="Last name"
+                      [(ngModel)]="register.lastName" name="lastName" #lastName="ngModel" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="text" class="form-control" placeholder="Email" title="Email"
+                      [(ngModel)]="register.email" name="email" #email="ngModel" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="countryCode">Country code</label>
+                      <select class="form-control" id="countryCode" [value]="'VN +84'"
+                      [(ngModel)]="register.countryCode" name="countryCode" #countryCode="ngModel" required>
+                        <option selected [value]="'VN +84'">VN +84</option>
+                        <option [value]="'VN +84'">VN +84</option>
+                        <option [value]="'VN +84'">VN +84</option>
+                        <option [value]="'VN +84'">VN +84</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="phone">Phone</label>
+                      <input type="text" class="form-control" placeholder="Phone" title="Phone"
+                      [(ngModel)]="register.phone" name="phone" #phone="ngModel" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="text" class="form-control" placeholder="Password" title="Password"
+                      [(ngModel)]="register.password" name="password" #password="ngModel" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="confirmPassword">Confirm password</label>
+                      <input type="text" class="form-control" placeholder="Confirm password" title="Confirm password"
+                      [(ngModel)]="register.confirmPassword" name="confirmPassword" #confirmPassword="ngModel" required>
+                    </div>
+                  </div>
+                </div>
+            </div> 
+            <div class="card-footer">
+                <div class="row">
+                  <div class="col-md-12">
+                    <button 
+                      type="button"
+                      [disabled]="!register.formRegister.valid || loading"
+                      class="btn button-gray">
+                      Sign up
+                      <i [class.fa-spinner]="loading" class="fa fa-spin"></i>
+                    </button>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </form>
     </div>
   </div>
 </div>

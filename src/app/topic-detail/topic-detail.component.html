@@ -34,8 +34,20 @@ Topic - detail html
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button (click)="onUpdate(name.value,user.value)" [disabled]="!f.form.valid" title="Update" class="btn button-gray">Update</button>
-                        <button (click)="add(name.value,user.value)" [disabled]="!f.form.valid" title="Add" class="ml-sm-3 btn button-gray">New</button>
+                        <button 
+                            (click)="onUpdate(name.value,user.value)" 
+                            [disabled]="!f.form.valid || uploading" title="Update" 
+                            class="btn button-default">
+                            Update
+                            <i [class.fa-spinner]="uploading" class="fa fa-spin"></i>
+                        </button>
+                        <button 
+                            (click)="add(name.value,user.value)" 
+                            [disabled]="!f.form.valid || adding" title="Add" 
+                            class="ml-sm-3 btn button-default">
+                            New
+                            <i [class.fa-spinner]="adding" class="fa fa-spin"></i>
+                        </button>
                     </div>
                 </div>
             </form>

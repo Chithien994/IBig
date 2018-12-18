@@ -10,7 +10,7 @@ Topic html
                 <div class="card-body">
 
                     <!-- Search component -->
-                    <div style="padding: 0 8px 16px 2px;">
+                    <div style="padding: 16px 0;">
                         <app-search
                             (event)="searchCallBack($event)"
                             [title]="'Topic'"
@@ -53,10 +53,12 @@ Topic html
                     </virtual-scroller>
                     <!-- End Scroll -->
                     <button 
-                        [hidden]="getLengthTopics()==count || loading" 
+                        [hidden]="getLengthTopics()==count"
+                        [disabled]="loading"
                         (click)="loadMore()" 
-                        class="btn button-gray loadMore">
-                        Load More
+                        class="btn loadMore">
+                        Load more...
+                        <i [class.fa-spinner]="loading" class="fa fa-spin"></i>
                     </button>
 
                 </div>

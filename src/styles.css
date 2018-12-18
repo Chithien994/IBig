@@ -1,11 +1,11 @@
 body {
     margin: auto;
     padding: 0;
-    font-size: 0.875em; /* 14px/16=0.875em */
+    font-size: 1rem;
     font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
     color: #333;
     background: #fff;
-    font-weight: 400;
+    font-weight: 360;
 }
 
 a, a:hover {
@@ -22,13 +22,6 @@ a, a:hover {
     color: #f5dd5d; 
 } 
 
-h1 {
-    margin: 0 0 20px;
-    font-weight: 400;
-    font-size: 20px;
-    color: #666;
-}
-
 .ng-valid[required], .ng-valid.required  {
     border-left: 5px solid #417690;
 }
@@ -39,10 +32,14 @@ h1 {
 
 .button-default {
     background: #79aec8;
-    border: 1px solid #ccc;
+    color: white;
 }
 
-.button-gray, .button-delete {
+.button-default:hover {
+    background: #5aa2c5;
+}
+
+.button-gray {
     border: 1px solid #ccc;
     padding: 4px 10px;
     margin: 0;
@@ -52,22 +49,23 @@ h1 {
     cursor: pointer;
     color: #333;
     border-radius: 4px;
-    font-size: 14px;
-}
-
-.button-delete{
-    background: #e74c3c;
-    color: #ececec;
+    font-size: 1rem;
 }
 
 .icon-delete {
     padding: 3px;
     float: right;
-    color: black;
+    color: #5f5f5f;
     background: none;
     border: none;
     cursor: pointer;
+    font-size: large;
 }
+
+.icon-delete:hover {
+    color: black !important;
+}
+
 .card-header, .card-footer {
     background: #417690;
     color: white;
@@ -122,7 +120,7 @@ h1 {
 .modal-content {
     text-transform: none;
     color: #fff;
-    font-size: 14px;
+    font-size: 1rem;
 }
 
 .modal-content, .modal-body {

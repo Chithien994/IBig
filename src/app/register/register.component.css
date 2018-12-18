@@ -1,0 +1,9 @@
+.content {
+    margin-top: 16px;
+    background: #f0f0f0;
+    border-radius: 0.25em;
+}
+
+.form-group label {
+    font-weight: 400;
+}

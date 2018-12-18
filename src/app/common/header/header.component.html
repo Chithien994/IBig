@@ -23,9 +23,8 @@ Header html
                 <a>Login</a>
             </li>
             <app-login></app-login>
-            <li [hidden]="auth.isLogined()" class="ml-md-2" (click)="clearMsg()" 
-            data-toggle="modal" [attr.data-target]="'#modal-login'">
-                <a>Register</a>
+            <li [hidden]="auth.isLogined()" class="ml-md-2" (click)="clearMsg()">
+                <a href="/{{ registerPath }}">Register</a>
             </li>
             <li [hidden]="!auth.isLogined()" class="ml-md-2" (click)="auth.clearSession()"><a>Logout</a></li>
         </ul>

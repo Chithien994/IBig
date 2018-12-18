@@ -1,11 +1,8 @@
 import { OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 
 export abstract class BaseComponent implements OnInit {
 
   constructor() {}
-
-  private location: Location;
 
   /**
    * A lifecycle hook that is called after Angular has initialized.
@@ -40,6 +37,6 @@ export abstract class BaseComponent implements OnInit {
    * Go back
    */
   goBack(): void {
-    this.location.back();
+    window.history.back();
   }
 }

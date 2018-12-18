@@ -31,6 +31,12 @@ export class TopicDetailComponent extends BaseComponent {
   users: User[];
   user = new User;
 
+  /** Show icon is in progress, and disable "Upload" button, if "uploading" is true. False in reverse. */
+  uploading: boolean;
+
+  /** Show icon is in progress, and disable "New" button, if "adding" is true. False in reverse. */
+  adding: boolean;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private topicService: TopicService,
@@ -41,6 +47,9 @@ export class TopicDetailComponent extends BaseComponent {
   }
 
   onInit() {
+
+    this.uploading = false;
+    this.adding = false;
 
     // Automatically get data when component is initialized
     this.getUsers();
@@ -98,9 +107,11 @@ export class TopicDetailComponent extends BaseComponent {
    * @param user number
    */
   onUpdate(name: string, user: number): void {
+    this.uploading = true;
     this.msgService.clear();
     this.topicService.update(new Topic().getParams(this.topic.id, user, name)).subscribe(result => {
 
+      this.uploading = false;
       if (result != null && result[RP_STATUS] === 200 || result[RP_CODE] === 200 || result[RP_ID]) {
 
         // Topic successfully updated.
@@ -133,13 +144,14 @@ export class TopicDetailComponent extends BaseComponent {
    * @param user number
    */
   add(name: string, user: number): void {
-
+    this.adding = true;
     // Notify when user has too many topics.
     this.happy();
 
     this.msgService.clear();
     this.topicService.addTopic(new Topic().getParams(this.topic.id, user, name)).subscribe(result => {
 
+      this.adding = false;
       if (result != null && result[RP_STATUS] === 200 || result[RP_CODE] === 200 || result[RP_ID]) {
 
         // Topic successfully added
