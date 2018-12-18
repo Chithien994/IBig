@@ -33,9 +33,10 @@
                 <button 
                   type="button"
                   (click)="onLogin(username.value, password.value)"
-                  [disabled]="!login.form.valid"
+                  [disabled]="!login.form.valid || loading"
                   class="btn button-gray">
                   Sign in
+                  <i [class.fa-spinner]="loading" class="fa fa-spin"></i>
                 </button>
                 <button type="button" class="btn button-gray ml-sm-2" data-dismiss="modal">Close</button>
               </div>

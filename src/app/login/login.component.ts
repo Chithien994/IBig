@@ -17,11 +17,15 @@ export class LoginComponent extends BaseComponent {
   // Message variable.
   message: Message;
 
+  // Loading
+  loading: boolean;
+
   constructor(private auth: AuthenticationService) {
     super();
   }
 
   onInit() {
+    this.loading = false;
   }
 
   /**
@@ -32,12 +36,15 @@ export class LoginComponent extends BaseComponent {
    */
   onLogin(username: string, password: string): void {
 
+    this.loading = true;
+
     // Initialization of message model.
     this.message  = new Message;
 
     // Sign in and wait for the result to return.
     this.auth.login(username, password).subscribe(result => {
 
+      this.loading = false;
       if (result && result[RP_ID] > 0) {
 
         // Set the message content (Success).
