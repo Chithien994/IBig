@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
+  // Register model (Used for template-driven forms)
+  register: object = {'username': '', 'password': ''};
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  onRegister(username: string, password: string): void {
+
+  }
 }
