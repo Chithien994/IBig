@@ -10,7 +10,8 @@ import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   { path: '', redirectTo: R_HOME, pathMatch: 'full', data: { title: 'Home', isShow: true, auth: false }},
-  { path: R_SIGNUP_PATH, component: RegisterComponent, data: { title: 'Register', isShow: false, auth: true }},
+  { path: R_LOGIN_PATH, component: LoginComponent, data: { title: 'Login', isShow: false, auth: false }},
+  { path: R_SIGNUP_PATH, component: RegisterComponent, data: { title: 'Register', isShow: false, auth: false }},
   { path: R_TOPICS_PATH, component: TopicsComponent, data: { title: 'Topics', isShow: true, auth: true }},
   { path: R_BASHBOARD_PATH, component: DashboardComponent, data: { title: 'Dashboard', isShow: true, auth: true }},
   { path: `${R_DETAIL_PATH}:id`, component: TopicDetailComponent, data: { title: 'Topic Detail', isShow: false, auth: true }}

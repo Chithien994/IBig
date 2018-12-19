@@ -9,7 +9,7 @@ import { Route, Router } from '@angular/router';
 import { BaseComponent } from '../base/base.component';
 import { MessageService } from 'src/services/message/message.service';
 import { AuthenticationService } from 'src/services/auth/authentication.service';
-import { R_SIGNUP_PATH } from 'src/app/app-constants';
+import { R_SIGNUP_PATH, R_LOGIN_PATH } from 'src/app/app-constants';
 
 @Component({
   selector: 'app-header',
@@ -20,6 +20,9 @@ export class HeaderComponent extends BaseComponent {
 
   /** Register path */
   registerPath = R_SIGNUP_PATH;
+
+  /** Login path */
+  loginPath = R_LOGIN_PATH;
 
   constructor(
     private appComponent: AppComponent,

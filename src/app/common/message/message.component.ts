@@ -15,6 +15,7 @@ import { BaseComponent } from '../base/base.component';
 export class MessageComponent  extends BaseComponent {
 
   @Input() message: Message;
+  @Input() border = true;
   constructor(public messageService: MessageService) {
     super();
   }

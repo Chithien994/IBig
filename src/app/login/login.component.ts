@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '../common/base/base.component';
 import { AuthenticationService } from 'src/services/auth/authentication.service';
-import { RP_MESSAGE, RP_ID } from '../app-constants';
+import { RP_MESSAGE, RP_ID, R_SIGNUP_PATH } from '../app-constants';
 import { Message } from 'src/services/message/message.service';
 
 @Component({
@@ -11,8 +11,11 @@ import { Message } from 'src/services/message/message.service';
 })
 export class LoginComponent extends BaseComponent {
 
+  /** Register path */
+  registerPath = R_SIGNUP_PATH;
+
   /** Login model (Used for template-driven forms) */
-  login: object = {'username': '', 'password': ''};
+  login: object = {};
 
   /** Message variable. */
   message: Message;
@@ -49,7 +52,7 @@ export class LoginComponent extends BaseComponent {
 
         // Set the message content (Success).
         this.message.setNotfy('Successed!', false);
-        
+
         // Saves login session with all content returned.
         this.auth.setCurrentUser(result);
       } else {

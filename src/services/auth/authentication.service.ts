@@ -102,7 +102,7 @@ export class AuthenticationService extends BaseService {
 
     console.log(`path: ${window.location.pathname}`);
     // Go to home page, when this page is sign up page
-    if (window.location.pathname === `/${SIGNUP_PATH}`) {
+    if (window.location.pathname === `/${SIGNUP_PATH}` || window.location.pathname === `/${R_HOME}`) {
       window.location.href = R_HOME;
     } else {
 

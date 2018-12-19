@@ -26,12 +26,21 @@ a, a:hover {
     color: #f5dd5d; 
 } 
 
+.link-df {
+    color: #79aec8;
+    cursor: pointer; 
+}
+
+.link-df:hover {
+    color: #417690; 
+} 
+
 .ng-valid[required], .ng-valid.required  {
     border-left: 5px solid #417690;
 }
 
 .ng-invalid:not(form)  {
-    border-left: 5px solid #a94442; /* red */
+    border-left: 5px solid #d50000 /*#a94442; red*/
 }
 
 .button-default {
@@ -115,15 +124,15 @@ a, a:hover {
 
 /* margin 0.25 rem */
 .ml-1 {
-    margin-left: 0.25rem!important;;
+    margin-left: 0.25rem;
 }
 
 .mt-1 {
-    margin-top: 0.25rem!important;;
+    margin-top: 0.25rem;
 }
 
 .mr-1 {
-    margin-right: 0.25rem!important;;
+    margin-right: 0.25rem;
 }
 
 .mb-1 {
@@ -265,6 +274,24 @@ a, a:hover {
     position: relative !important;
 }
 
+/* Form style */
+
+.my-form-title {
+    color: #79aec8;
+    font-weight: 500;
+    font-size: 2rem;
+
+}
+
+.my-form-group {
+    margin-top: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.my-form-input:hover .my-form-label {
+ visibility: hidden;
+}
+
 .my-form-input {
     border-radius: 4px;
     height: 56px;
@@ -272,7 +299,6 @@ a, a:hover {
     border: 2px solid #417690;
     width: 100%;
     position: relative;
-    margin: 10px -10px;
     padding: 13px 15px;
 }
 
@@ -282,7 +308,9 @@ a, a:hover {
     border-radius: 2px;
     font-weight: 400;
     padding: 0 6px;
-    z-index: 9999;
+    z-index: 1;
     position: absolute;
     cursor: context-menu;
+    margin-left: 10px;
+    margin-top: -11px;
 }

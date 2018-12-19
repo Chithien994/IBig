@@ -1,11 +1,16 @@
 <!-- Message from service -->
-<div *ngIf="messageService.messages.length > 0">  
+<div *ngIf="border && messageService.messages.length > 0">  
     <div *ngFor='let msg of messageService.messages'> 
         <span class="alert alert-success" [class.alert-danger]="msg.err">{{msg.message}}</span>
     </div>
 </div>
 
 <!-- Message from input -->
-<div *ngIf="message && message.message">  
+<div *ngIf="border && message && message.message">  
     <span class="alert alert-success" [class.alert-danger]="message.err">{{message.message}}</span>
+</div>
+
+<!-- Message from input -->
+<div *ngIf="!border && message && message.message">  
+    <span class="msg-success" [class.msg-err]="message.err">{{message.message}}</span>
 </div>
