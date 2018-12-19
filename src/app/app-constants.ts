@@ -1,7 +1,8 @@
 import {HttpHeaders} from '@angular/common/http';
 export const URL = 'https://itbigger.pythonanywhere.com/';
 export const API_URL = `${URL}api/v1/`;
-export const LOGIN_HTTP_OPTIONS = {
+export const PATH_COUNTRY_CODE = '../../assets/country_code.json';
+export const TYPE_HTTP_OPTIONS = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json'
   })
@@ -17,7 +18,7 @@ export const MessageType = {success: 'success', info: 'info', warning: 'warning'
 // Routing path
 export const R_HOME = '';
 export const R_LOGIN_PATH = 'login';
-export const R_REGISTER_PATH = 'register';
+export const R_SIGNUP_PATH = 'signup';
 export const R_TOPICS_PATH = `topics`;
 export const R_BASHBOARD_PATH = `dashboard`;
 export const R_DETAIL_PATH = `detail/`;
@@ -25,8 +26,10 @@ export const R_USERS_PATH = `users`;
 
 // Api path
 export const LOGIN_PATH = 'login/';
+export const SIGNUP_PATH = 'signup/';
 export const TOPICS_PATH = `topics/`;
 export const USERS_PATH = `users/`;
+export const SMS_VERIFICATION = 'smsverification/';
 
 // Api key
 export const KEY_SEARCH = `search`;

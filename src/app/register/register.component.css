@@ -4,6 +4,13 @@
     border-radius: 0.25em;
 }
 
-.form-group label {
+label, .label-sign-in {
     font-weight: 400;
+}
+
+.label-sign-in {
+    margin-top: 8%;
+    text-align: center;
+    cursor: pointer;
+    color: #ffc;
 }

@@ -27,7 +27,7 @@ export class TopicService extends BaseService {
    * @returns Topic[] | any
    */
   getTopics(limit: number, offset: number) {
-    return this.get(this.getPathLimitOffset(limit, offset), this.auth.httpHeaders);
+    return this.get(this.getUrlLimitOffset(TOPICS_PATH, limit, offset), this.auth.httpHeaders);
   }
 
   /**
@@ -37,7 +37,7 @@ export class TopicService extends BaseService {
    * @returns Topic | any
    */
   getTopicFromId(id: number) {
-    return this.get(this.getPathAddId(id), this.auth.httpHeaders);
+    return this.get(this.getUrlAddId(TOPICS_PATH, id), this.auth.httpHeaders);
   }
 
   /**
@@ -47,7 +47,7 @@ export class TopicService extends BaseService {
    * @returns Topic | any
    */
   addTopic(topic: Topic) {
-    return this.post(TOPICS_PATH, topic, this.auth.httpHeaders);
+    return this.post(this.getFullUrl(TOPICS_PATH), topic, this.auth.httpHeaders);
   }
 
   /**
@@ -57,7 +57,7 @@ export class TopicService extends BaseService {
    * @returns any
    */
   update(topic: Topic) {
-    return this.patch(this.getPathAddId(topic.id), topic, this.auth.httpHeaders);
+    return this.patch(this.getUrlAddId(TOPICS_PATH, topic.id), topic, this.auth.httpHeaders);
   }
 
   /**
@@ -67,27 +67,6 @@ export class TopicService extends BaseService {
    * @returns any
    */
   onDelete(id: number) {
-    return this.delete(this.getPathAddId(id), this.auth.httpHeaders);
-  }
-
-  /**
-   * Append the path by Id
-   *
-   * @param id number
-   * @returns url string
-   */
-  getPathAddId(id: number) {
-    return `${TOPICS_PATH}${id}/`;
-  }
-
-  /**
-   * Get path with limit and offset
-   *
-   * @param limit number
-   * @param offset number
-   * @returns string (`${API_PATH}?limit=${limit}&offset=${offset}`)
-   */
-  getPathLimitOffset(limit: number, offset: number): string {
-    return `${TOPICS_PATH}?limit=${limit}&offset=${offset}`;
+    return this.delete(this.getUrlAddId(TOPICS_PATH, id), this.auth.httpHeaders);
   }
 }

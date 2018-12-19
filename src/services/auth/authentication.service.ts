@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from '../base/base.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CURRENT_USER, LOGIN_HTTP_OPTIONS } from '../../app/app-constants';
+import { CURRENT_USER, TYPE_HTTP_OPTIONS, SIGNUP_PATH, SMS_VERIFICATION } from '../../app/app-constants';
+import { User } from 'src/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +52,18 @@ export class AuthenticationService extends BaseService {
     const body = new Object();
     body['username'] = username;
     body['password'] = password;
-    return this.post(this.LOGIN_PATH, body, LOGIN_HTTP_OPTIONS);
+    return this.post(this.getFullUrl(this.LOGIN_PATH), body, TYPE_HTTP_OPTIONS);
+  }
+
+  register(object: Object) {
+    return this.post(this.getFullUrl(SIGNUP_PATH), object, TYPE_HTTP_OPTIONS);
+  }
+
+  verify(countryCode: string, phoneNumber: string) {
+    const body = new Object();
+    body['phone_number'] = phoneNumber;
+    body['verify_code'] = countryCode;
+    return this.post(this.getFullUrl(SMS_VERIFICATION), body, TYPE_HTTP_OPTIONS);
   }
 
   /**

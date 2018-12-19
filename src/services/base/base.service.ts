@@ -23,8 +23,8 @@ export class BaseService {
    * @param options ?: any | null
    * @returns any
    */
-  post(path: string, body?: any | null, options?: any | null): Observable<any> {
-    return this.http.post<any>(this.getFullUrl(path), body, options).pipe(
+  post(url: string, body?: any | null, options?: any | null): Observable<any> {
+    return this.http.post<any>(url, body, options).pipe(
       tap(),
       catchError(error => of(error))
     );
@@ -33,12 +33,12 @@ export class BaseService {
   /**
    * Get
    *
-   * @param path string
+   * @param url string
    * @param options ?: any | null
    * @returns any
    */
-  get(path: string, options?: any | null): Observable<any> {
-    return this.http.get<any>(this.getFullUrl(path), options).pipe(
+  get(url: string, options?: any | null): Observable<any> {
+    return this.http.get<any>(url, options).pipe(
       tap(),
       catchError(error => of(error))
     );
@@ -47,13 +47,13 @@ export class BaseService {
   /**
    * Put
    *
-   * @param path string
+   * @param url string
    * @param body ?: any | null
    * @param options ?: any | null
    * @returns any
    */
-  put(path: string, body?: any | null, options?: any | null): Observable<any> {
-    return this.http.put<any>(this.getFullUrl(path), body, options).pipe(
+  put(url: string, body?: any | null, options?: any | null): Observable<any> {
+    return this.http.put<any>(url, body, options).pipe(
       tap(),
       catchError(error => of(error))
     );
@@ -62,13 +62,13 @@ export class BaseService {
   /**
    * Patch
    *
-   * @param path string
+   * @param url string
    * @param body ?: any | null
    * @param options ?: any | null
    * @returns any
    */
-  patch(path: string, body?: any | null, options?: any | null): Observable<any> {
-    return this.http.patch<any>(this.getFullUrl(path), body, options).pipe(
+  patch(url: string, body?: any | null, options?: any | null): Observable<any> {
+    return this.http.patch<any>(url, body, options).pipe(
       tap(),
       catchError(error => of(error))
     );
@@ -77,13 +77,12 @@ export class BaseService {
   /**
    * Delete
    *
-   * @param path string
+   * @param url string
    * @param options ?: any | null
    * @returns any
    */
-  delete(path: string, options?: any | null): Observable<any> {
-    console.log(this.getFullUrl(path));
-    return this.http.delete<any>(this.getFullUrl(path), options).pipe(
+  delete(url: string, options?: any | null): Observable<any> {
+    return this.http.delete<any>(url, options).pipe(
       tap(response => {
         console.log(JSON.stringify(response));
       }),
@@ -101,6 +100,29 @@ export class BaseService {
     return API_URL + path;
   }
 
+  /**
+   * Append the url by Id
+   *
+   * @param path string
+   * @param id number
+   * @returns url string
+   */
+  getUrlAddId(path: string, id: number) {
+    return `${API_URL}${path}${id}/`;
+  }
+
+  /**
+   * Get url with limit and offset
+   *
+   * @param path string
+   * @param limit number
+   * @param offset number
+   * @returns string (`${path}?limit=${limit}&offset=${offset}`)
+   */
+  getUrlLimitOffset(path: string, limit: number, offset: number) {
+    return `${API_URL}${path}?limit=${limit}&offset=${offset}`;
+  }
+
    /**
    * Get the message from HttpErrorResponse object.
    *
@@ -112,5 +134,5 @@ export class BaseService {
       return error.message;
     }
     return 'An unknown error occurred: ' + error.status;
-}
+  }
 }

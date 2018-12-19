@@ -39,6 +39,15 @@ a, a:hover {
     background: #5aa2c5;
 }
 
+.button-success {
+    background: #417690;
+    color: white;
+}
+
+.button-success:hover {
+    background: #347290;
+}
+
 .button-gray {
     border: 1px solid #ccc;
     padding: 4px 10px;
@@ -88,6 +97,14 @@ a, a:hover {
     margin: 0%;
     padding-left: 15px;
     padding-right: 15px;
+}
+
+.bd-r-1 {
+    border-right: 1px solid #417690;
+}
+
+.bd-l-1 {
+    border-left: 1px solid #417690;
 }
 
 .col-padding-0 {
