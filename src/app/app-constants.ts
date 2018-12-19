@@ -1,5 +1,6 @@
 import {HttpHeaders} from '@angular/common/http';
 export const URL = 'https://itbigger.pythonanywhere.com/';
+// export const URL = 'http://127.0.0.1:8000/';
 export const API_URL = `${URL}api/v1/`;
 export const PATH_COUNTRY_CODE = '../../assets/country_code.json';
 export const TYPE_HTTP_OPTIONS = {

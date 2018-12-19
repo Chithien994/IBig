@@ -49,7 +49,7 @@ export class LoginComponent extends BaseComponent {
 
         // Set the message content (Success).
         this.message.setNotfy('Successed!', false);
-
+        
         // Saves login session with all content returned.
         this.auth.setCurrentUser(result);
       } else {

@@ -18,15 +18,15 @@ Header html
                     {{ route.data.title | titlecase }}
                 </a>
             </li>
-            <li [hidden]="auth.isLogined()" class="ml-md-2" (click)="clearMsg()" 
+            <li [hidden]="auth.isLogined()" class="ml-2" (click)="clearMsg()" 
             data-toggle="modal" [attr.data-target]="'#modal-login'">
                 <a>Login</a>
             </li>
             <app-login></app-login>
-            <li [hidden]="auth.isLogined()" class="ml-md-2" (click)="clearMsg()">
+            <li [hidden]="auth.isLogined()" class="ml-2" (click)="clearMsg()">
                 <a href="/{{ registerPath }}">Register</a>
             </li>
-            <li [hidden]="!auth.isLogined()" class="ml-md-2" (click)="auth.clearSession()"><a>Logout</a></li>
+            <li [hidden]="!auth.isLogined()" class="ml-2" (click)="auth.clearSession()"><a>Logout</a></li>
         </ul>
     </div>        
 </div>

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from '../base/base.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CURRENT_USER, TYPE_HTTP_OPTIONS, SIGNUP_PATH, SMS_VERIFICATION } from '../../app/app-constants';
-import { User } from 'src/models/user';
+import { CURRENT_USER, TYPE_HTTP_OPTIONS, SIGNUP_PATH, SMS_VERIFICATION, R_HOME } from '../../app/app-constants';
 
 @Injectable({
   providedIn: 'root'
@@ -26,10 +25,6 @@ export class AuthenticationService extends BaseService {
       'Content-Type':  'application/json',
       'Authorization': `token ${this.currentToken()}`
     })
-    // headers: new HttpHeaders({
-    //   'Content-Type':  'application/json',
-    //   'Authorization': 'token d95ca4f94ea324af1622757882c583f85e5b9a27'
-    // })
   };
 
   /**
@@ -55,10 +50,23 @@ export class AuthenticationService extends BaseService {
     return this.post(this.getFullUrl(this.LOGIN_PATH), body, TYPE_HTTP_OPTIONS);
   }
 
+  /**
+   * This method is used to sign up.
+   *
+   * @param object JSONObject
+   * @returns any | object
+   */
   register(object: Object) {
     return this.post(this.getFullUrl(SIGNUP_PATH), object, TYPE_HTTP_OPTIONS);
   }
 
+  /**
+   * This method is used to verify.
+   *
+   * @param countryCode string
+   * @param phoneNumber string
+   * @returns any | User object
+   */
   verify(countryCode: string, phoneNumber: string) {
     const body = new Object();
     body['phone_number'] = phoneNumber;
@@ -92,8 +100,15 @@ export class AuthenticationService extends BaseService {
   setCurrentUser(user) {
     localStorage.setItem(CURRENT_USER, JSON.stringify(user));
 
-    // Reload page
-    window.location.reload();
+    console.log(`path: ${window.location.pathname}`);
+    // Go to home page, when this page is sign up page
+    if (window.location.pathname === `/${SIGNUP_PATH}`) {
+      window.location.href = R_HOME;
+    } else {
+
+      // reload page
+      window.location.reload();
+    }
   }
 
   /**
@@ -108,7 +123,7 @@ export class AuthenticationService extends BaseService {
    */
   clearSession() {
     localStorage.removeItem(CURRENT_USER);
-    window.location.href = '';
+    window.location.href = R_HOME;
   }
 
   /**

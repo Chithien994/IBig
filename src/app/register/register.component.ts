@@ -61,7 +61,10 @@ export class RegisterComponent extends BaseComponent {
     .getParams(firstName, lastName, email, countryCode, phoneNumber, password)).subscribe(result => {
       console.log(JSON.stringify(result));
       this.loading = false;
-      if (!result && result[RP_CODE] === 200) {
+      if (result && result[RP_CODE] === 200) {
+
+        // Set the message content (Success).
+        this.message.setNotfy(result[RP_MESSAGE], false);
 
         // Show verify from
         this.showFromVerify = true;
