@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from '../base/base.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CURRENT_USER, TYPE_HTTP_OPTIONS, SIGNUP_PATH, SMS_VERIFICATION, R_HOME } from '../../app/app-constants';
+import { CURRENT_USER, TYPE_HTTP_OPTIONS, SIGNUP_PATH, SMS_VERIFICATION,
+  R_HOME, R_LOGIN_PATH, RESEND_SMS, R_SIGNUP_PATH } from '../../app/app-constants';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,9 @@ export class AuthenticationService extends BaseService {
   readonly LOGOUT_PATH = 'logout';
   readonly USERS_PATH = `users/`;
 
-  constructor(protected http: HttpClient) {
+  constructor(
+    protected http: HttpClient,
+    private activatedRoute: ActivatedRoute) {
     super(http);
   }
 
@@ -75,6 +79,18 @@ export class AuthenticationService extends BaseService {
   }
 
   /**
+   * This method is used to resend verification sms.
+   *
+   * @param phoneNumber string
+   * @returns any | object
+   */
+  resendSms(phoneNumber: string) {
+    const body = new Object();
+    body['phone_number'] = phoneNumber;
+    return this.post(this.getFullUrl(RESEND_SMS), body, TYPE_HTTP_OPTIONS);
+  }
+
+  /**
    * This method is used to logout.
    *
    * @returns any | User object
@@ -93,6 +109,16 @@ export class AuthenticationService extends BaseService {
   }
 
   /**
+   * When accessing pages that require you to login,
+   * but you have not logged in, it will automatically redirect to the login page.
+   */
+  checkLogined() {
+    if (!this.isLogined()) {
+      window.location.href = R_LOGIN_PATH;
+    }
+  }
+
+  /**
    * set current login user.
    *
    * @param user object
@@ -100,9 +126,12 @@ export class AuthenticationService extends BaseService {
   setCurrentUser(user) {
     localStorage.setItem(CURRENT_USER, JSON.stringify(user));
 
-    console.log(`path: ${window.location.pathname}`);
-    // Go to home page, when this page is sign up page
-    if (window.location.pathname === `/${SIGNUP_PATH}` || window.location.pathname === `/${R_HOME}`) {
+    if (this.queryParams().returnUrl) {
+
+      window.location.href = this.queryParams().returnUrl;
+    } else if (window.location.pathname === `/${R_SIGNUP_PATH}` || window.location.pathname === `/${R_LOGIN_PATH}`) {
+
+      // Go to home page, when this page is sign up page
       window.location.href = R_HOME;
     } else {
 
@@ -123,7 +152,9 @@ export class AuthenticationService extends BaseService {
    */
   clearSession() {
     localStorage.removeItem(CURRENT_USER);
-    window.location.href = R_HOME;
+
+    // Go to login page when clear the session
+    window.location.href = R_LOGIN_PATH;
   }
 
   /**
@@ -150,5 +181,19 @@ export class AuthenticationService extends BaseService {
       return user.token;
     }
     return '';
+  }
+
+  /**
+   * @description
+   * Query Params
+   *
+   * ActivatedRoute Contains the information about a route associated with a component loaded in an outlet.
+   *
+   * snapshot The current snapshot of this route
+   *
+   * @returns this.activatedRoute.snapshot.queryParams: Params
+   */
+  queryParams(): Params {
+    return this.activatedRoute.snapshot.queryParams;
   }
 }

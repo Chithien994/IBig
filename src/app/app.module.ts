@@ -21,6 +21,8 @@ import { DeleteModalComponent } from './common/modal/delete/delete-modal.compone
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { VerifyComponent } from './verify/verify.component';
+import { AuthGuardService } from '../services/guard/auth.guard.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { LoginComponent } from './login/login.component';
     SearchComponent,
     DeleteModalComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    VerifyComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ import { LoginComponent } from './login/login.component';
   providers: [
     TopicService,
     MessageService,
-    AuthenticationService
+    AuthenticationService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

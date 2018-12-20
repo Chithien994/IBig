@@ -1,0 +1,54 @@
+<div class="container-list">
+    <div class="row d-flex justify-content-center mt-4">
+        <div class="col-md-6 my-form-content">
+  
+          <!-- ====START VERIFY FORM==== -->
+          <form name="form" #verify="ngForm" novalidate>
+  
+            <!-- ====Start Header==== -->
+  
+            <!-- Title -->
+            <label class="my-form-title" for="verify">{{ title }}</label>
+  
+            <!-- ====End Header==== -->
+  
+            <!-- ====Start Body==== -->
+  
+            <div class="row">
+              <div class="col-md-6">
+  
+                <!-- Form Group (Input Verify)  -->
+                <div class="my-form-group">
+                  <span class="my-form-label">Verify</span>
+                  <input type="number" class="my-form-input" title="Verify" tabindex="0"
+                  [(ngModel)]="verify.verify_code" name="verify_code" #verify_code="ngModel" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="my-form-group">
+                  <button 
+                    type="button" tabindex="1"
+                    [disabled]="!verify.form.valid || loading || resend"
+                    class="btn button-default float-left"
+                    (click)="onVerify(verify_code.value)">
+                    Verify
+                    <i [class.fa-spinner]="loading" class="fa fa-spin"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Resend verification -->
+            <div class="mb-3">
+              <button class="link-b" (click)="onResend()" [disabled]="resend || loading" tabindex="2">Message not received</button>
+              <i [class.fa-spinner]="resend" class="fa fa-spin"></i>
+            </div>
+            <!-- Message -->
+            <div class="mb-3">
+              <app-message [message]="message" [border]="false"></app-message>
+            </div>
+            <!-- ====End Body==== -->
+          </form>
+          <!-- ====END VERIFY FORM==== -->
+        </div>
+    </div>
+  </div>

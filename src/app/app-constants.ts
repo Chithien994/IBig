@@ -16,6 +16,10 @@ export const TYPE_HTTP_OPTIONS = {
 export const TIMEOUT_CONFIG = {idle: 1800, timeout: 31, ping: 5};
 export const MessageType = {success: 'success', info: 'info', warning: 'warning', danger: 'danger'};
 
+// Roles
+export const IS_ADMIN = true;
+export const NOT_ADMIN = false;
+
 // Routing path
 export const R_HOME = '';
 export const R_LOGIN_PATH = 'login';
@@ -31,6 +35,7 @@ export const SIGNUP_PATH = 'signup/';
 export const TOPICS_PATH = `topics/`;
 export const USERS_PATH = `users/`;
 export const SMS_VERIFICATION = 'smsverification/';
+export const RESEND_SMS = 'resendsms/';
 
 // Api key
 export const KEY_SEARCH = `search`;

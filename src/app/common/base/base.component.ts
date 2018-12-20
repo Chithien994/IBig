@@ -39,4 +39,17 @@ export abstract class BaseComponent implements OnInit {
   goBack(): void {
     window.history.back();
   }
+
+  /**
+   * Get current path
+   *
+   * @returns path
+   *
+   * @example
+   * http://localhost:4200/example/15
+   * return '/example/15'
+   */
+  getPath(): string {
+    return window.location.pathname;
+  }
 }

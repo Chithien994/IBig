@@ -1,16 +1,8 @@
-.content {
-    margin-top: 16px;
-    background: none;
-    border-radius: 0.25em;
+.my-form-input, button {
+    height: 46px;
 }
 
-label, .label-sign-in {
-    font-weight: 400;
+.my-form-group {
+    margin-top: 2rem;
 }
 
-.label-sign-in {
-    margin-top: 8%;
-    text-align: center;
-    cursor: pointer;
-    color: #ffc;
-}

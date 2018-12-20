@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '../common/base/base.component';
 import { AuthenticationService } from 'src/services/auth/authentication.service';
-import { RP_MESSAGE, RP_ID, PATH_COUNTRY_CODE, RP_CODE, R_HOME } from '../app-constants';
+import { RP_MESSAGE, PATH_COUNTRY_CODE, RP_CODE, R_LOGIN_PATH } from '../app-constants';
 import { Message } from 'src/services/message/message.service';
 import { CountryCode } from '../../models/country.code';
 import { User } from 'src/models/user';
@@ -13,9 +13,13 @@ import { User } from 'src/models/user';
 })
 export class RegisterComponent extends BaseComponent {
 
-  // Register model (Used for template-driven forms)
+  /** Login Path */
+  loginPath = R_LOGIN_PATH;
+
+  /** Register model (Used for template-driven forms) */
   register: object = {};
 
+  /** Country codes list */
   countryCodes: CountryCode;
 
   /** Message variable. */
@@ -24,13 +28,11 @@ export class RegisterComponent extends BaseComponent {
   /** Show icon is in progress, and disable "Sign up" button, if "loading" is true. False in reverse. */
   loading: boolean;
 
-  /** Show icon is in progress, and disable "Verify code" button, if "verifying" is true. False in reverse. */
-  verifying: boolean;
-
-  /** Show disable Verify from, if "showFromVerify" is true. False in reverse. */
-  showFromVerify: boolean;
-
+  /** Register phone */
   phone: string;
+
+  /** When "showFromVerify" is true, then show Verify form and hidden Sign Up form. False in reverse. */
+  showFromVerify = false;
 
   constructor(private auth: AuthenticationService) {
     super();
@@ -38,8 +40,6 @@ export class RegisterComponent extends BaseComponent {
 
   onInit() {
     this.loading = false;
-    this.showFromVerify = false;
-    this.verifying = false;
     this.getCountryCode();
   }
 
@@ -51,7 +51,6 @@ export class RegisterComponent extends BaseComponent {
     password: string): void {
 
     this.loading = true;
-    this.showFromVerify = false;
 
     // Initialization of message model.
     this.message  = new Message;
@@ -65,8 +64,6 @@ export class RegisterComponent extends BaseComponent {
 
         // Set the message content (Success).
         this.message.setNotfy(result[RP_MESSAGE], false);
-
-        // Show verify from
         this.showFromVerify = true;
         this.phone = phoneNumber;
       } else {
@@ -77,28 +74,9 @@ export class RegisterComponent extends BaseComponent {
     });
   }
 
-  onVerify(countryCode: string) {
-
-    this.verifying = true;
-    this.auth.verify(countryCode, this.phone).subscribe(result => {
-
-      this.verifying = false;
-      if (result && result[RP_ID] > 0) {
-
-        // Set the message content (Success).
-        this.message.setNotfy('Successed!', false);
-
-        // Saves login session with all content returned.
-        this.auth.setCurrentUser(result);
-        this.goToPage(R_HOME);
-      } else {
-
-        // Set message content (Failed).
-        this.message.setNotfy(result[RP_MESSAGE], true);
-      }
-    });
-  }
-
+  /**
+   * This method is used to get country code.
+   */
   getCountryCode() {
     this.auth.get(PATH_COUNTRY_CODE).subscribe(result => {
       this.countryCodes = result;

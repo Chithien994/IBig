@@ -1,117 +1,126 @@
-<div class="container-list">
-  <div class="row d-flex justify-content-center">
-    <div class="col-md-10 content">
-      <form name="form_register" #register="ngForm" novalidate>
-        <div class="card">
-          <div class="card-header">
-              <h4 style="float: left;">Register</h4>
-          </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-6 bd-r-1">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="first_name">First name</label>
-                      <input type="text" class="form-control" placeholder="First name" title="First name"
-                      [(ngModel)]="register.first_name" name="first_name" #first_name="ngModel" required autofocus>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="last_name">Last name</label>
-                      <input type="text" class="form-control" placeholder="Last name" title="Last name"
-                      [(ngModel)]="register.last_name" name="last_name" #last_name="ngModel" required>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" class="form-control" placeholder="Email" title="Email"
-                  [(ngModel)]="register.email" name="email" #email="ngModel" required>
-                </div>
-                <div class="mt-4">
-                  <app-message [message]="message"></app-message>
-                </div>
-                <div [hidden]="!showFromVerify" class="row mt-4">
-                  <div class="col-md-8">
-                    <div class="form-group">
-                      <input type="number" class="form-control" placeholder="Verify code" title="Verify code"
-                      name="verify_code" #verify_code required>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                        <button 
-                        type="button"
-                        [disabled]="verify_code.value || verifying"
-                        class="btn button-success"
-                        (click)="onVerify(verify_code.value)">
-                          Verify code
-                        <i [class.fa-spinner]="verifying" class="fa fa-spin"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div class="label-sign-in" 
-                data-toggle="modal" [attr.data-target]="'#modal-login'">
-                  <a>Sign in</a>
-                  <i class="fa fa-long-arrow-right ml-1"></i>
-                </div>
-              </div>
-              <div class="col-md-6 bd-l-1">
-                <div class="row">
-                  <div class="col-md-5">
-                    <div class="form-group">
-                      <label for="country_code">Country code</label>
-                      <select class="form-control" name="country_code" #country_code required>
-                        <option *ngFor="let countryCode of countryCodes"
-                          [value]="countryCode.code">{{ countryCode.name }} +{{ countryCode.code }}</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-7">
-                    <div class="form-group">
-                      <label for="phone">Phone</label>
-                      <input type="phone" class="form-control" placeholder="Phone" title="Phone"
-                      [(ngModel)]="register.phone" name="phone" #phone="ngModel" required>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" placeholder="Password" title="Password"
-                  [(ngModel)]="register.password" name="password" #password="ngModel" required>
-                </div>
-                <div class="form-group">
-                  <label for="confirm_password">Confirm password</label>
-                  <input type="password" class="form-control" placeholder="Confirm password" title="Confirm password"
-                  [(ngModel)]="register.confirm_password" name="confirm_password" #confirm_password="ngModel" required>
-                </div>
+<div *ngIf="!showFromVerify" class="container-list">
+  <div class="row d-flex justify-content-center mt-4">
+      <div class="col-md-6 my-form-content">
+
+        <!-- ====START SIGN UP FORM==== -->
+        <form name="form" #register="ngForm" novalidate>
+
+          <!-- ====Start Header==== -->
+
+          <!-- Title -->
+          <label class="my-form-title" for="register">Register</label>
+
+          <!-- ====End Header==== -->
+
+          <!-- ====Start Body==== -->
+
+          <div class="row">
+            <div class="col-md-6">
+
+              <!-- Form Group (Input First Name)  -->
+              <div class="my-form-group">
+                <span class="my-form-label">First Name</span>
+                <input type="text" class="my-form-input" title="First Name" tabindex="0"
+                [(ngModel)]="register.first_name" name="first_name" #first_name="ngModel" required>
               </div>
             </div>
-          </div> 
-          <div class="card-footer">
-              <div class="row">
-                <div class="col-md-12">
-                  <button 
-                    type="button"
-                    [disabled]="!register.form.valid || loading"
-                    class="btn button-default"
-                    (click)="onRegister(first_name.value,
-                      last_name.value,
-                      email.value,
-                      country_code.value,
-                      phone.value,
-                      password.value)">
-                    Sign up
-                    <i [class.fa-spinner]="loading" class="fa fa-spin"></i>
-                  </button>
-                </div>
+            <div class="col-md-6">
+
+              <!-- Form Group (Input Last Name)  -->
+              <div class="my-form-group">
+                <span class="my-form-label">Last Name</span>
+                <input type="text" class="my-form-input" title="Last Name" tabindex="1"
+                [(ngModel)]="register.last_name" name="last_name" #last_name="ngModel" required>
               </div>
+            </div>
           </div>
-        </div>
-      </form>
-    </div>
+
+          <div class="row">
+            <div class="col-md-6">
+
+              <!-- Form Group (Input password)  -->
+              <div class="my-form-group">
+                  <span class="my-form-label">Password</span>
+                  <input type="password" class="my-form-input" title="Password" tabindex="2"
+                  [(ngModel)]="register.password" name="password" #password="ngModel" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+
+              <!-- Form Group (Input confirm password)  -->
+              <div class="my-form-group">
+                <span class="my-form-label">Confirm password</span>
+                <input type="password" class="my-form-input" title="Confirm password" tabindex="3"
+                [(ngModel)]="register.confirm_password" name="confirm_password" #confirm_password="ngModel" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Group (Input email)  -->
+          <div class="my-form-group">
+            <span class="my-form-label">Email</span>
+            <input type="email" class="my-form-input" title="Email" tabindex="4"
+            [(ngModel)]="register.email" name="email" #email="ngModel" required>
+          </div>
+
+          <div class="row">
+            <div class="col-md-5">
+
+              <!-- Form Group (Input First Name)  -->
+              <div class="my-form-group">
+                <span class="my-form-label">Country Code</span>
+                <select class="my-form-input" name="country_code" tabindex="5" #country_code required>
+                  <option *ngFor="let countryCode of countryCodes"
+                    [value]="countryCode.code">{{ countryCode.name }} +{{ countryCode.code }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-7">
+
+              <!-- Form Group (Input phone)  -->
+              <div class="my-form-group">
+                <span class="my-form-label">Phone</span>
+                <input type="text" class="my-form-input" title="Phone" tabindex="6"
+                [(ngModel)]="register.phone" name="phone" #phone="ngModel" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Message -->
+          <div class="mb-3">
+            <app-message [message]="message" [border]="false"></app-message>
+          </div>
+
+          <!-- ====End Body==== -->
+
+          <!-- ====Start Footer==== -->
+          <div class="my-form-footer">
+            <div class="row">
+              <div class="col-md-8 link-b">
+                <a class="link-b" href="/{{ loginPath }}">Login</a>
+                <i class="fa fa-long-arrow-right ml-1"></i>
+              </div>
+              <div class="col-md-4">
+                <button 
+                  type="button"
+                  [disabled]="!register.form.valid || loading"
+                  class="btn button-default float-right"
+                  (click)="onRegister(first_name.value,
+                        last_name.value,
+                        email.value,
+                        country_code.value,
+                        phone.value,
+                        password.value)">
+                  Sign in
+                  <i [class.fa-spinner]="loading" class="fa fa-spin"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- ====End Footer==== -->
+        </form>
+        <!-- ====END SIGN UP FORM==== -->
+      </div>
   </div>
 </div>
+<app-verify *ngIf="showFromVerify" [phone]="phone"></app-verify>

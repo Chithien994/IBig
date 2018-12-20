@@ -8,6 +8,11 @@ body {
     font-weight: 360;
 }
 
+.no-bd-bgr, a, .link, .link-df, .link-b {
+    border: none !important;
+    background: none !important;
+}
+
 input, .form-control {
     height: 46px;
 }
@@ -18,21 +23,32 @@ a, a:hover {
 }
 
 .link {
-    color: #ffc;
-    cursor: pointer; 
+    color: #ffc!important;
+    cursor: pointer;
 } 
 
 .link:hover {
-    color: #f5dd5d; 
+    color: #f5dd5d!important; 
 } 
 
 .link-df {
-    color: #79aec8;
-    cursor: pointer; 
+    color: #79aec8!important;
+    cursor: pointer;
 }
 
 .link-df:hover {
-    color: #417690; 
+    color: #417690!important; 
+} 
+
+.link-b {
+    color: #79aec8!important;
+    cursor: pointer;
+    font-weight: 500;
+    letter-spacing: .25px;
+}
+
+.link-b:hover {
+    color: #417690!important; 
 } 
 
 .ng-valid[required], .ng-valid.required  {
@@ -276,6 +292,13 @@ a, a:hover {
 
 /* Form style */
 
+.my-form-content {
+    padding: 3rem;
+    border-radius: 0.25rem;
+    border: 0.06rem solid #dadce0;
+    margin: 1rem;
+}
+
 .my-form-title {
     color: #79aec8;
     font-weight: 500;
@@ -288,13 +311,16 @@ a, a:hover {
     margin-bottom: 0.5rem;
 }
 
+.my-form-group button, .my-form-input {
+    height: 56px;
+}
+
 .my-form-input:hover .my-form-label {
  visibility: hidden;
 }
 
 .my-form-input {
     border-radius: 4px;
-    height: 56px;
     background: white;
     border: 2px solid #417690;
     width: 100%;
@@ -313,4 +339,8 @@ a, a:hover {
     cursor: context-menu;
     margin-left: 10px;
     margin-top: -11px;
+}
+
+.my-form-footer {
+    margin-top: 3rem;
 }

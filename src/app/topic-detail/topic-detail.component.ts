@@ -13,7 +13,7 @@ import { MessageService } from '../../services/message/message.service';
 
 /** Constants */
 import { R_TOPICS_PATH, R_DETAIL_PATH, RP_RESULTS, RP_CODE, RP_STATUS, RP_ID, RP_MESSAGE } from '../app-constants';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-topic-detail',
@@ -40,8 +40,7 @@ export class TopicDetailComponent extends BaseComponent {
   constructor(
     private activatedRoute: ActivatedRoute,
     private topicService: TopicService,
-    private msgService: MessageService,
-    private router: Router
+    private msgService: MessageService
     ) {
     super();
   }
@@ -192,19 +191,6 @@ export class TopicDetailComponent extends BaseComponent {
    */
   paramMap(): ParamMap {
     return this.activatedRoute.snapshot.paramMap;
-  }
-
-  /**
-   * Get current path
-   *
-   * @returns path
-   *
-   * @example
-   * http://localhost:4200/example/15
-   * return '/example/15'
-   */
-  getPath(): string {
-    return this.router.url;
   }
 
   /**

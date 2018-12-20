@@ -1,38 +1,58 @@
 <div class="container-list">
   <div class="row d-flex justify-content-center mt-4">
-      <div class="col-md-5 content">
+      <div class="col-md-5 my-form-content">
         <form name="form" #login="ngForm" novalidate>
-            <label class="my-form-title" for="login">Login</label>
-            <div class="my-form-group">
-              <span class="my-form-label">Phone or email</span>
-              <input type="text" class="my-form-input" title="Phone or email" 
-              (keydown.enter)="onLogin(username.value, password.value)"
-              [(ngModel)]="login.username" name="username" #username="ngModel" required autofocus >
+
+          <!-- ====Start Header==== -->
+
+          <!-- Title -->
+          <label class="my-form-title" for="login">Login</label>
+          <!-- ====End Header==== -->
+
+          <!-- ====Start Body==== -->
+
+          <!-- Form Group (Input username)  -->
+          <div class="my-form-group">
+            <span class="my-form-label">Phone or email</span>
+            <input type="text" class="my-form-input" title="Phone or email" 
+            (keydown.enter)="onLogin(username.value, password.value)"
+            [(ngModel)]="login.username" name="username" #username="ngModel" required autofocus>
           </div>
+
+          <!-- Form Group (Input password)  -->
           <div class="my-form-group">
             <span class="my-form-label">Password</span>
             <input type="password" class="my-form-input" title="Password"
             (keydown.enter)="onLogin(username.value, password.value)"
             [(ngModel)]="login.password" name="password" #password="ngModel" required>
           </div>
-          <div class="mb-3 my-err">
-              <app-message [message]="message" [border]="false"></app-message>
+
+          <!-- Message -->
+          <div class="mb-3">
+            <app-message [message]="message" [border]="false"></app-message>
           </div>
-          <div class="row">
-            <div class="col-md-8">
-              <a class="link-df " href="/{{ registerPath }}">Create account</a> or <a class="link-df " href="#">Forgot password</a>
-            </div>
-            <div class="col-md-4">
-              <button 
-                type="button"
-                (click)="onLogin(username.value, password.value)"
-                [disabled]="!login.form.valid || loading"
-                class="btn button-default float-right">
-                Sign in
-                <i [class.fa-spinner]="loading" class="fa fa-spin"></i>
-              </button>
+          <!-- ====End Body==== -->
+
+          <!-- ====Start Footer==== -->
+          <div class="my-form-footer">
+            <div class="row my-form-group">
+              <div class="col-md-8">
+                <a class="link-df " href="/{{ registerPath }}">Create account</a> or <a class="link-df " href="#">Forgot password</a>
+              </div>
+              <div class="col-md-4">
+                <button 
+                  type="button"
+                  (click)="onLogin(username.value, password.value)"
+                  [disabled]="!login.form.valid || loading"
+                  class="btn button-default float-right">
+                  Sign in
+                  <i [class.fa-spinner]="loading" class="fa fa-spin"></i>
+                </button>
+              </div>
             </div>
           </div>
+          <!-- ====End Footer==== -->
+
         </form>
       </div>
   </div>
