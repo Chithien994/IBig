@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from '../base/base.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CURRENT_USER, TYPE_HTTP_OPTIONS, SIGNUP_PATH, SMS_VERIFICATION,
+import { TYPE_HTTP_OPTIONS, SIGNUP_PATH, SMS_VERIFICATION,
   R_HOME, R_LOGIN_PATH, RESEND_SMS, R_SIGNUP_PATH } from '../../app/app-constants';
 import { ActivatedRoute, Params } from '@angular/router';
 
@@ -9,7 +9,6 @@ import { ActivatedRoute, Params } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthenticationService extends BaseService {
-  readonly LOGIN_PATH = 'login';
   readonly LOGOUT_PATH = 'logout';
   readonly USERS_PATH = `users/`;
 
@@ -37,7 +36,7 @@ export class AuthenticationService extends BaseService {
    * @returns any | User[]
    */
   getUsers() {
-    return this.get(this.USERS_PATH, this.httpHeaders);
+    return this.get(this.getFullUrl(this.USERS_PATH), this.httpHeaders);
   }
 
   /**
@@ -103,9 +102,11 @@ export class AuthenticationService extends BaseService {
 
   /**
    * Returns true if the app is logging.
+   *
+   * @method override
    */
   isLogined() {
-    return localStorage.getItem(CURRENT_USER) != null;
+    return super.isLogined();
   }
 
   /**
@@ -121,11 +122,11 @@ export class AuthenticationService extends BaseService {
   /**
    * set current login user.
    *
+   * @method override
    * @param user object
    */
   setCurrentUser(user) {
-    localStorage.setItem(CURRENT_USER, JSON.stringify(user));
-
+    super.setCurrentUser(user);
     if (this.queryParams().returnUrl) {
 
       window.location.href = this.queryParams().returnUrl;
@@ -142,45 +143,43 @@ export class AuthenticationService extends BaseService {
 
   /**
    * Get current user info.
+   *
+   * @method override
    */
   currentUser() {
-    return JSON.parse(localStorage.getItem(CURRENT_USER));
+    return super.currentUser();
   }
 
   /**
    * This method is used to clear session.
+   *
+   * @method override
    */
   clearSession() {
-    localStorage.removeItem(CURRENT_USER);
+    super.clearSession();
 
-    // Go to login page when clear the session
-    window.location.href = R_LOGIN_PATH;
+    // Reload page
+    window.location.reload();
   }
 
   /**
    * Get current name of current user.
    *
-   *  @returns name -- string
+   * @method override
+   * @returns name -- string
    */
   currentName(): string {
-    const user = this.currentUser();
-    if (user != null && user.name != null) {
-      return user.name;
-    }
-    return '';
+    return super.currentName();
   }
 
   /**
    * Get current token of current user.
    *
+   * @method override
    * @returns token -- string
    */
   currentToken(): string {
-    const user = this.currentUser();
-    if (user != null && user.token != null) {
-      return user.token;
-    }
-    return '';
+    return super.currentToken();
   }
 
   /**

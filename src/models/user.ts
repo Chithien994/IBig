@@ -4,6 +4,7 @@ user.ts = Difine model User class
 */
 export class User {
     id: number;
+    is_admin: boolean;
     password: string;
     profile_picture: string;
     country_code: string;

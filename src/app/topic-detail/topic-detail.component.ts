@@ -79,6 +79,7 @@ export class TopicDetailComponent extends BaseComponent {
    */
   getUsers() {
     this.topicService.auth.getUsers().subscribe(results => {
+      console.log(`User: ${results}`);
       this.users = results[RP_RESULTS];
     });
   }

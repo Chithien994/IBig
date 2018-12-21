@@ -7,7 +7,7 @@ import { TopicDetailComponent } from './topic-detail/topic-detail.component';
 import { R_TOPICS_PATH, R_HOME, R_BASHBOARD_PATH, R_DETAIL_PATH, R_LOGIN_PATH, R_SIGNUP_PATH, NOT_ADMIN } from './app-constants';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { AuthGuardService } from '../services/guard/auth.guard.service';
+import { AuthGuardService } from '../services/auth/auth.guard.service';
 
 const routes: Routes = [
   {

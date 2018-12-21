@@ -54,7 +54,6 @@ export const RP_STATUS = 'status';
 export const RP_MESSAGE = 'message';
 
 export const APP_NAME = 'IBig';
-export const CURRENT_USER = 'currentUser';
 export const LOGGED_IN_AS = 'You are logged in as ';
 export const SEPARATOR = ' | ';
 export const LOGOUT = 'Log Out';

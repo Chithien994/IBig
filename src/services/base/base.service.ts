@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 
 /** Get data asynchronously with Observable */
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { API_URL } from '../../app/app-constants';
+import { BaseAuthService } from './base.auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BaseService {
+export class BaseService extends BaseAuthService {
 
   constructor(protected http: HttpClient) {
+    super();
   }
 
   /**
@@ -26,7 +28,10 @@ export class BaseService {
   post(url: string, body?: any | null, options?: any | null): Observable<any> {
     return this.http.post<any>(url, body, options).pipe(
       tap(),
-      catchError(error => of(error))
+      catchError((error: HttpErrorResponse) => {
+        this.checkAuthorized(error);
+        return throwError(error);
+      })
     );
   }
 
@@ -40,7 +45,10 @@ export class BaseService {
   get(url: string, options?: any | null): Observable<any> {
     return this.http.get<any>(url, options).pipe(
       tap(),
-      catchError(error => of(error))
+      catchError((error: HttpErrorResponse) => {
+        this.checkAuthorized(error);
+        return throwError(error);
+      })
     );
   }
 
@@ -55,7 +63,10 @@ export class BaseService {
   put(url: string, body?: any | null, options?: any | null): Observable<any> {
     return this.http.put<any>(url, body, options).pipe(
       tap(),
-      catchError(error => of(error))
+      catchError((error: HttpErrorResponse) => {
+        this.checkAuthorized(error);
+        return throwError(error);
+      })
     );
   }
 
@@ -70,7 +81,10 @@ export class BaseService {
   patch(url: string, body?: any | null, options?: any | null): Observable<any> {
     return this.http.patch<any>(url, body, options).pipe(
       tap(),
-      catchError(error => of(error))
+      catchError((error: HttpErrorResponse) => {
+        this.checkAuthorized(error);
+        return throwError(error);
+      })
     );
   }
 
@@ -83,10 +97,11 @@ export class BaseService {
    */
   delete(url: string, options?: any | null): Observable<any> {
     return this.http.delete<any>(url, options).pipe(
-      tap(response => {
-        console.log(JSON.stringify(response));
-      }),
-      catchError(error => of(error))
+      tap(),
+      catchError((error: HttpErrorResponse) => {
+        this.checkAuthorized(error);
+        return throwError(error);
+      })
     );
   }
 

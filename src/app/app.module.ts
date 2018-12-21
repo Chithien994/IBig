@@ -22,7 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { VerifyComponent } from './verify/verify.component';
-import { AuthGuardService } from '../services/guard/auth.guard.service';
+import { AuthGuardService } from '../services/auth/auth.guard.service';
 
 @NgModule({
   declarations: [
