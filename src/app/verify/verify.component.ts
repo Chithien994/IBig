@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { BaseComponent } from '../common/base/base.component';
+import { BaseComponent } from '../../base/component/base.component';
 import { AuthenticationService } from 'src/services/auth/authentication.service';
 import { Message } from 'src/services/message/message.service';
-import { RP_ID, R_HOME, RP_MESSAGE, RP_CODE } from '../app-constants';
+import { RP_ID, RP_MESSAGE, RP_CODE } from '../app-constants';
 
 /**
  * @description

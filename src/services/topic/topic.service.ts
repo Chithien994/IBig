@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 import { Topic } from '../../models/topic';
 
 import { HttpClient } from '@angular/common/http';
-import { BaseService } from '../base/base.service';
+import { BaseService } from '../../base/services/base.service';
 import { AuthenticationService } from '../auth/authentication.service';
 import { TOPICS_PATH } from '../../app/app-constants';
 

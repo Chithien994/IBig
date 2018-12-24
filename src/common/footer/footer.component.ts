@@ -3,7 +3,7 @@ ChiThienTCN
 Footer Component
 */
 import { Component } from '@angular/core';
-import { BaseComponent } from '../base/base.component';
+import { BaseComponent } from '../../base/component/base.component';
 
 @Component({
   selector: 'app-footer',

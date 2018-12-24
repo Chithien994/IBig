@@ -8,7 +8,7 @@ import { ChangeEvent, VirtualScrollerComponent, IViewport } from 'ngx-virtual-sc
 import { Topic } from '../../models/topic';
 import { TopicService } from '../../services/topic/topic.service';
 import { MessageService } from '../../services/message/message.service';
-import { BaseComponent } from '../common/base/base.component';
+import { BaseComponent } from '../../base/component/base.component';
 import { RP_RESULTS, RP_COUNT, RP_CODE } from '../app-constants';
 
 @Component({
@@ -106,7 +106,7 @@ export class TopicsComponent extends BaseComponent {
 
     // Send a request to retrieve the data, and listen for the results returned.
     this.topicService.getTopics(limit, offset).subscribe((updateTopic) => {
-
+        console.log(updateTopic);
         // results returned
         if (this.bLoadMore) {
 

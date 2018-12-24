@@ -6,7 +6,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { TopicService } from '../../services/topic/topic.service';
 import { Topic } from '../../models/topic';
 import { ChangeEvent, VirtualScrollerComponent } from 'ngx-virtual-scroller';
-import { BaseComponent } from '../common/base/base.component';
+import { BaseComponent } from '../../base/component/base.component';
 
 @Component({
   selector: 'app-dashboard',

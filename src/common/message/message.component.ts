@@ -4,8 +4,8 @@ Message Service
 */
 import { Component, Input } from '@angular/core';
 
-import { MessageService, Message } from '../../../services/message/message.service';
-import { BaseComponent } from '../base/base.component';
+import { MessageService, Message } from '../../services/message/message.service';
+import { BaseComponent } from '../../base/component/base.component';
 
 @Component({
   selector: 'app-message',

@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 
 /** Get data asynchronously with Observable */
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { API_URL } from '../../app/app-constants';
 import { BaseAuthService } from './base.auth.service';
+import { StatusCode } from '../constants';
+import { DialogService } from 'src/common/dialog/dialog.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BaseService extends BaseAuthService {
 
+  dialog: DialogService;
   constructor(protected http: HttpClient) {
     super();
   }
@@ -29,8 +32,8 @@ export class BaseService extends BaseAuthService {
     return this.http.post<any>(url, body, options).pipe(
       tap(),
       catchError((error: HttpErrorResponse) => {
-        this.checkAuthorized(error);
-        return throwError(error);
+        this.throwError(error);
+        return of(error);
       })
     );
   }
@@ -46,7 +49,7 @@ export class BaseService extends BaseAuthService {
     return this.http.get<any>(url, options).pipe(
       tap(),
       catchError((error: HttpErrorResponse) => {
-        this.checkAuthorized(error);
+        this.throwError(error);
         return throwError(error);
       })
     );
@@ -64,8 +67,8 @@ export class BaseService extends BaseAuthService {
     return this.http.put<any>(url, body, options).pipe(
       tap(),
       catchError((error: HttpErrorResponse) => {
-        this.checkAuthorized(error);
-        return throwError(error);
+        this.throwError(error);
+        return of(error);
       })
     );
   }
@@ -82,8 +85,8 @@ export class BaseService extends BaseAuthService {
     return this.http.patch<any>(url, body, options).pipe(
       tap(),
       catchError((error: HttpErrorResponse) => {
-        this.checkAuthorized(error);
-        return throwError(error);
+        this.throwError(error);
+        return of(error);
       })
     );
   }
@@ -99,8 +102,8 @@ export class BaseService extends BaseAuthService {
     return this.http.delete<any>(url, options).pipe(
       tap(),
       catchError((error: HttpErrorResponse) => {
-        this.checkAuthorized(error);
-        return throwError(error);
+        this.throwError(error);
+        return of(error);
       })
     );
   }
@@ -136,6 +139,34 @@ export class BaseService extends BaseAuthService {
    */
   getUrlLimitOffset(path: string, limit: number, offset: number) {
     return `${API_URL}${path}?limit=${limit}&offset=${offset}`;
+  }
+
+  /**
+   * Basic error handling:
+   * Unauthorized,
+   * Forbidden,
+   * Has been blocked by CORS policy: Response to preflight request doesn't pass access control
+   *
+   * @param error HttpErrorResponse
+   */
+  throwError(error: HttpErrorResponse) {
+
+    if (!error) { return; }
+    switch (error.status) {
+      case StatusCode._0:
+        this.requestRefreshAndTryAgain();
+        break;
+      case StatusCode._401:
+      case StatusCode._403:
+        this.unAuthorized();
+        break;
+    }
+  }
+  /**
+   * Request page refresh and try again
+   */
+  requestRefreshAndTryAgain() {
+    alert('Please refresh the page and try again!');
   }
 
    /**

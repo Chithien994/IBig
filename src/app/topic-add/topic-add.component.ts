@@ -22,8 +22,8 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class TopicDetailComponent extends BaseComponent {
 
-  /** Get data from parents */
-  @Input() topic: Topic;
+  /** data */
+  topic: Topic;
 
   /** Initialize an event notifying parents */
   @Output() messageEvent = new EventEmitter<boolean>();
@@ -52,7 +52,6 @@ export class TopicDetailComponent extends BaseComponent {
 
     // Automatically get data when component is initialized
     this.getUsers();
-    this.getTopicFromID();
   }
 
   /**

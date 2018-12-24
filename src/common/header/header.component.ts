@@ -3,10 +3,10 @@ ChiThienTCN
 Header Component
 */
 import { Component } from '@angular/core';
-import { AppComponent } from '../../app.component';
-import { AppRoutingModule } from '../../app-routing.module';
+import { AppComponent } from '../../app/app.component';
+import { AppRoutingModule } from '../../app/app-routing.module';
 import { Route, Router } from '@angular/router';
-import { BaseComponent } from '../base/base.component';
+import { BaseComponent } from '../../base/component/base.component';
 import { MessageService } from 'src/services/message/message.service';
 import { AuthenticationService } from 'src/services/auth/authentication.service';
 import { R_SIGNUP_PATH, R_LOGIN_PATH } from 'src/app/app-constants';

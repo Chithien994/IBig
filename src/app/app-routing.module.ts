@@ -4,7 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TopicsComponent } from './topics/topics.component';
 import { TopicDetailComponent } from './topic-detail/topic-detail.component';
-import { R_TOPICS_PATH, R_HOME, R_BASHBOARD_PATH, R_DETAIL_PATH, R_LOGIN_PATH, R_SIGNUP_PATH, NOT_ADMIN } from './app-constants';
+import { R_TOPICS_PATH, R_HOME, R_BASHBOARD_PATH, R_DETAIL_PATH,
+  R_LOGIN_PATH, R_SIGNUP_PATH, NOT_ADMIN, R_TOPICS_ADD_PATH } from './app-constants';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuardService } from '../services/auth/auth.guard.service';
@@ -37,6 +38,12 @@ const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuardService],
     data: { title: 'Dashboard', isShow: true, auth: true, roles: NOT_ADMIN }
+  },
+  {
+    path: R_TOPICS_ADD_PATH,
+    component: TopicsComponent,
+    canActivate: [AuthGuardService],
+    data: { title: 'Add Topic', isShow: true, auth: true, roles: NOT_ADMIN }
   },
   {
     path: `${R_DETAIL_PATH}:id`,

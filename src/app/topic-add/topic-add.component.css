@@ -1,0 +1,15 @@
+/*
+ChiThienTCN
+Topic - detail css
+*/
+
+.details {  
+    background: #79aec8;
+    color: white;
+    padding: 0.5em;
+    margin: 1em;        
+    max-width: 24em;  
+    text-align: left;
+    border-radius: 0.25em;
+}
+

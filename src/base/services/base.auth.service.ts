@@ -12,11 +12,9 @@ export class BaseAuthService {
   constructor() {
   }
 
-  checkAuthorized(error: HttpErrorResponse) {
-    if (error && error.status === 401) {
-      this.clearSession();
-      window.location.href = `/${this.LOGIN_PATH}`;
-    }
+  unAuthorized() {
+    this.clearSession();
+    window.location.href = `/${this.LOGIN_PATH}`;
   }
 
   /**

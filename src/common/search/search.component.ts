@@ -5,9 +5,9 @@ import {
   debounceTime, distinctUntilChanged, switchMap, count
 } from 'rxjs/operators';
 
-import { BaseService } from '../../../services/base/base.service';
-import { AuthenticationService } from "../../../services/auth/authentication.service";
-import { KEY_SEARCH, VAL_LIMIT_SEARCH, KEY_LIMIT } from '../../app-constants';
+import { BaseService } from '../../base/services/base.service';
+import { AuthenticationService } from '../../services/auth/authentication.service';
+import { KEY_SEARCH, VAL_LIMIT_SEARCH, KEY_LIMIT } from '../../app/app-constants';
 
 /**
  * @description

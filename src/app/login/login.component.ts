@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '../common/base/base.component';
+import { BaseComponent } from '../../base/component/base.component';
 import { AuthenticationService } from 'src/services/auth/authentication.service';
 import { RP_MESSAGE, RP_ID, R_SIGNUP_PATH } from '../app-constants';
 import { Message } from 'src/services/message/message.service';
