@@ -9,29 +9,30 @@ Header html
 	<div class="user-tools">
          <ul class="nav">
             <li *ngFor="let route of appRouting.routes"
-            [hidden]="!auth.isLogined() && route.data.auth">
-                <a 
-                    [class.selected]="route.path==getCurrentRouter().path"
-                    [class.ml-md-2]="route.data.isShow"
-                    *ngIf="route.data.isShow"
+            >
+                <a  class="nav-item"
+                    routerLinkActive="selected"
+                    *ngIf="accessAbility(route)"
+                    [class.ml-3]="route.data.isShow"
                     routerLink="/{{ route.path }}">
                     {{ route.data.title | titlecase }}
                 </a>
             </li>
-            <li [hidden]="auth.isLogined()" class="ml-2" (click)="clearMsg()">
-                <a href="/{{ loginPath }}">Login</a>
+            <li *ngIf="auth.isLogined()" class="ml-3 dropdown-toggle" data-toggle="dropdown">
+                <a class="option">Hi: {{ auth.currentFirstName() }}</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item item">Manage My Account</a>
+                    <a class="dropdown-item item">My Orders</a>
+                    <a class="dropdown-item item" (click)="auth.clearSession()">Logout</a>
+                </div>
             </li>
-            <li [hidden]="auth.isLogined()" class="ml-2" (click)="clearMsg()">
-                <a href="/{{ registerPath }}">Register</a>
-            </li>
-            <li [hidden]="!auth.isLogined()" class="ml-2" (click)="auth.clearSession()"><a>Logout</a></li>
         </ul>
     </div>        
 </div>
 <div class="breadcrumbs">
     <a class="home" href="/{{ getHomeRouter().path }}">{{getHomeRouter().data.title | titlecase }} </a>
     <a
-    *ngIf="setCurrentRouter() && getCurrentRouter()['path']">
+    *ngIf="setCurrentRouter()">
     <span class="fa fa-angle-right"></span>
     {{getCurrentRouter().data.title | titlecase}}</a>
 </div>

@@ -173,6 +173,33 @@ export class AuthenticationService extends BaseService {
   }
 
   /**
+   * Get current first name of current user.
+   *
+   *  @returns first name -- string
+   */
+  protected currentFirstName(): string {
+    return super.currentFirstName();
+  }
+
+  /**
+   * Get current last name of current user.
+   *
+   *  @returns last name -- string
+   */
+  currentLastName(): string {
+    return super.currentLastName();
+  }
+
+    /**
+   * Get current full name of current user.
+   *
+   *  @returns full name -- string
+   */
+  protected currentFullName(): string {
+    return super.currentFullName();
+  }
+
+  /**
    * Get current token of current user.
    *
    * @method override

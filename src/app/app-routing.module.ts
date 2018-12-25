@@ -15,17 +15,17 @@ const routes: Routes = [
     path: '',
     redirectTo: R_HOME,
     pathMatch: 'full',
-    data: { title: 'Home', isShow: true, auth: false, roles: NOT_ADMIN }
+    data: { title: 'Home', isShow: false, auth: false, roles: NOT_ADMIN }
   },
   {
     path: R_LOGIN_PATH,
     component: LoginComponent,
-    data: { title: 'Login', isShow: false, auth: false, roles: NOT_ADMIN }
+    data: { title: 'Login', isShow: true, auth: false, roles: NOT_ADMIN }
   },
   {
     path: R_SIGNUP_PATH,
     component: RegisterComponent,
-    data: { title: 'Register', isShow: false, auth: false, roles: NOT_ADMIN }
+    data: { title: 'Register', isShow: true, auth: false, roles: NOT_ADMIN }
   },
   {
     path: R_TOPICS_PATH,

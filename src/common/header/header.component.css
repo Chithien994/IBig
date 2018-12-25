@@ -25,7 +25,7 @@ Header css
     color: #fff;
 }
 
-.selected, .nav a:hover, .home:hover{
+.selected, .nav li:hover, .nav-item:hover, .home:hover{
     color: #f5dd5d!important;
 }
 
@@ -60,4 +60,19 @@ Header css
     letter-spacing: 0.5px;
     text-transform: uppercase;
     text-align: right;
+}
+
+.option {
+    cursor: pointer;
+}
+
+.item {
+    color: #000;
+    text-transform: capitalize;
+    text-align: left;
+    cursor: pointer;
+}
+
+.item:hover {
+    color: #417690!important;
 }

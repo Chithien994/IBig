@@ -5,11 +5,14 @@ Header Component
 import { Component } from '@angular/core';
 import { AppComponent } from '../../app/app.component';
 import { AppRoutingModule } from '../../app/app-routing.module';
-import { Route, Router } from '@angular/router';
+import { Route, Router, RouterState } from '@angular/router';
 import { BaseComponent } from '../../base/component/base.component';
 import { MessageService } from 'src/services/message/message.service';
 import { AuthenticationService } from 'src/services/auth/authentication.service';
 import { R_SIGNUP_PATH, R_LOGIN_PATH } from 'src/app/app-constants';
+import { of, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { pipe } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-header',
@@ -24,6 +27,10 @@ export class HeaderComponent extends BaseComponent {
   /** Login path */
   loginPath = R_LOGIN_PATH;
 
+  path = '';
+
+  routerState: RouterState;
+
   constructor(
     private appComponent: AppComponent,
     public appRouting: AppRoutingModule,
@@ -36,7 +43,9 @@ export class HeaderComponent extends BaseComponent {
 
   currentRouter: Route;
 
-  onInit() {}
+  onInit() {
+    this.routerState = this.router.routerState;
+  }
 
   /**
    * Get app title
@@ -53,14 +62,11 @@ export class HeaderComponent extends BaseComponent {
    * @returns only true
    */
   setCurrentRouter(): boolean {
-    for (const route of this.appRouting.routes) {
-      if (route.path === this.getPath().split('/')[1] ||
-      this.getPath().search(route.path.substring(0, 7)) === 1) {// ==> 'detail/'
-        this.currentRouter = route;
-        break;
-      } else {
-        this.currentRouter = {path: '', data: {title: '', isShow: false}};
-      }
+    if (this.path !== this.getPath()) {
+      this.currentRouter = this.appRouting.routes.find(
+        route => (route.path.split('/:')[0] === this.getPath().split('/')[1]));
+        console.log('sss');
+        this.path = this.getPath();
     }
     return true;
   }
@@ -70,7 +76,7 @@ export class HeaderComponent extends BaseComponent {
    *
    * @returns Route
    */
-  getCurrentRouter(): Route {
+  getCurrentRouter() {
     return this.currentRouter;
   }
 
@@ -94,6 +100,14 @@ export class HeaderComponent extends BaseComponent {
    */
   getPath(): string {
     return this.router.url;
+  }
+
+  accessAbility(route: Route) {
+    if (this.auth.isLogined()) {
+      return (route.data.isShow && route.data.auth);
+    }
+
+    return (route.data.isShow && !route.data.auth);
   }
 
   /**

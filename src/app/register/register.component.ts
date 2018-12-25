@@ -5,6 +5,8 @@ import { RP_MESSAGE, PATH_COUNTRY_CODE, RP_CODE, R_LOGIN_PATH } from '../app-con
 import { Message } from 'src/services/message/message.service';
 import { CountryCode } from '../../models/country.code';
 import { User } from 'src/models/user';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { ValidatorsForms } from 'src/shared/ValidatorsForms';
 
 @Component({
   selector: 'app-register',
@@ -34,6 +36,8 @@ export class RegisterComponent extends BaseComponent {
   /** When "showFromVerify" is true, then show Verify form and hidden Sign Up form. False in reverse. */
   showFromVerify = false;
 
+  userFormGroup: FormGroup;
+
   constructor(private auth: AuthenticationService) {
     super();
   }
@@ -41,8 +45,21 @@ export class RegisterComponent extends BaseComponent {
   onInit() {
     this.loading = false;
     this.getCountryCode();
+
+    // Get User FormGroup (ValidatorsForms)
+    // this.userFormGroup = ValidatorsForms.userFormGroup(this.formBuilder);
   }
 
+  /**
+   * This method is used to sign up.
+   *
+   * @param firstName string
+   * @param lastName string
+   * @param email string
+   * @param countryCode string
+   * @param phoneNumber string
+   * @param password string
+   */
   onRegister(firstName: string,
     lastName: string,
     email: string,
@@ -57,7 +74,7 @@ export class RegisterComponent extends BaseComponent {
 
     // Sign up and wait for the result to return.
     this.auth.register(new User()
-    .getParams(firstName, lastName, email, countryCode, phoneNumber, password)).subscribe(result => {
+    .setParams(firstName, lastName, email, countryCode, phoneNumber, password)).subscribe(result => {
       console.log(JSON.stringify(result));
       this.loading = false;
       if (result && result[RP_CODE] === 200) {

@@ -61,6 +61,45 @@ export class BaseAuthService {
   }
 
   /**
+   * Get current first name of current user.
+   *
+   *  @returns first name -- string
+   */
+  protected currentFirstName(): string {
+    const user = this.currentUser();
+    if (user && user.first_name) {
+      return user.first_name;
+    }
+    return '';
+  }
+
+  /**
+   * Get current last name of current user.
+   *
+   *  @returns last name -- string
+   */
+  protected currentLastName(): string {
+    const user = this.currentUser();
+    if (user && user.last_name) {
+      return user.last_name;
+    }
+    return '';
+  }
+
+    /**
+   * Get current full name of current user.
+   *
+   *  @returns full name -- string
+   */
+  protected currentFullName(): string {
+    const user = this.currentUser();
+    if (user && user.first_name && user.last_name) {
+      return `${user.first_name} ${user.last_name}`;
+    }
+    return '';
+  }
+
+  /**
    * Get current token of current user.
    *
    * @returns token -- string
