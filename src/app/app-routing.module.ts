@@ -12,7 +12,7 @@ import { AuthGuardService } from '../services/auth/auth.guard.service';
 
 const routes: Routes = [
   {
-    path: '',
+    path: R_HOME,
     redirectTo: R_HOME,
     pathMatch: 'full',
     data: { title: 'Home', isShow: false, auth: false, roles: NOT_ADMIN }
