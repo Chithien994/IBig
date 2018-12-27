@@ -157,8 +157,10 @@ export class BaseService extends BaseAuthService {
         this.requestRefreshAndTryAgain();
         break;
       case StatusCode._401:
-      case StatusCode._403:
         this.unAuthorized();
+        break;
+      case StatusCode._403:
+        // alert('You do not have permission to perform this action.');
         break;
     }
   }
@@ -175,9 +177,16 @@ export class BaseService extends BaseAuthService {
    * @param HttpErrorResponse error the HttpErrorResponse object.
    * @return string the message.
    */
-  getErrorMessage(error: HttpErrorResponse) {
-    if (error.error != null) {
+  getErrorMessage(error) {
+    if (error.error.detail) {
+
+      return error.error.detail;
+    } else if (error.message) {
+
       return error.message;
+    } else if (error.statusText) {
+
+      return `Errer: ${error.statusText}`;
     }
     return 'An unknown error occurred: ' + error.status;
   }

@@ -131,7 +131,7 @@ export class TopicDetailComponent extends BaseComponent {
       } else {
 
         // Notification failed
-        this.msgService.setFailure(result[RP_MESSAGE]);
+        this.msgService.setFailure(this.topicService.getErrorMessage(result));
       }
     });
   }
@@ -173,7 +173,7 @@ export class TopicDetailComponent extends BaseComponent {
       } else {
 
         // Notification failed
-        this.msgService.setFailure(result[RP_MESSAGE]);
+        this.msgService.setFailure(this.topicService.getErrorMessage(result));
       }
 
     });

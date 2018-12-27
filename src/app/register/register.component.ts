@@ -86,7 +86,7 @@ export class RegisterComponent extends BaseComponent {
       } else {
 
         // Set message content (Failed).
-        this.message.setNotfy(result[RP_MESSAGE], true);
+        this.message.setNotfy(this.auth.getErrorMessage(result), true);
       }
     });
   }
