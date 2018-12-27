@@ -10,9 +10,6 @@ import { BaseComponent } from '../../base/component/base.component';
 import { MessageService } from 'src/services/message/message.service';
 import { AuthenticationService } from 'src/services/auth/authentication.service';
 import { R_SIGNUP_PATH, R_LOGIN_PATH } from 'src/app/app-constants';
-import { of, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { pipe } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-header',
@@ -27,7 +24,7 @@ export class HeaderComponent extends BaseComponent {
   /** Login path */
   loginPath = R_LOGIN_PATH;
 
-  path = '';
+  historyPath = '';
 
   routerState: RouterState;
 
@@ -57,26 +54,16 @@ export class HeaderComponent extends BaseComponent {
   }
 
   /**
-   * Set current router
-   *
-   * @returns only true
-   */
-  setCurrentRouter(): boolean {
-    if (this.path !== this.getPath()) {
-      this.currentRouter = this.appRouting.routes.find(
-        route => (route.path.split('/:')[0] === this.getPath().split('/')[1]));
-        console.log('sss');
-        this.path = this.getPath();
-    }
-    return true;
-  }
-
-  /**
    * Get current router
    *
    * @returns Route
    */
   getCurrentRouter() {
+    if (this.historyPath !== this.getPath()) {
+      this.currentRouter = this.appRouting.routes.find(
+        route => (route.path.search(this.getPath().split('/')[1]) === 0));
+        this.historyPath = this.getPath();
+    }
     return this.currentRouter;
   }
 

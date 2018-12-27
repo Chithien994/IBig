@@ -21,7 +21,7 @@ export const IS_ADMIN = true;
 export const NOT_ADMIN = false;
 
 // Routing path
-export const R_HOME = '';
+export const R_HOME_PATH = '';
 export const R_LOGIN_PATH = 'login';
 export const R_SIGNUP_PATH = 'signup';
 export const R_TOPICS_PATH = `topics`;
@@ -61,4 +61,4 @@ export const LOGOUT = 'Log Out';
 export const HELP = 'Help';
 export const ROLE_EDIT_SUFFIX = '-EDIT';
 export const ROLE_VIEW_SUFFIX = '-VIEW';
-export const WITHOUT_CHECK_ROLE_MODULES = [R_HOME, 'master'];
+export const WITHOUT_CHECK_ROLE_MODULES = [R_HOME_PATH, 'master'];

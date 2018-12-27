@@ -11,8 +11,8 @@ export class Topic {
 
     public getParams(id: number, user: number, name: string) {
         const param = new Topic();
-        param.id = id;
-        param.user = user;
+        param.id = +id;
+        param.user = +user;
         param.name = name;
         param.privileged = 1;
         return param;

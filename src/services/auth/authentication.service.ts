@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BaseService } from '../../base/services/base.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TYPE_HTTP_OPTIONS, SIGNUP_PATH, SMS_VERIFICATION,
-  R_HOME, R_LOGIN_PATH, RESEND_SMS, R_SIGNUP_PATH } from '../../app/app-constants';
+  R_HOME_PATH, R_LOGIN_PATH, RESEND_SMS, R_SIGNUP_PATH } from '../../app/app-constants';
 import { ActivatedRoute, Params } from '@angular/router';
 
 @Injectable({
@@ -133,7 +133,7 @@ export class AuthenticationService extends BaseService {
     } else if (window.location.pathname === `/${R_SIGNUP_PATH}` || window.location.pathname === `/${R_LOGIN_PATH}`) {
 
       // Go to home page, when this page is sign up page
-      window.location.href = R_HOME;
+      window.location.href = R_HOME_PATH;
     } else {
 
       // reload page

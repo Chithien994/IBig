@@ -16,11 +16,11 @@ import { R_TOPICS_PATH, R_DETAIL_PATH, RP_RESULTS, RP_CODE, RP_STATUS, RP_ID, RP
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
-  selector: 'app-topic-detail',
-  templateUrl: './topic-detail.component.html',
-  styleUrls: ['./topic-detail.component.css']
+  selector: 'app-add-detail',
+  templateUrl: './topic-add.component.html',
+  styleUrls: ['./topic-add.component.css']
 })
-export class TopicDetailComponent extends BaseComponent {
+export class TopicAddComponent extends BaseComponent {
 
   /** data */
   topic: Topic;

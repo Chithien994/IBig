@@ -11,6 +11,7 @@ import { TopicsComponent } from './topics/topics.component';
 import { HeaderComponent } from '../common/header/header.component';
 import { FooterComponent } from '../common/footer/footer.component';
 import { TopicDetailComponent } from './topic-detail/topic-detail.component';
+import { TopicAddComponent } from './topic-add/topic-add.component';
 import { MessageComponent } from '../common/message/message.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SearchComponent } from '../common/search/search.component';
@@ -42,7 +43,8 @@ import { from } from 'rxjs';
     RegisterComponent,
     LoginComponent,
     VerifyComponent,
-    DialogComponent
+    DialogComponent,
+    TopicAddComponent
   ],
   imports: [
     BrowserModule,

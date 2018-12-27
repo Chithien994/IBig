@@ -2,8 +2,8 @@
 ChiThienTCN
 Topics Component
 */
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { ChangeEvent, VirtualScrollerComponent, IViewport } from 'ngx-virtual-scroller';
+import { Component, ViewChild, Input } from '@angular/core';
+import { VirtualScrollerComponent } from 'ngx-virtual-scroller';
 
 import { Topic } from '../../models/topic';
 import { TopicService } from '../../services/topic/topic.service';
