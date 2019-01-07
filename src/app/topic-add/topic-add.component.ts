@@ -3,17 +3,18 @@ ChiThienTCN
 Topic - detail Component
 */
 import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
-import { BaseComponent } from '../../base/component/base.component';
-import { Topic } from '../../models/topic';
-import { User } from '../../models/user';
+import { BaseComponent } from '../core/base/components/base.component';
+import { Topic } from '../models/topic';
+import { User } from '../models/user';
 
 /** Service */
-import { TopicService } from '../../services/topic/topic.service';
-import { MessageService } from '../../services/message/message.service';
+import { TopicService } from '../services/topics/topic.service';
+import { MessageService } from '../services/message/message.service';
 
 /** Constants */
 import { R_TOPICS_PATH, R_DETAIL_PATH, RP_RESULTS, RP_CODE, RP_STATUS, RP_ID, RP_MESSAGE } from '../app-constants';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-add-detail',
@@ -40,7 +41,8 @@ export class TopicAddComponent extends BaseComponent {
   constructor(
     private activatedRoute: ActivatedRoute,
     private topicService: TopicService,
-    private msgService: MessageService
+    private msgService: MessageService,
+    private usersSevice: UsersService
     ) {
     super();
   }
@@ -77,7 +79,7 @@ export class TopicAddComponent extends BaseComponent {
    * Get users
    */
   getUsers() {
-    this.topicService.auth.getUsers().subscribe(results => {
+    this.usersSevice.getUsers().subscribe(results => {
       console.log(`User: ${results}`);
       this.users = results[RP_RESULTS];
     });

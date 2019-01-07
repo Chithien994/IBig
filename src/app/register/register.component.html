@@ -1,126 +1,138 @@
-<div *ngIf="!showFromVerify" class="container-list">
+<div *ngIf="!usersService.isVerify()" class="container-list">
   <div class="row d-flex justify-content-center mt-4">
-      <div class="col-md-6 my-form-content">
+    <div class="col-md-8 my-form-content">
+      <div class="row">
+        <div class="col-md-7">
 
-        <!-- ====START SIGN UP FORM==== -->
-        <form name="form" #register="ngForm" novalidate>
+          <!-- ====START SIGN UP FORM==== -->
+          <form name="form" #register="ngForm" novalidate>
 
-          <!-- ====Start Header==== -->
+            <!-- ====Start Header==== -->
 
-          <!-- Title -->
-          <label class="my-form-title" for="register">Register</label>
+            <!-- Title -->
+            <label class="my-form-title" for="register">Register</label>
 
-          <!-- ====End Header==== -->
+            <!-- ====End Header==== -->
 
-          <!-- ====Start Body==== -->
+            <!-- ====Start Body==== -->
 
-          <div class="row">
-            <div class="col-md-6">
-
-              <!-- Form Group (Input First Name)  -->
-              <div class="my-form-group">
-                <span class="my-form-label">First Name</span>
-                <input type="text" class="my-form-input" title="First Name" tabindex="0"
-                [(ngModel)]="register.first_name" name="first_name" #first_name="ngModel" required>
+            <!-- Form Group (Input Country Code)  -->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="my-form-group">
+                  <span class="my-form-label">Country Code</span>
+                  <select class="my-form-input" name="country_code" tabindex="4" #country_code required>
+                    <option *ngFor="let countryCode of countryCodes"
+                      [value]="countryCode.code">{{ countryCode.name }} +{{ countryCode.code }}</option>
+                  </select>
+                </div>
               </div>
             </div>
-            <div class="col-md-6">
+
+            <!-- Form Group (Input phone)  -->
+            <div class="row">
+              <div class="col-md-12">
+                  <div class="my-form-group">
+                    <span class="my-form-label">Phone</span>
+                    <input type="text" class="my-form-input" title="Phone" tabindex="5"
+                    [(ngModel)]="register.phone" name="phone" #phone="ngModel" required>
+                  </div>
+              </div>
+
+              <!-- Form Group (Input email)  -->
+              <div class="col-md-12">
+                <div class="my-form-group">
+                  <span class="my-form-label">Email</span>
+                  <input type="email" class="my-form-input" title="Email" tabindex="4"
+                  [(ngModel)]="register.email" name="email" #email="ngModel" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+
+              <!-- Form Group (Input First Name)  -->
+              <div class="col-md-6">
+                <div class="my-form-group">
+                  <span class="my-form-label">First Name</span>
+                  <input type="text" class="my-form-input" title="First Name" tabindex="0"
+                  [(ngModel)]="register.first_name" name="first_name" #first_name="ngModel" required>
+                </div>
+              </div>
 
               <!-- Form Group (Input Last Name)  -->
-              <div class="my-form-group">
-                <span class="my-form-label">Last Name</span>
-                <input type="text" class="my-form-input" title="Last Name" tabindex="1"
-                [(ngModel)]="register.last_name" name="last_name" #last_name="ngModel" required>
+              <div class="col-md-6">
+                <div class="my-form-group">
+                  <span class="my-form-label">Last Name</span>
+                  <input type="text" class="my-form-input" title="Last Name" tabindex="1"
+                  [(ngModel)]="register.last_name" name="last_name" #last_name="ngModel" required>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="row">
-            <div class="col-md-6">
+            <div class="row">
 
               <!-- Form Group (Input password)  -->
-              <div class="my-form-group">
-                  <span class="my-form-label">Password</span>
-                  <input type="password" class="my-form-input" title="Password" tabindex="2"
-                  [(ngModel)]="register.password" name="password" #password="ngModel" required>
+              <div class="col-md-6">
+                <div class="my-form-group">
+                    <span class="my-form-label">Password</span>
+                    <input type="password" class="my-form-input" title="Password" tabindex="2"
+                    [(ngModel)]="register.password" name="password" #password="ngModel" required>
+                </div>
               </div>
-            </div>
-            <div class="col-md-6">
 
               <!-- Form Group (Input confirm password)  -->
-              <div class="my-form-group">
-                <span class="my-form-label">Confirm password</span>
-                <input type="password" class="my-form-input" title="Confirm password" tabindex="3"
-                [(ngModel)]="register.confirm_password" name="confirm_password" #confirm_password="ngModel" required>
+              <div class="col-md-6">
+                <div class="my-form-group">
+                  <span class="my-form-label">Confirm password</span>
+                  <input type="password" class="my-form-input" title="Confirm password" tabindex="3"
+                  [(ngModel)]="register.confirm_password" name="confirm_password" #confirm_password="ngModel" required>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Form Group (Input email)  -->
-          <div class="my-form-group">
-            <span class="my-form-label">Email</span>
-            <input type="email" class="my-form-input" title="Email" tabindex="4"
-            [(ngModel)]="register.email" name="email" #email="ngModel" required>
-          </div>
+            <!-- Message -->
+            <div class="mb-3">
+              <app-message [message]="message" [border]="false"></app-message>
+            </div>
 
-          <div class="row">
-            <div class="col-md-5">
+            <!-- ====End Body==== -->
 
-              <!-- Form Group (Input First Name)  -->
-              <div class="my-form-group">
-                <span class="my-form-label">Country Code</span>
-                <select class="my-form-input" name="country_code" tabindex="5" #country_code required>
-                  <option *ngFor="let countryCode of countryCodes"
-                    [value]="countryCode.code">{{ countryCode.name }} +{{ countryCode.code }}</option>
-                </select>
+            <!-- ====Start Footer==== -->
+            <div class="my-form-footer">
+              <div class="row">
+                <div class="col-md-8 link-b">
+                  <a class="link-b" href="/{{ loginPath }}">Login</a>
+                  <i class="fa fa-long-arrow-right ml-1"></i>
+                </div>
+                <div class="col-md-4">
+                  <button 
+                    type="button"
+                    [disabled]="!register.form.valid || loading"
+                    class="btn button-default float-right"
+                    (click)="onRegister(first_name.value,
+                          last_name.value,
+                          email.value,
+                          country_code.value,
+                          phone.value,
+                          password.value)">
+                    Sign up
+                    <i [class.fa-spinner]="loading" class="fa fa-spin"></i>
+                  </button>
+                </div>
               </div>
             </div>
-            <div class="col-md-7">
-
-              <!-- Form Group (Input phone)  -->
-              <div class="my-form-group">
-                <span class="my-form-label">Phone</span>
-                <input type="text" class="my-form-input" title="Phone" tabindex="6"
-                [(ngModel)]="register.phone" name="phone" #phone="ngModel" required>
-              </div>
-            </div>
+            <!-- ====End Footer==== -->
+          </form>
+          <!-- ====END SIGN UP FORM==== -->
+        </div>
+        <div class="col-md-5 logo" style="margin:auto 0;">
+          <div class="text-center">
+            <img width="50%" src="../../assets/img/logo/logo1.png" alt="logo1">
           </div>
-
-          <!-- Message -->
-          <div class="mb-3">
-            <app-message [message]="message" [border]="false"></app-message>
-          </div>
-
-          <!-- ====End Body==== -->
-
-          <!-- ====Start Footer==== -->
-          <div class="my-form-footer">
-            <div class="row">
-              <div class="col-md-8 link-b">
-                <a class="link-b" href="/{{ loginPath }}">Login</a>
-                <i class="fa fa-long-arrow-right ml-1"></i>
-              </div>
-              <div class="col-md-4">
-                <button 
-                  type="button"
-                  [disabled]="!register.form.valid || loading"
-                  class="btn button-default float-right"
-                  (click)="onRegister(first_name.value,
-                        last_name.value,
-                        email.value,
-                        country_code.value,
-                        phone.value,
-                        password.value)">
-                  Sign in
-                  <i [class.fa-spinner]="loading" class="fa fa-spin"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- ====End Footer==== -->
-        </form>
-        <!-- ====END SIGN UP FORM==== -->
+        </div>
       </div>
+    </div>
   </div>
 </div>
-<app-verify *ngIf="showFromVerify" [phone]="phone"></app-verify>
+<app-verify *ngIf="usersService.isVerify()" [phone]="usersService.isVerify()"></app-verify>

@@ -1,6 +1,6 @@
 import {HttpHeaders} from '@angular/common/http';
-// export const URL = 'https://itbigger.pythonanywhere.com/';
-export const URL = 'http://192.168.1.130:8000/';
+export const URL = 'https://itbigger.pythonanywhere.com/';
+// export const URL = 'http://192.168.1.130:8000/';
 export const API_URL = `${URL}api/v1/`;
 export const PATH_COUNTRY_CODE = '../../assets/country_code.json';
 export const TYPE_HTTP_OPTIONS = {
@@ -31,12 +31,23 @@ export const R_DETAIL_PATH = `detail/`;
 export const R_USERS_PATH = `users`;
 
 // Api path
+export const TOPICS_PATH = `topics/`;
 export const LOGIN_PATH = 'login/';
 export const SIGNUP_PATH = 'signup/';
-export const TOPICS_PATH = `topics/`;
 export const USERS_PATH = `users/`;
-export const SMS_VERIFICATION = 'smsverification/';
-export const RESEND_SMS = 'resendsms/';
+export const VERIFY_SIGNIN_PATH = 'verify/signin/';
+export const VERIFY_PHONE_PATH = 'verify/phone/';
+export const VERIFY_FORGOT_PASS_PATH = 'verify/forgotpassword/';
+export const VERIFY_RESEND_SMS_PATH = 'verify/resendsms/';
+export const CHANGE_PHONE_PATH = 'change/phone/';
+export const CHANGE_EMAIL_PATH = 'change/email/';
+export const FORGOT_PASS_PHONE_PATH = 'forgotpassword/phone/';
+export const FORGOT_PASS_EMAIL_PATH = 'forgotpassword/email/';
+export const PRODUCT_PATH = `products/`;
+export const PRODUCT_SIZE_PATH = `product/sizes/`;
+export const PRODUCT_ITEM_PATH = `product/items/`;
+export const PRODUCT_TYPE_PATH = `product/types/`;
+export const PRODUCT_IMG_PATH = `product/pictures/`;
 
 // Api key
 export const KEY_SEARCH = `search`;

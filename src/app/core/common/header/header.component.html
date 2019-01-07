@@ -31,7 +31,7 @@ Header html
 </div>
 <div class="breadcrumbs">
     <a class="home" href="/{{ getHomeRouter().path }}">{{getHomeRouter().data.title | titlecase }} </a>
-    <a *ngIf="getCurrentRouter().path && getCurrentRouter().path != getHomeRouter().path">
+    <a *ngIf="getCurrentRouter() && getCurrentRouter().path != getHomeRouter().path">
     <span class="fa fa-angle-right"></span>
     {{getCurrentRouter().data.title | titlecase}}</a>
 </div>

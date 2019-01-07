@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '../../base/component/base.component';
-import { AuthenticationService } from 'src/services/auth/authentication.service';
-import { RP_MESSAGE, RP_ID, R_SIGNUP_PATH } from '../app-constants';
-import { Message } from 'src/services/message/message.service';
+import { BaseComponent } from '../core/base/components/base.component';
+import { RP_ID, R_SIGNUP_PATH } from '../app-constants';
+import { Message } from 'src/app/services/message/message.service';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +23,7 @@ export class LoginComponent extends BaseComponent {
   /** Show icon is in progress, and disable "Sign in" button, if "loading" is true. False in reverse. */
   loading: boolean;
 
-  constructor(private auth: AuthenticationService) {
+  constructor(private usersService: UsersService) {
     super();
   }
 
@@ -45,7 +45,7 @@ export class LoginComponent extends BaseComponent {
     this.message  = new Message;
 
     // Sign in and wait for the result to return.
-    this.auth.login(username, password).subscribe(result => {
+    this.usersService.login(username, password).subscribe(result => {
 
       this.loading = false;
       if (result && result[RP_ID] > 0) {
@@ -54,11 +54,11 @@ export class LoginComponent extends BaseComponent {
         this.message.setNotfy('Successed!', false);
 
         // Saves login session with all content returned.
-        this.auth.setCurrentUser(result);
+        this.usersService.setCurrentUser(result);
       } else {
 
         // Set message content (Failed).
-        this.message.setNotfy(this.auth.getErrorMessage(result), true);
+        this.message.setNotfy(this.usersService.getErrorMessage(result), true);
       }
     });
   }

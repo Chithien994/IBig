@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BaseService } from '../../base/services/base.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { TYPE_HTTP_OPTIONS, SIGNUP_PATH, SMS_VERIFICATION,
-  R_HOME_PATH, R_LOGIN_PATH, RESEND_SMS, R_SIGNUP_PATH } from '../../app/app-constants';
+import { BaseService } from '../../core/base/services/base.service';
+import { HttpClient } from '@angular/common/http';
+import { R_HOME_PATH, R_LOGIN_PATH, R_SIGNUP_PATH } from '../../app-constants';
 import { ActivatedRoute, Params } from '@angular/router';
 
 @Injectable({
@@ -16,88 +15,6 @@ export class AuthenticationService extends BaseService {
     protected http: HttpClient,
     private activatedRoute: ActivatedRoute) {
     super(http);
-  }
-
-  /**
-   * Option: HttpHeaders ---
-   * Content-Type,
-   * Authorization
-   */
-  public httpHeaders = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': `token ${this.currentToken()}`
-    })
-  };
-
-  /**
-   * This method is used to get the users a list
-   *
-   * @returns any | User[]
-   */
-  getUsers() {
-    return this.get(this.getFullUrl(this.USERS_PATH), this.httpHeaders);
-  }
-
-  /**
-   * This method is used to login.
-   *
-   * @param username string
-   * @param password string
-   * @returns any | User object
-   */
-  login(username: string, password: string) {
-    const body = new Object();
-    body['username'] = username;
-    body['password'] = password;
-    return this.post(this.getFullUrl(this.LOGIN_PATH), body, TYPE_HTTP_OPTIONS);
-  }
-
-  /**
-   * This method is used to sign up.
-   *
-   * @param object JSONObject
-   * @returns any | object
-   */
-  register(object: Object) {
-    return this.post(this.getFullUrl(SIGNUP_PATH), object, TYPE_HTTP_OPTIONS);
-  }
-
-  /**
-   * This method is used to verify.
-   *
-   * @param countryCode string
-   * @param phoneNumber string
-   * @returns any | User object
-   */
-  verify(countryCode: string, phoneNumber: string) {
-    const body = new Object();
-    body['phone_number'] = phoneNumber;
-    body['verify_code'] = countryCode;
-    return this.post(this.getFullUrl(SMS_VERIFICATION), body, TYPE_HTTP_OPTIONS);
-  }
-
-  /**
-   * This method is used to resend verification sms.
-   *
-   * @param phoneNumber string
-   * @returns any | object
-   */
-  resendSms(phoneNumber: string) {
-    const body = new Object();
-    body['phone_number'] = phoneNumber;
-    return this.post(this.getFullUrl(RESEND_SMS), body, TYPE_HTTP_OPTIONS);
-  }
-
-  /**
-   * This method is used to logout.
-   *
-   * @returns any | User object
-   */
-  logout() {
-
-    // remove user from local storage to log user out
-    return this.post(this.LOGOUT_PATH).pipe(result => result);
   }
 
   /**
@@ -177,7 +94,7 @@ export class AuthenticationService extends BaseService {
    *
    *  @returns first name -- string
    */
-  protected currentFirstName(): string {
+  currentFirstName(): string {
     return super.currentFirstName();
   }
 
@@ -195,7 +112,7 @@ export class AuthenticationService extends BaseService {
    *
    *  @returns full name -- string
    */
-  protected currentFullName(): string {
+  currentFullName(): string {
     return super.currentFullName();
   }
 

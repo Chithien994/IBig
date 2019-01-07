@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { BaseComponent } from '../../base/component/base.component';
-import { AuthenticationService } from 'src/services/auth/authentication.service';
-import { Message } from 'src/services/message/message.service';
+import { BaseComponent } from '../core/base/components/base.component';
+import { Message } from 'src/app/services/message/message.service';
 import { RP_ID, RP_MESSAGE, RP_CODE } from '../app-constants';
+import { UsersService } from 'src/app/services/users/users.service';
 
 /**
  * @description
@@ -45,7 +45,7 @@ export class VerifyComponent extends BaseComponent {
   /** Show icon is in progress, and disable "Message not received" button, if "resend" is true. False in reverse. */
   resend: boolean;
 
-  constructor(private auth: AuthenticationService) {
+  constructor(private usersService: UsersService) {
     super();
   }
 
@@ -63,7 +63,7 @@ export class VerifyComponent extends BaseComponent {
 
     this.message = new Message;
     this.loading = true;
-    this.auth.verify(countryCode, this.phone).subscribe(result => {
+    this.usersService.verify(countryCode, this.phone).subscribe(result => {
 
       this.loading = false;
       if (result && result[RP_ID] > 0) {
@@ -72,11 +72,11 @@ export class VerifyComponent extends BaseComponent {
         this.message.setNotfy('Successed!', false);
 
         // Saves sign up session with all content returned.
-        this.auth.setCurrentUser(result);
+        this.usersService.setCurrentUser(result);
       } else {
 
         // Set message content (Failed).
-        this.message.setNotfy(result[RP_MESSAGE], true);
+        this.message.setNotfy(this.usersService.getErrorMessage(result), true);
       }
     });
   }
@@ -88,7 +88,7 @@ export class VerifyComponent extends BaseComponent {
 
     this.message = new Message;
     this.resend = true;
-    this.auth.resendSms(this.phone).subscribe(result => {
+    this.usersService.resendSms(this.phone).subscribe(result => {
 
       this.resend = false;
       if (result && result[RP_CODE] === 200) {
@@ -98,8 +98,21 @@ export class VerifyComponent extends BaseComponent {
       } else {
 
         // Set message content (Failed).
-        this.message.setNotfy(result[RP_MESSAGE], true);
+        this.message.setNotfy(this.usersService.getErrorMessage(result), true);
       }
     });
+  }
+
+  /**
+   * @description
+   * Cancel account registration.
+   * And go to home page.
+   *
+   * @override
+   * Override the method goToHome()
+   */
+  goToHome() {
+    this.usersService.setIsVerify(null);
+    super.goToHome();
   }
 }

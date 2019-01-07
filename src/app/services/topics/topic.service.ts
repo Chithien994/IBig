@@ -7,15 +7,14 @@ import { Injectable } from '@angular/core';
 import { Topic } from '../../models/topic';
 
 import { HttpClient } from '@angular/common/http';
-import { BaseService } from '../../base/services/base.service';
-import { AuthenticationService } from '../auth/authentication.service';
-import { TOPICS_PATH } from '../../app/app-constants';
+import { BaseService } from '../../core/base/services/base.service';
+import { TOPICS_PATH } from '../../app-constants';
 
 
 @Injectable()
 export class TopicService extends BaseService {
 
-  constructor(protected http: HttpClient, public auth: AuthenticationService) {
+  constructor(protected http: HttpClient) {
     super(http);
   }
 
@@ -27,7 +26,7 @@ export class TopicService extends BaseService {
    * @returns Topic[] | any
    */
   getTopics(limit: number, offset: number) {
-    return this.get(this.getUrlLimitOffset(TOPICS_PATH, limit, offset), this.auth.httpHeaders);
+    return this.get(this.getUrlLimitOffset(TOPICS_PATH, limit, offset), this.httpHeaders);
   }
 
   /**
@@ -37,7 +36,7 @@ export class TopicService extends BaseService {
    * @returns Topic | any
    */
   getTopicFromId(id: number) {
-    return this.get(this.getUrlAddId(TOPICS_PATH, id), this.auth.httpHeaders);
+    return this.get(this.getUrlAddId(TOPICS_PATH, id), this.httpHeaders);
   }
 
   /**
@@ -47,7 +46,7 @@ export class TopicService extends BaseService {
    * @returns Topic | any
    */
   addTopic(topic: Topic) {
-    return this.post(this.getFullUrl(TOPICS_PATH), topic, this.auth.httpHeaders);
+    return this.post(this.getFullUrl(TOPICS_PATH), topic, this.httpHeaders);
   }
 
   /**
@@ -57,7 +56,7 @@ export class TopicService extends BaseService {
    * @returns any
    */
   update(topic: Topic) {
-    return this.patch(this.getUrlAddId(TOPICS_PATH, topic.id), topic, this.auth.httpHeaders);
+    return this.patch(this.getUrlAddId(TOPICS_PATH, topic.id), topic, this.httpHeaders);
   }
 
   /**
@@ -67,6 +66,6 @@ export class TopicService extends BaseService {
    * @returns any
    */
   onDelete(id: number) {
-    return this.delete(this.getUrlAddId(TOPICS_PATH, id), this.auth.httpHeaders);
+    return this.delete(this.getUrlAddId(TOPICS_PATH, id), this.httpHeaders);
   }
 }

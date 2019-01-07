@@ -5,17 +5,15 @@ import { Observable, throwError, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { API_URL } from '../../app/app-constants';
+import { API_URL } from '../../../app-constants';
 import { BaseAuthService } from './base.auth.service';
-import { StatusCode } from '../constants';
-import { DialogService } from 'src/common/dialog/dialog.service';
+import { StatusCode } from '../status-code';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BaseService extends BaseAuthService {
 
-  dialog: DialogService;
   constructor(protected http: HttpClient) {
     super();
   }
@@ -178,16 +176,21 @@ export class BaseService extends BaseAuthService {
    * @return string the message.
    */
   getErrorMessage(error) {
-    if (error.error.detail) {
+    let message = 'An unknown error occurred';
+    if (error) {
+      if (error.error && error.error.detail) {
 
-      return error.error.detail;
-    } else if (error.message) {
+        message = error.error.detail;
+      } else if (error.message) {
 
-      return error.message;
-    } else if (error.statusText) {
+        message = error.message;
+      } else if (error.statusText) {
 
-      return `Errer: ${error.statusText}`;
+        message = `Errer: ${error.statusText}`;
+      } else if (error.status) {
+        message = 'An unknown error occurred: ' + error.status;
+      }
     }
-    return 'An unknown error occurred: ' + error.status;
+    return message;
   }
 }

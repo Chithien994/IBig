@@ -5,10 +5,10 @@ Topics Component
 import { Component, ViewChild, Input } from '@angular/core';
 import { VirtualScrollerComponent } from 'ngx-virtual-scroller';
 
-import { Topic } from '../../models/topic';
-import { TopicService } from '../../services/topic/topic.service';
-import { MessageService } from '../../services/message/message.service';
-import { BaseComponent } from '../../base/component/base.component';
+import { Topic } from '../models/topic';
+import { TopicService } from '../services/topics/topic.service';
+import { MessageService } from '../services/message/message.service';
+import { BaseComponent } from '../core/base/components/base.component';
 import { RP_RESULTS, RP_COUNT, RP_CODE } from '../app-constants';
 
 @Component({

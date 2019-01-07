@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '../../base/component/base.component';
-import { AuthenticationService } from 'src/services/auth/authentication.service';
+import { BaseComponent } from '../core/base/components/base.component';
 import { RP_MESSAGE, PATH_COUNTRY_CODE, RP_CODE, R_LOGIN_PATH } from '../app-constants';
-import { Message } from 'src/services/message/message.service';
-import { CountryCode } from '../../models/country.code';
-import { User } from 'src/models/user';
+import { Message } from 'src/app/services/message/message.service';
+import { CountryCode } from '../models/country.code';
+import { User } from 'src/app/models/user';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ValidatorsForms } from 'src/shared/ValidatorsForms';
+import { ValidatorsForms } from 'src/app/core/shared/ValidatorsForms';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-register',
@@ -30,15 +30,9 @@ export class RegisterComponent extends BaseComponent {
   /** Show icon is in progress, and disable "Sign up" button, if "loading" is true. False in reverse. */
   loading: boolean;
 
-  /** Register phone */
-  phone: string;
-
-  /** When "showFromVerify" is true, then show Verify form and hidden Sign Up form. False in reverse. */
-  showFromVerify = false;
-
   userFormGroup: FormGroup;
 
-  constructor(private auth: AuthenticationService) {
+  constructor(public usersService: UsersService) {
     super();
   }
 
@@ -73,7 +67,7 @@ export class RegisterComponent extends BaseComponent {
     this.message  = new Message;
 
     // Sign up and wait for the result to return.
-    this.auth.register(new User()
+    this.usersService.register(new User()
     .setParams(firstName, lastName, email, countryCode, phoneNumber, password)).subscribe(result => {
       console.log(JSON.stringify(result));
       this.loading = false;
@@ -81,12 +75,11 @@ export class RegisterComponent extends BaseComponent {
 
         // Set the message content (Success).
         this.message.setNotfy(result[RP_MESSAGE], false);
-        this.showFromVerify = true;
-        this.phone = phoneNumber;
+        this.usersService.setIsVerify(phoneNumber);
       } else {
 
         // Set message content (Failed).
-        this.message.setNotfy(this.auth.getErrorMessage(result), true);
+        this.message.setNotfy(this.usersService.getErrorMessage(result), true);
       }
     });
   }
@@ -95,7 +88,7 @@ export class RegisterComponent extends BaseComponent {
    * This method is used to get country code.
    */
   getCountryCode() {
-    this.auth.get(PATH_COUNTRY_CODE).subscribe(result => {
+    this.usersService.get(PATH_COUNTRY_CODE).subscribe(result => {
       this.countryCodes = result;
     });
   }

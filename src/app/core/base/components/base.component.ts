@@ -25,11 +25,12 @@ export abstract class BaseComponent implements OnInit {
   }
 
   /**
-   * Go to page
+   * Go to page.
+   * If "path = 'null", it will be set with default value "path =' / '" (Go to home page).
    *
-   * @param path string
+   * @param path default value "/"
    */
-  goToPage(path: string): void {
+  goToPage(path = '/'): void {
     window.location.href = path;
   }
 
@@ -38,6 +39,15 @@ export abstract class BaseComponent implements OnInit {
    */
   goBack(): void {
     window.history.back();
+  }
+
+  /**
+   * Go to home page
+   *
+   * @param path string
+   */
+  goToHome(): void {
+    this.goToPage();
   }
 
   /**

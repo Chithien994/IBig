@@ -1,0 +1,18 @@
+.link-b {
+    text-decoration: underline;
+}
+
+@media only screen and (max-width: 767px) {
+
+    .layout-btn-verify {
+        margin-top: 2rem;
+    }
+
+    .layout-btn-verify button {
+        width: 100%;
+    }
+
+    .layout-resend {
+        margin-top: 4rem;
+    }
+}

@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { Observable, of, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import {
-  debounceTime, distinctUntilChanged, switchMap, count
+  debounceTime, distinctUntilChanged
 } from 'rxjs/operators';
 
 import { BaseService } from '../../base/services/base.service';
-import { AuthenticationService } from '../../services/auth/authentication.service';
-import { KEY_SEARCH, VAL_LIMIT_SEARCH, KEY_LIMIT } from '../../app/app-constants';
+import { AuthenticationService } from '../../../services/auth/authentication.service';
+import { KEY_SEARCH, VAL_LIMIT_SEARCH, KEY_LIMIT } from '../../../app-constants';
 
 /**
  * @description
